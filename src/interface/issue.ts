@@ -1,3 +1,5 @@
+import { Comment } from "./comment";
+
 export interface issue {
   id: number;
   devMode: string;
