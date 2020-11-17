@@ -4,9 +4,14 @@ class App {
   constructor(){
     this.application = express();
   }
+  test(params:string): string {
+    return params + " world !";
+  }
 }
-const app = new App().application;
-app.get("/",(req : express.Request , res : express.Response) =>{
+const app = new App();
+
+console.log(app.test("hello"));
+app.application.get("/",(req : express.Request , res : express.Response) =>{
   res.send("start");
 })
-app.listen(4000,()=>console.log("start"));
+app.application.listen(4000,()=>console.log("start"));
