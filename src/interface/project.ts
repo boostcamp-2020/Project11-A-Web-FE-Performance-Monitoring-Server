@@ -1,5 +1,5 @@
-import { issue } from "./issue";
-import { User } from "./user";
+import { issue } from "@interface/issue";
+import { User } from "@interface/user";
 
 export interface Project {
   id: number | null;
