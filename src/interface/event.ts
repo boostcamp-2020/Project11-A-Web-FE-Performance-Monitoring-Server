@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from "@interface/user";
 
 export interface Event {
   id: number;
