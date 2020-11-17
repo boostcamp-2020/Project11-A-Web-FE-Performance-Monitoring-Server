@@ -1,4 +1,5 @@
 import { Comment } from "./comment";
+import { Event } from "./event";
 
 export interface issue {
   id: number;
