@@ -1,3 +1,4 @@
+import { issue } from "./issue";
 import { User } from "./user";
 
 export interface Project {
@@ -7,7 +8,7 @@ export interface Project {
   admin: Array<User>;
   member: Array<User>;
   projectName: string;
-  issues: Array<any>;
+  issues: Array<issue>;
   createdAt: Date;
   updatedAt: Date;
 }
