@@ -1,7 +1,6 @@
 name: "Reviewer lottery"
 on:
   pull_request:
-    types: [opened, ready_for_review, reopened]
 
 jobs:
   test:
