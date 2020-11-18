@@ -1,14 +1,19 @@
-import { User } from "@interface/user";
-
 export interface Event {
   id: number;
   issueId: number;
   timeStamp: Date;
-  createdBy: User;
-  tag: {
-    os: string;
-    osName: string;
-    browser: string;
-    browserName: string;
+  createdBy: {
+    ip: string | null;
+    email: string | null;
+    userId: string | null;
+  };
+  os?: {
+    version: string | null;
+    name: string;
+  };
+  browser?: {
+    version: string;
+    name: string;
   };
 }
+// os , browser , sdk 분리

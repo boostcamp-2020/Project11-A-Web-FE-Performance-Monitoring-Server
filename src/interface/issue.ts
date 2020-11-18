@@ -1,6 +1,3 @@
-import { Comment } from "@interface/comment";
-import { Event } from "@interface/event";
-
 export interface issue {
   id: number;
   devMode: string;
@@ -11,7 +8,7 @@ export interface issue {
     name: string;
   };
   isResolved: boolean;
-  comments: Array<Comment>;
-  events: Array<Event>;
+  comments: Array<number>;
+  events: Array<number>;
   timeStamp: Date;
 }
