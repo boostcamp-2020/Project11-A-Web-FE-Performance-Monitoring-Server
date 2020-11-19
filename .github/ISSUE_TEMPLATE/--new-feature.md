@@ -1,7 +1,7 @@
 ---
 name: "✨ New Feature"
 about: Plan new feature of this project
-title: ''
+title: "[Feature] : "
 labels: enhancement
 assignees: ''
 
