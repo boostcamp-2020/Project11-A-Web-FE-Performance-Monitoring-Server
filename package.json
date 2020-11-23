@@ -8,10 +8,6 @@
     "start": "tsc && node build/index.js",
     "build": "tsc",
     "test": "jest"
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/setting
   },
   "repository": {
     "type": "git",
