@@ -1,11 +1,11 @@
 export interface Project {
-  id: number | null;
+  _id: string;
   platfrom: string;
   owner: number;
-  admin: Array<number>;
-  member: Array<number>;
+  admin?: Array<number>;
+  member?: Array<number>;
   projectName: string;
-  issues: Array<number>;
+  issues?: Array<number>;
   createdAt: Date;
   updatedAt: Date;
 }

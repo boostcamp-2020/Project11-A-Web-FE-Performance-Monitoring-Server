@@ -1,6 +1,6 @@
 export interface Event {
-  id: number;
-  issueId: number;
+  _id: string;
+  issueId: string;
   timeStamp: Date;
   createdBy: {
     ip: string | null;

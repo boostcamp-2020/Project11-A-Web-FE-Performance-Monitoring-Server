@@ -1,5 +1,5 @@
-export interface issue {
-  id: number;
+export default interface issue {
+  _id: string;
   devMode: string;
   projectId: number;
   error: Error;
@@ -8,7 +8,7 @@ export interface issue {
     name: string;
   };
   isResolved: boolean;
-  comments: Array<number>;
+  comments?: Array<number>;
   events: Array<number>;
   timeStamp: Date;
 }
