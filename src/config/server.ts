@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 
 // Set the NODE_ENV to 'development' by default
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.PORT = process.env.PORT || '3000';
+const mode = process.env.NODE_ENV || 'development';
+const port = process.env.PORT || '3000';
 
 const envFound = dotenv.config();
 if (envFound.error) {
@@ -12,6 +12,6 @@ if (envFound.error) {
 }
 
 export default {
-  mode: process.env.NODE_ENV,
-  port: parseInt(process.env.PORT, 10),
+  mode,
+  port: parseInt(port, 10),
 };
