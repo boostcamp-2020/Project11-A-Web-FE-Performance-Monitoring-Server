@@ -6,7 +6,7 @@
     "outDir": "./build",                        /* Redirect output structure to the directory. */
     "strict": true,                           /* Enable all strict type-checking options. */
     "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    "baseUrl": "./src",                       /* Base directory to resolve non-absolute module names. */
+    "baseUrl": "./src",   
     "paths": {
       "@root/*":["./*"],
       "@api":["./api"],
@@ -26,8 +26,10 @@
       "@models":["./models"],
       "@models/*":["./models/*"],
       "@services":["./services"],
-      "@services/*":["./services/*"]
-    },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+      "@services/*":["./services/*"],
+      "@utils":["./utils"],
+      "@utils/*":["./utils/*"],
+    },                            /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
