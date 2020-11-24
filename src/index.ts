@@ -4,7 +4,7 @@ import express from 'express';
 
 import Loader from '@loaders';
 
-async function startServer() {
+const startServer = async () => {
   const app = express();
 
   await Loader({ app });
@@ -12,6 +12,6 @@ async function startServer() {
   app.listen(config.port, () => {
     console.log(`Example app listening at http://localhost:${config.port}`);
   });
-}
+};
 
 startServer();
