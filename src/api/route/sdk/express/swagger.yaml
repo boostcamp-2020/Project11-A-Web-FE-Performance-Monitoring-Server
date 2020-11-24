@@ -1,17 +1,18 @@
-definitions:
-  User:
-    properties:
-      id:
-        type: number
-      email:
-        type: string
-      image:
-        type: string
-      displayName:
-        type: string
-      phoneNumber:
-        type: string
-        nullable: true
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+        image:
+          type: string
+        displayName:
+          type: string
+        phoneNumber:
+          type: string
+          nullable: true
 
 paths:
   /api/users:
@@ -28,8 +29,8 @@ paths:
               users:
                 type: array
                 items:
-                  $ref: '#/definitions/User'
+                  $ref: '#/components/schemas/User'
         default:
           description: Error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'

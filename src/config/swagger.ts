@@ -4,6 +4,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 // You can set every attribute except paths and swagger
 // https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
 const swaggerDefinition = {
+  openapi: '3.0.0',
   info: {
     title: 'Santry', // Title (required)
     version: '0.0.1', // Version (required)
