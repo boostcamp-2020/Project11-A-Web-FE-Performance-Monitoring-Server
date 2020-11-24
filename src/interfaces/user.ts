@@ -1,6 +1,6 @@
 export interface User {
-  id: number | null;
+  _id: string;
   email: string;
   pwd: string;
-  projectIds: Array<number>;
+  projectIds?: Array<number>;
 }
