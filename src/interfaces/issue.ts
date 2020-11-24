@@ -1,14 +1,9 @@
-export default interface issue {
+export interface Issue {
   _id: string;
   devMode: string;
-  projectId: number;
-  error: Error;
-  sdk: {
-    version: string;
-    name: string;
-  };
+  projectId: string;
+  error: string;
   isResolved: boolean;
-  comments?: Array<number>;
-  events: Array<number>;
-  timeStamp: Date;
+  comments?: Array<string>;
+  events: Array<string>;
 }
