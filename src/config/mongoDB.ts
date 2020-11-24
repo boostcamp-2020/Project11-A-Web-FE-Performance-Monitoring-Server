@@ -7,8 +7,8 @@ if (envFound.error) {
   throw new Error("🔒  Couldn't find .env file  🔒");
 }
 
-process.env.MONGODB_URI = process.env.MONGODB_URI || '';
+const mongodbUrl = process.env.MONGODB_URI || '';
 
 export default {
-  databaseURL: process.env.MONGODB_URI,
+  databaseURL: mongodbUrl,
 };
