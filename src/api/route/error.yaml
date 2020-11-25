@@ -1,5 +1,6 @@
-definitions:
-  ErrorResponse:
-    properties:
-      message:
-        type: string
+components:
+  schemas: 
+    ErrorResponse: 
+      properties: 
+        message: 
+          type: string;

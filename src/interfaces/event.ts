@@ -3,12 +3,16 @@ export interface Event {
   issueId: string;
   timeStamp: Date;
   createdBy: {
-    ip: string | null;
-    email: string | null;
-    userId: string | null;
+    ip: string;
+    email?: string;
+    userId?: string;
+  };
+  sdk: {
+    version: string;
+    name: string;
   };
   os?: {
-    version: string | null;
+    version: string;
     name: string;
   };
   browser?: {
@@ -16,4 +20,3 @@ export interface Event {
     name: string;
   };
 }
-// os , browser , sdk 분리

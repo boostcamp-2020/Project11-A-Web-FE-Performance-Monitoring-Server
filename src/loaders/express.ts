@@ -19,6 +19,7 @@ import swaggerConfig from '@config/swagger';
 import { logger, stream } from '@config/winston';
 import HttpException from '@interfaces/express/httpException';
 import routes from '@api/route';
+import passport from './passport';
 
 export default ({ app }: { app: Application }): void => {
   // app.use(morgan('dev'));
@@ -34,6 +35,8 @@ export default ({ app }: { app: Application }): void => {
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  passport(app);
 
   app.get('/status', (req, res) => {
     return res.status(200).end();

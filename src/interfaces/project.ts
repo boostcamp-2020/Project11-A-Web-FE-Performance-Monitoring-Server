@@ -2,10 +2,8 @@ export interface Project {
   _id: string;
   platfrom: string;
   owner: number;
-  admin?: Array<number>;
-  member?: Array<number>;
+  admin?: string[];
+  member?: string[];
   projectName: string;
-  issues?: Array<number>;
-  createdAt: Date;
-  updatedAt: Date;
+  issues?: string[];
 }

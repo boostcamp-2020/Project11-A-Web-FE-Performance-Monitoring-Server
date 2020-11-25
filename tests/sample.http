@@ -1,8 +1,0 @@
-@hostname = localhost
-@port = 3000
-@develop = http://{{hostname}}:{{port}}
-@host = {{develop}}
-@contentType = application/json
-
-
-GET {{host}}/status

@@ -3,11 +3,15 @@ import mongoose from 'mongoose';
 
 const Event = new mongoose.Schema(
   {
-    issueId: String,
+    issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
     createdBy: {
       ip: String,
       email: String,
       userId: String,
+    },
+    sdk: {
+      version: String,
+      name: String,
     },
     os: {
       version: String,
