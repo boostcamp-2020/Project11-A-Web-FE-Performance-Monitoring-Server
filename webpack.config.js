@@ -1,5 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const SwaggerJSDocWebpackPlugin = require('swagger-jsdoc-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -35,4 +37,18 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'build'),
   },
+  plugins: [
+    new Dotenv({ path: './production.env' }),
+    new SwaggerJSDocWebpackPlugin({
+      swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+          title: 'Santry', // Title (required)
+          version: '0.0.1', // Version (required)
+          description: 'Santry Backend API', // Description (optional)
+        },
+      },
+      apis: ['./src/api/route/**/*.yaml'],
+    }),
+  ]
 };
