@@ -13,16 +13,22 @@ POST {{host}}/api/auth/join
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
+  "email": "asdfssg@naver.com",
   "pwd": "asksA1@aa!"
 }
 
 ###
 
+# @name login
 POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
+  "email": "ssssasdfsg@naver.com",
   "pwd": "asksA1@aa!"
 }
+
+###
+@authToken = {{login.response.body.token}}
+
+###
