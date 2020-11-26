@@ -12,7 +12,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import moment from 'moment';
 import bodyParser from 'body-parser';
+import path from 'path';
 import swaggerUi from 'swagger-ui-express';
+import fs from 'fs';
 
 import config from '@config/server';
 import swaggerConfig from '@config/swagger';
@@ -43,7 +45,13 @@ export default ({ app }: { app: Application }): void => {
   });
 
   // 라우터 설정
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+  if (config.mode === 'production') {
+    const optionJson = fs.readFileSync(path.join(__dirname, 'swagger.json'));
+    const swaggerOption = JSON.parse(optionJson.toString());
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerOption));
+  } else {
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+  }
   app.use('/', routes);
 
   app.use((req, res, next) => {
