@@ -1,0 +1,72 @@
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        email:
+          description: 가입할 이메일 입력
+          type: string
+        pwd:
+          description: 비밀번호 입력
+          type: string
+      require:
+      - email
+      - pwd
+    Login:
+      type: object
+      properties:
+        projectIds:
+          type: array
+          items:
+            type: string
+        _id:
+          type: string
+        email:
+          type: string
+        pwd:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        __v:
+          type: number
+        token:
+          type: string
+paths:
+  /api/auth/join:
+    post:
+      tags:
+        - Auth
+      summary: 회원가입을 진행한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/User'
+      responses:
+        200:
+          description: 회원가입 성공
+        default:
+          description: Error
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: 로그인을 진행한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/User'
+      responses:
+        200:
+          description: 로그인 성공
+          schema:
+            $ref: '#/components/schemas/Login'
+        default:
+          description: Error
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
