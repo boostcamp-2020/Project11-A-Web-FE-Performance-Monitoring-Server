@@ -1,9 +1,9 @@
 export interface Project {
-  _id: string;
+  _id?: string;
   platfrom: string;
-  owner: number;
-  admin?: string[];
-  member?: string[];
+  owner: string;
+  admins?: string[];
+  members?: string[];
   projectName: string;
   issues?: string[];
 }
