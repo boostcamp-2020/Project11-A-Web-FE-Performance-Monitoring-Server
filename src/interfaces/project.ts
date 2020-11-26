@@ -1,6 +1,6 @@
 export interface Project {
   _id?: string;
-  platfrom: string;
+  platform: string;
   owner: string;
   admins?: string[];
   members?: string[];
