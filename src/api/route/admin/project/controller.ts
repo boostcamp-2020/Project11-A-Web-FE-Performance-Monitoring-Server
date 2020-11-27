@@ -12,8 +12,7 @@ const createProject = async (
   next: NextFunction,
 ): Promise<void | Response<void>> => {
   try {
-    const { body } = req;
-    const { user } = req;
+    const { body, user } = req;
     const { _id } = user as UserToken;
     const projectInfo = { ...body, owner: _id };
     const token = await createService(projectInfo);
