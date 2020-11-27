@@ -13,8 +13,6 @@ router.post(
   passport.authenticate('local', { session: false }),
   Controller.login,
 );
-router.post('/checkEmail', emailValidation, (req: Request, res: Response) =>
-  res.status(200).end(),
-);
+router.post('/checkEmail', emailValidation, Controller.checkEmail);
 
 export default router;

@@ -1,7 +1,8 @@
 import catchErrorService from '@services/catchError';
-import { Response, Request } from 'express';
+import { Response } from 'express';
+import { SDKRequest } from '@interfaces/express/sdkRequest';
 
-const catchError = (req: Request, res: Response): void => {
+const catchError = (req: SDKRequest, res: Response): void => {
   try {
     const event = req.body;
     catchErrorService(event);

@@ -1,16 +1,41 @@
-import { Response, Request } from 'express';
-import authService from '@services/auth';
+import { Response, Request, NextFunction } from 'express';
+import authService from '@root/services/auth/auth';
+import checkEmailService from '@services/auth/checkEmail';
 
-const join = async (req: Request, res: Response): Promise<void> => {
+const join = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
   const userInfo = req.body;
-  await authService.join(userInfo);
-  return res.status(201).end();
+  try {
+    await authService.join(userInfo);
+    return res.status(200).end();
+  } catch (err) {
+    next(new Error(err));
+  }
 };
 
 const login = (req: Request, res: Response): Response<void> => {
   return res.json({
-    user: req.user,
+    ...req.user,
   });
 };
 
-export default { join, login };
+const checkEmail = async (
+  req: Request,
+  res: Response,
+): Promise<void | Response<void>> => {
+  try {
+    const checkResult = await checkEmailService.checkEmail(req.body.email);
+    if (checkResult) {
+      return res.status(200).end();
+    } else {
+      return res.status(400).json({ message: '이미 존재하는 이메일 입니다.' });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export default { join, login, checkEmail };

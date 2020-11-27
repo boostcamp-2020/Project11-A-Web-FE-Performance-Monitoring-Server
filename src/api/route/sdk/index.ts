@@ -1,10 +1,8 @@
-import expressRouter from './express/index';
-import reactRouter from './react';
+import errorRouter from './error';
 import { Router } from 'express';
 
 const router = Router();
 
-router.use('/express', expressRouter);
-router.use('/react', reactRouter);
+router.use('/error', errorRouter);
 
 export default router;

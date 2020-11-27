@@ -1,0 +1,29 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@host = {{develop}}
+@contentType = application/json
+
+###
+
+POST {{host}}/sdk/error
+content-type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.NWZiZjU0MDg1YTY5YzkwNjY4OTJhN2Y0.VdKH1KGiH5_2j4JlZp1wfco_HjPvIb-NJu-vW0HzwmQ
+
+{
+  "timeStamp": "2020-11-11",
+  "createdBy": {
+    "ip": "111.111.111.111"
+  },
+  "stactTrace": [1, 2, 3, 4],
+  "platform": "react",
+  "sdk": {
+    "version": "0.0.1",
+    "name": "string"
+  },
+  "context": ["가", "나", "다"],
+  "os": {
+    "name": "Mac",
+    "version": "10.2.4"
+  }
+}
