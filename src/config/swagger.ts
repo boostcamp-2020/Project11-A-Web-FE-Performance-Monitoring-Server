@@ -7,11 +7,11 @@ const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
     title: 'Santry', // Title (required)
-    version: '0.0.1', // Version (required)
+    version: process.env.npm_package_version as string, // Version (required)
     description: 'Santry Backend API', // Description (optional)
   },
-  host: 'localhost:3000', // Host (optional)
-  basePath: '/', // Base path (optional)
+  // host: 'localhost:3000', // Host (optional)
+  // basePath: '/', // Base path (optional)
 };
 
 // Options for the swagger docs
@@ -19,6 +19,7 @@ const options = {
   // Import swaggerDefinitions
   swaggerDefinition: swaggerDefinition,
   // Path to the API docs
+  // apis: ['./**/swagger.ts'],
   apis: ['./src/api/route/**/*.yaml'],
 };
 

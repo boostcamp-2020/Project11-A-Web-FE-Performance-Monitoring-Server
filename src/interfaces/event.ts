@@ -1,12 +1,17 @@
 export interface Event {
-  _id: string;
-  issueId: string;
+  _id?: string;
+  issueId?: string;
   timeStamp: Date;
   createdBy: {
     ip: string;
     email?: string;
     userId?: string;
   };
+  url?: string;
+  type?: string;
+  value?: string;
+  stactTrace: any[]; // StactTrace[]
+  platform: string;
   sdk: {
     version: string;
     name: string;
@@ -19,4 +24,5 @@ export interface Event {
     version: string;
     name: string;
   };
+  context: string[];
 }

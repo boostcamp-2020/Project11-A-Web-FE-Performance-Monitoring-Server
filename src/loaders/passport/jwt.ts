@@ -1,4 +1,4 @@
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
 import { jwtPayload as IJwtPayload } from '@interfaces/express/jwtPayload';
 
 import db from '@models';
@@ -9,7 +9,7 @@ const opts = {
   secretOrKey: passportConfig.secretOrKey,
 };
 
-const jwtFn = async (jwtPayload: IJwtPayload, done: any) => {
+const jwtFn = async (jwtPayload: IJwtPayload, done: VerifiedCallback) => {
   try {
     const user = await db.User.findOne({ email: jwtPayload.email });
     if (!user) {

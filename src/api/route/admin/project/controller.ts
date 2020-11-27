@@ -12,8 +12,7 @@ const createProject = async (
   next: NextFunction,
 ): Promise<void | Response<void>> => {
   try {
-    const { body } = req;
-    const { user } = req;
+    const { body, user } = req;
     const { _id } = user as UserToken;
     const projectInfo = { ...body, owner: _id };
     const token = await createService(projectInfo);
@@ -33,10 +32,7 @@ const getProjects = async (
     if (!valid) {
       next(new Error(ajv.errorsText(validate.errors)));
     }
-    let { page } = req.query;
-    if (typeof page !== 'string') {
-      page = '1';
-    }
+    const page = typeof req.query.page === 'string' ? req.query.page : '1';
     const { user } = req;
     const { _id } = user as UserToken;
     const projectList = await getService(_id, parseInt(page));
