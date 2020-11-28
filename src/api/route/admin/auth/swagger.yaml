@@ -45,7 +45,7 @@ paths:
             schema:
               $ref: '#components/schemas/User'
       responses:
-        200:
+        201:
           description: 회원가입 성공
         default:
           description: Error
