@@ -1,6 +1,9 @@
 import { Response, Request, NextFunction } from 'express';
-import authService from '@root/services/auth/auth';
+import got from 'got';
+
+import authService from '@root/services/auth/signup';
 import checkEmailService from '@services/auth/checkEmail';
+import githubService from '@services/auth/githubHandler';
 
 const join = async (
   req: Request,
@@ -10,7 +13,7 @@ const join = async (
   const userInfo = req.body;
   try {
     await authService.join(userInfo);
-    return res.status(200).end();
+    return res.status(201).end();
   } catch (err) {
     next(new Error(err));
   }
@@ -38,4 +41,25 @@ const checkEmail = async (
   }
 };
 
-export default { join, login, checkEmail };
+const githubLogin = (req: Request, res: Response): void => {
+  return res.redirect(githubService.githubURL);
+};
+
+const githubCallback = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<Response<void> | void> => {
+  try {
+    const { code } = req.query;
+    if (typeof code !== 'string') {
+      throw new Error('code query가 올바르지 않습니다.');
+    }
+    const user = await githubService.githubCallback(code);
+    return res.status(200).json(user);
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export default { join, login, checkEmail, githubLogin, githubCallback };
