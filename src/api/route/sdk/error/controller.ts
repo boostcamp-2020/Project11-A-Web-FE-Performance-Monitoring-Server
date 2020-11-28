@@ -6,7 +6,7 @@ const catchError = (req: SDKRequest, res: Response): void => {
   try {
     const event = req.body;
     catchErrorService(event);
-    return res.status(200).end();
+    return res.status(201).end();
   } catch (error) {
     console.error(error);
   }

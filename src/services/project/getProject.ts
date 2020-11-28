@@ -6,10 +6,13 @@ interface ProjectWithRole {
   role: string;
 }
 
-const get = async (_id: string, pid: string): Promise<ProjectWithRole> => {
+const get = async (
+  _id: string,
+  projectId: string,
+): Promise<ProjectWithRole> => {
   try {
     const targetProject = await db.Project.findOne({
-      _id: pid,
+      _id: projectId,
       $or: [{ owner: _id }, { admins: _id }, { members: _id }],
     }).populate(['owner', 'members', 'admins', 'issues']);
     if (!targetProject) {

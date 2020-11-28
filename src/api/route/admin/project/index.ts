@@ -7,7 +7,7 @@ const router = Router();
 
 router.use(passportMiddleware);
 
-router.get('/:pid', Controller.getProject);
+router.get('/:projectId', Controller.getProject);
 router.post('/', Controller.createProject);
 router.get('/', Controller.getProjects);
 
