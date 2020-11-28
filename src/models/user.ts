@@ -12,7 +12,6 @@ const User = new mongoose.Schema(
 
     pwd: {
       type: String,
-      required: true,
     },
 
     projectIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
