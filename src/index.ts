@@ -11,7 +11,15 @@ const startServer = async () => {
 
   app.listen(config.port, () => {
     console.log(`Example app listening at http://localhost:${config.port}`);
+    if (typeof process.send === 'function') {
+      process.send('ready');
+    }
   });
+
+  process.on('SIGINT', function () {
+    
+  }
+  
 };
 
 startServer();
