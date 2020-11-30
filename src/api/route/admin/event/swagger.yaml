@@ -1,0 +1,46 @@
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id: 
+          type: string
+        issueId: 
+          type: string
+        timeStamp: 
+          type: string
+        createdBy: 
+          type: object
+          properties:
+            ip: 
+              type: string
+            email: 
+              type: string
+            userId: 
+              type: string
+        url: 
+          type: string
+paths:
+  /api/event/{eventId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Event
+      summary: 특정 이벤트 정보를 불러온다.
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          description: 이벤트 아이디 입력
+          schema:
+            type : string
+      responses:
+        200:
+          description: 이벤트 정보 출력
+          schema:
+            $ref: '#components/schemas/Event'
+        default:
+          description: Error
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
