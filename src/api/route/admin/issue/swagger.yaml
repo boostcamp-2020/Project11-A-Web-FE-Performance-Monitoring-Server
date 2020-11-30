@@ -1,0 +1,22 @@
+paths:
+  /api/issue/{issueId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Issue
+      summary: 특정 이벤트 정보를 불러온다.
+      parameters:
+        - name: issueId
+          in: path
+          required: true
+          description: 이슈 아이디 입력
+          schema:
+            type : string
+      responses:
+        200:
+          description: 이슈 정보 출력
+        default:
+          description: Error
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

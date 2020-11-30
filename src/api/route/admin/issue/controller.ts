@@ -1,7 +1,9 @@
 import { Response, Request, NextFunction } from 'express';
 
-import issueService from '@root/services/issue/getIssues';
+import issueService from '@services/issue/getIssues';
+import getIssueService from '@services/issue/getIssue';
 import { ajv, validate } from '@utils/pageCheck';
+import { UserToken } from '@interfaces/userToken';
 
 const getIssues = async (
   req: Request,
@@ -20,4 +22,19 @@ const getIssues = async (
   return res.json(result);
 };
 
-export default { getIssues };
+const getIssue = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void | Response> => {
+  const user = req.user as UserToken;
+  const { issueId } = req.params;
+  try {
+    const targetIssue = await getIssueService(user._id, issueId);
+    return res.json(targetIssue);
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export default { getIssue, getIssues };
