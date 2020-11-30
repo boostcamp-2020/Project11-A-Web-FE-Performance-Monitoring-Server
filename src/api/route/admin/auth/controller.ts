@@ -1,5 +1,4 @@
 import { Response, Request, NextFunction } from 'express';
-import got from 'got';
 
 import authService from '@root/services/auth/signup';
 import checkEmailService from '@services/auth/checkEmail';
