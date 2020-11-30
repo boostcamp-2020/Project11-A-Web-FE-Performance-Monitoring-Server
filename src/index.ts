@@ -23,7 +23,7 @@ const startServer = async () => {
     mongoose.disconnect();
     process.exit(0);
 
-  }
+  });
   
 };
 
