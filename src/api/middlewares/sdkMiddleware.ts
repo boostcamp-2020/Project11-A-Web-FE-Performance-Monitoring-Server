@@ -12,11 +12,11 @@ const sdkTokenVerify = async (
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
-  const token: string[] = req.headers.authorization.split(' ');
-  if (token[0] !== 'Bearer') {
+  const [tokenType, token]: string[] = req.headers.authorization.split(' ');
+  if (tokenType !== 'Bearer') {
     return res.status(400).end();
   }
-  const projectId = jwt.verify(token[1], tokenConfig.secretOrKey);
+  const projectId = jwt.verify(token, tokenConfig.secretOrKey);
   const project = await db.Project.findById(projectId);
   if (!project) {
     return next(new Error('올바르지 않은 토큰입니다.'));

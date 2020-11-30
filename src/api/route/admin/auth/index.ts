@@ -14,5 +14,7 @@ router.post(
   Controller.login,
 );
 router.post('/checkEmail', emailValidation, Controller.checkEmail);
+router.get('/github', Controller.githubLogin);
+router.get('/github/callback', Controller.githubCallback);
 
 export default router;

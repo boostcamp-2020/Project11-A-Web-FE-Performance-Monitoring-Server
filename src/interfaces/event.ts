@@ -1,3 +1,5 @@
+import { StackTrace } from '@root/interfaces/stackTrace';
+
 export interface Event {
   _id?: string;
   issueId?: string;
@@ -10,7 +12,7 @@ export interface Event {
   url?: string;
   type?: string;
   value?: string;
-  stactTrace: any[]; // StactTrace[]
+  stackTrace?: StackTrace[];
   platform: string;
   sdk: {
     version: string;
