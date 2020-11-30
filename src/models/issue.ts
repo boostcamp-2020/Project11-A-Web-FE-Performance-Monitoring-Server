@@ -5,8 +5,6 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 const Issue = new mongoose.Schema(
   {
-    devMode: { type: String, required: true },
-
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project',
