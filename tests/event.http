@@ -1,0 +1,29 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@host = {{develop}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "asdfsg@naver.com",
+  "pwd": "asksA1@aa!"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+
+@eventId = asdf
+GET {{host}}/api/event/{{eventId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
