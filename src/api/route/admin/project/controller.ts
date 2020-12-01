@@ -51,8 +51,8 @@ const getProject = async (
     const { projectId } = req.params;
     const { user } = req;
     const { _id } = user as UserToken;
-    const projectList = await getProjectService(_id, projectId);
-    return res.status(200).json(projectList);
+    const projectDetail = await getProjectService(_id, projectId);
+    return res.status(200).json(projectDetail);
   } catch (err) {
     next(new Error(err));
   }
