@@ -30,7 +30,12 @@ export default ({ app }: { app: Application }): void => {
     : app.use(morgan('combined', { stream }));
 
   // CORS 옵션 설정
-  app.use(cors());
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    }),
+  );
 
   app.use(json());
   app.use(urlencoded({ extended: false })); // extended false or true
