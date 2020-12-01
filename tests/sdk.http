@@ -4,12 +4,13 @@
 @server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
+@token = eyJhbGciOiJIUzI1NiJ9.NWZjNWQ4M2ExMDQwMzBiMTZmZGNjZDAw.rJ5P-saqBsp29VxX0EIzAFr766cUa25K4M5neWnNmzA
 
 ###
 
 POST {{host}}/sdk/error
 content-type: {{contentType}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.NWZjMDhlNjNiNGRkODM2NTY2MzhmM2Rk.v7INvRdlpnGPC8tOr4GO0FonW_xjoiVr4m5vgAa88Bw
+Authorization: Bearer {{token}}
 
 {
   "timeStamp": "2020-11-12",

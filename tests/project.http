@@ -1,6 +1,7 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
 
@@ -14,8 +15,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
-  "pwd": "asksA1@aa!"
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
 }
 
 ###
@@ -24,7 +25,6 @@ content-type: {{contentType}}
 ###
 
 GET {{host}}/api/project
-?page=1
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -35,12 +35,12 @@ content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "platform": "sdk",
-  "projectName": "134"
+  "platform": "Issue 페이지 전용",
+  "projectName": "1234123"
 }
 
 ###
 
-GET {{host}}/api/project/5fbf3ff395551e3870decb27
+GET {{host}}/api/project/5fc492ab6a919a86e0fa5119
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
