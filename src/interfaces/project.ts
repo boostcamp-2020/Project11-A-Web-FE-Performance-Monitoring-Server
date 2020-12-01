@@ -1,6 +1,6 @@
 export interface Project {
   _id?: string;
-  platform: string;
+  platform: 'node' | 'express' | 'javascript' | 'react';
   owner: string;
   admins?: string[];
   members?: string[];
