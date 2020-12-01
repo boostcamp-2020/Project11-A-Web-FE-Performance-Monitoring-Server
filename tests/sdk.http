@@ -1,6 +1,7 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
 
@@ -8,14 +9,14 @@
 
 POST {{host}}/sdk/error
 content-type: {{contentType}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.NWZiZjU0MDg1YTY5YzkwNjY4OTJhN2Y0.VdKH1KGiH5_2j4JlZp1wfco_HjPvIb-NJu-vW0HzwmQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.NWZjMDhlNjNiNGRkODM2NTY2MzhmM2Rk.v7INvRdlpnGPC8tOr4GO0FonW_xjoiVr4m5vgAa88Bw
 
 {
-  "timeStamp": "2020-11-11",
+  "timeStamp": "2020-11-12",
   "createdBy": {
     "ip": "111.111.111.111"
   },
-  "stactTrace": [1, 2, 3, 4],
+  "stacktrace": [1, 2, 3, 4],
   "platform": "react",
   "sdk": {
     "version": "0.0.1",
@@ -25,5 +26,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.NWZiZjU0MDg1YTY5YzkwNjY4OTJhN2Y0.VdKH
   "os": {
     "name": "Mac",
     "version": "10.2.4"
-  }
+  },
+  "type": "new Error",
+  "value": "그냥 에러임"
 }
