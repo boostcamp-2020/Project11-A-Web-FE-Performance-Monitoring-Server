@@ -14,7 +14,11 @@ const get = async (
     const targetProject = await db.Project.findOne({
       _id: projectId,
       $or: [{ owner: _id }, { admins: _id }, { members: _id }],
-    }).populate(['owner', 'members', 'admins', 'issues']);
+    })
+      .populate('issues')
+      .populate({ path: 'owner', select: 'email' })
+      .populate({ path: 'members', select: 'email' })
+      .populate({ path: 'admins', select: 'email' });
     if (!targetProject) {
       throw new Error('찾는 프로젝트가 없습니다.');
     }

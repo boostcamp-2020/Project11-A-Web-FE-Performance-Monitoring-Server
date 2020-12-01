@@ -6,7 +6,6 @@ const router = Router();
 
 router.use(passportMiddleware);
 
-router.get('/:issueId', Controller.getIssue);
-router.get('/', Controller.getIssues);
+router.get('/:eventId', Controller.getEvent);
 
 export default router;

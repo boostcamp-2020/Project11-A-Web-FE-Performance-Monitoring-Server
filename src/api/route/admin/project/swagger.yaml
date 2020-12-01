@@ -68,7 +68,7 @@ paths:
             type : string
       responses:
         200:
-          description: 로그인 성공
+          description: 프로젝트 정보
           schema:
             $ref: '#/components/schemas/Login'
         default:
