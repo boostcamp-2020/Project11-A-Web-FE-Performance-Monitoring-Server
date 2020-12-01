@@ -1,0 +1,57 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
+@host = {{develop}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+
+GET {{host}}/api/issue
+?page=1
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+post {{host}}/api/comment
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "issueId": "5fc5b12b0ad5397003cad48c",
+  "comment": "나는 댓글이당. 백엔드 빨리 마치고싶다...."
+}
+
+###
+@deleteCommentId = 5fc60e25da7ce91b1807b167
+delete {{host}}/api/comment/{{deleteCommentId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+@updateCommentId = 5fc60e25da7ce91b1807b167
+put {{host}}/api/comment/{{updateCommentId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "comment": "커맨드 수정했다."
+}
