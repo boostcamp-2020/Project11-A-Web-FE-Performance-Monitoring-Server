@@ -18,7 +18,6 @@ export interface Event {
     version: string;
     name: string;
   };
-  platform?: string;
   sdk: {
     version: string;
     name: string;
