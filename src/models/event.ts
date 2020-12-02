@@ -24,10 +24,8 @@ const Event = new mongoose.Schema({
   url: String,
   stacktrace: [Object],
   context: [String],
-  runtime: {
-    version: String,
-    name: String,
-  },
+  version: String,
+  platform: String,
   serverName: String,
   transaction: String,
   userIp: String,
