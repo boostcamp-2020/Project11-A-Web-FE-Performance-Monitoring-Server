@@ -1,4 +1,4 @@
-import { Event as IEvent } from '@interfaces/event';
+import { Event as IEvent } from '@interfaces/models/event';
 import mongoose from 'mongoose';
 
 const Event = new mongoose.Schema({

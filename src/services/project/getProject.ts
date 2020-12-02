@@ -1,8 +1,9 @@
 import db from '@models';
-import { Project } from '@interfaces/project';
+import { Project } from '@interfaces/models/project';
+import { Document } from 'mongoose';
 
 interface ProjectWithRole {
-  info: Project;
+  info: Project & Document;
   role: string;
 }
 

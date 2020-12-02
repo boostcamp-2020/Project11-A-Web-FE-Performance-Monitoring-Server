@@ -1,5 +1,5 @@
 import db from '@models';
-import { User } from '@interfaces/user';
+import { User } from '@interfaces/models/user';
 import passwordBcrypt from '@utils/passwordBcrypt';
 
 const join = async (userInfo: User): Promise<User> => {

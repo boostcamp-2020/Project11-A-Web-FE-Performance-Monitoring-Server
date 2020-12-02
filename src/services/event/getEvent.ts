@@ -1,5 +1,5 @@
 import db from '@models';
-import { Event } from '@interfaces/event';
+import { Event } from '@root/interfaces/models/event';
 
 const getEvent = async (_id: string, eventId: string): Promise<Event> => {
   try {

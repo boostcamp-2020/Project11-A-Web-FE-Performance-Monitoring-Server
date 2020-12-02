@@ -1,4 +1,4 @@
-import { StackTrace } from '@root/interfaces/stackTrace';
+import { StackTrace } from '@interfaces/models/stackTrace';
 import { Types } from 'mongoose';
 
 export interface Event {
