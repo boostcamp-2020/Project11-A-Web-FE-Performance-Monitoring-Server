@@ -18,7 +18,14 @@ const getIssues = async (
   if (typeof page !== 'string') {
     page = '1';
   }
-  const result = await issueService.getIssues({ page: parseInt(page) });
+
+  const { projectId } = req.params;
+  const { user } = req;
+  const { _id } = user as UserToken;
+
+  const result = await issueService.getIssues(_id, projectId, {
+    page: parseInt(page),
+  });
   return res.json(result);
 };
 
