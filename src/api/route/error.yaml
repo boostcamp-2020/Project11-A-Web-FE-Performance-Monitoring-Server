@@ -3,4 +3,4 @@ components:
     ErrorResponse: 
       properties: 
         message: 
-          type: string;
+          type: string
