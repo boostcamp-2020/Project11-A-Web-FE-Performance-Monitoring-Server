@@ -6,6 +6,7 @@ import {
   json,
   urlencoded,
 } from 'express';
+import compress from 'compression';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 import cors from 'cors';
@@ -36,7 +37,7 @@ export default ({ app }: { app: Application }): void => {
       credentials: true,
     }),
   );
-
+  app.use(compress());
   app.use(json());
   app.use(urlencoded({ extended: false })); // extended false or true
   app.use(cookieParser());
@@ -82,7 +83,7 @@ export default ({ app }: { app: Application }): void => {
             stack: err.stack,
             status: err.status,
           },
-          // user: req.user,
+          user: req.user,
         };
 
         logger.error(`${moment().format('YYYY-MM-DD HH:mm:ss')}`, errObj);
