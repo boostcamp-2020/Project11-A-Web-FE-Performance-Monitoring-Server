@@ -23,9 +23,13 @@ const Issue = new mongoose.Schema(
 
     isResolved: { type: Boolean, required: true },
 
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    comments: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'Comment', default: [] },
+    ],
 
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    events: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'Event', default: [] },
+    ],
   },
   { timestamps: true },
 );
