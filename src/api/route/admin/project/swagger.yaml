@@ -1,3 +1,25 @@
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        admins:
+          type: array
+          items: string
+        members:
+          type: array
+          items: string
+        issues:
+          type: array
+          items: string
+        _id:
+          type: string
+        platform:
+          type: string
+        projectName:
+          type: string
+        owner:
+          $ref: '#/components/schemas/Login'
 paths:
   /api/project:
     post:
@@ -22,17 +44,21 @@ paths:
               - platform
               - projectName
       responses:
-        200:
-          description: 프로젝트 성공
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
+        201:
+          description: 프로젝트 생성
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     get:
       security:
         - bearerAuth: []
@@ -48,10 +74,16 @@ paths:
       responses:
         200:
           description: 페이지 목록
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagenation'
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/project/{projectId}:
     get:
       security:
@@ -69,9 +101,13 @@ paths:
       responses:
         200:
           description: 프로젝트 정보
-          schema:
-            $ref: '#/components/schemas/Login'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

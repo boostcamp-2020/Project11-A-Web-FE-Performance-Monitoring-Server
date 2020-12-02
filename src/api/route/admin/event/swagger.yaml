@@ -3,23 +3,69 @@ components:
     Event:
       type: object
       properties:
-        id: 
+        _id: 
           type: string
         issueId: 
+          description: 이슈 정보를 불러온다.
+          type: object
+        release: 
+          type: string
+        environment:
           type: string
         timeStamp: 
           type: string
         createdBy: 
           type: object
           properties:
-            ip: 
+            ipAddress: 
               type: string
             email: 
               type: string
-            userId: 
-              type: string
         url: 
           type: string
+        os:
+          type: object
+          properties:
+            version: 
+              type: string
+            name: 
+              type: string
+        browser:
+          type: object
+          properties:
+            version:
+              type: string
+            name:
+              type: string
+        sdk:
+          type: object
+          properties:
+            version:
+              type: string
+            name:
+              type: string
+        stacktrace:
+          description: stacktrace
+          type: array
+          items:
+            type: object
+        runtime:
+          description: Express 전용
+          type: object
+          properties:
+            version:
+              type: string
+            name:
+              type: string
+        serverName:
+          type: string
+          description: Express 전용
+        transaction:
+          type: string
+          description: Express 전용
+        userIp:
+          type: string
+          description: Express 전용
 paths:
   /api/event/{eventId}:
     get:
@@ -32,15 +78,19 @@ paths:
         - name: eventId
           in: path
           required: true
-          description: 이벤트 아이디 입력
+          description: 이벤트 오브젝트 아이디 입력
           schema:
             type : string
       responses:
         200:
           description: 이벤트 정보 출력
-          schema:
-            $ref: '#components/schemas/Event'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Event'
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
