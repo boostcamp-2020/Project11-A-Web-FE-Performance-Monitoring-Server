@@ -1,8 +1,8 @@
 export interface Issue {
   _id: string;
-  devMode: string;
   projectId: string;
-  error: string;
+  errorName: string;
+  errorMessage: string;
   isResolved: boolean;
   comments?: Array<string>;
   events: Array<string>;

@@ -1,7 +1,8 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
-@host = {{develop}}
+@server = http://118.67.129.120:3000
+@host = {{server}}
 @contentType = application/json
 
 ###
@@ -13,7 +14,7 @@ POST {{host}}/api/auth/join
 content-type: {{contentType}}
 
 {
-  "email": "asdfssg@naver.com",
+  "email": "asdfsg@naver.com",
   "pwd": "asksA1@aa!"
 }
 
@@ -24,7 +25,7 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "ssssasdfsg@naver.com",
+  "email": "asdfssaaa@naver.com",
   "pwd": "asksA1@aa!"
 }
 
@@ -32,3 +33,6 @@ content-type: {{contentType}}
 @authToken = {{login.response.body.token}}
 
 ###
+
+GET https://api.github.com/user
+Authorization: Bearer ac3d466c22f82889b17f22b8126bbf11b06bda74

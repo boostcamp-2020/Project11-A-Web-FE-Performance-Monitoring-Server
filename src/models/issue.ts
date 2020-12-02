@@ -11,9 +11,14 @@ const Issue = new mongoose.Schema(
       required: true,
     },
 
-    error: {
+    errorName: {
       type: String,
       required: true,
+    },
+
+    errorMessage: {
+      type: String,
+      require: true,
     },
 
     isResolved: { type: Boolean, required: true },

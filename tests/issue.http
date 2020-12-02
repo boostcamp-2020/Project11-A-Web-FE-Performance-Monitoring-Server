@@ -25,6 +25,8 @@ content-type: {{contentType}}
 
 GET {{host}}/api/issue
 ?page=1
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
 
 ### 페이지가 없으면 에러
 

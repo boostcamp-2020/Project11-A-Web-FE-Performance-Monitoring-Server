@@ -22,10 +22,14 @@ const Event = new mongoose.Schema({
   },
   timeStamp: Date,
   url: String,
-  type: String,
-  value: String,
-  stactTrace: [Object],
-  platform: String,
+  stacktrace: [Object],
   context: [String],
+  runtime: {
+    version: String,
+    name: String,
+  },
+  serverName: String,
+  transaction: String,
+  userIp: String,
 });
 export default mongoose.model<IEvent & mongoose.Document>('Event', Event);

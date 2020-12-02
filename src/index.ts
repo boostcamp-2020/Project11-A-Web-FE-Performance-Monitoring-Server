@@ -6,7 +6,6 @@ import Loader from '@loaders';
 
 import mongoose from 'mongoose';
 
-
 const startServer = async () => {
   const app = express();
 
@@ -22,9 +21,7 @@ const startServer = async () => {
   process.on('SIGINT', function () {
     mongoose.disconnect();
     process.exit(0);
-
   });
-  
 };
 
 startServer();

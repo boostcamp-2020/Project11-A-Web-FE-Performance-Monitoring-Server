@@ -10,22 +10,30 @@ const catchErrorService = async (
   event: EventRequest,
   project: Project,
 ): Promise<void> => {
-  let targetIssue = await db.Issue.findOne({
-    error: event.error,
-    projectId: project._id,
-  });
-  if (!targetIssue) {
-    targetIssue = await new db.Issue({
+  try {
+    let targetIssue = await db.Issue.findOne({
+      errorName: event.type,
+      errorMessage: event.value,
       projectId: project._id,
-      error: event.error,
-      isResolved: false,
     });
+    if (!targetIssue) {
+      targetIssue = await new db.Issue({
+        projectId: project._id,
+        errorName: event.type,
+        errorMessage: event.value,
+        isResolved: false,
+      });
+    }
+    const errorSample = await new db.Event({
+      ...event,
+      issueId: targetIssue._id,
+    });
+    targetIssue.events.push(project._id as string);
+    await targetIssue.save();
+    await errorSample.save();
+  } catch (err) {
+    throw new Error(err);
   }
-  const errorSample = await new db.Event({
-    ...event,
-    issueId: targetIssue._id,
-  });
-  await errorSample.save();
 };
 
 export default catchErrorService;
