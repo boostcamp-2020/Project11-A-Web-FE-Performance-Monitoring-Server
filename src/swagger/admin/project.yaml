@@ -3,6 +3,42 @@ components:
     Project:
       type: object
       properties:
+        _id:
+          type: string
+        platform:
+          type: string
+        projectName:
+          type: string
+        createdAt: 
+          type: string
+        updateAt:
+          type: string
+        role:
+          type: string
+          description: 역할 (owner, admin, member 등)
+        sdkToken:
+          type: string
+        owner:
+          type: object
+          properties:
+            projectIds:
+              description: 속한 프로젝트 ID들
+              type: array
+              items:
+                type: string
+            _id:
+              description: 오브젝트 ID
+              type: string
+            email:
+              type: string
+            pwd:
+              type: string
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            __v:
+              type: number
         admins:
           type: array
           items: string
@@ -12,14 +48,6 @@ components:
         issues:
           type: array
           items: string
-        _id:
-          type: string
-        platform:
-          type: string
-        projectName:
-          type: string
-        owner:
-          $ref: '#/components/schemas/Login'
 paths:
   /api/project:
     post:
@@ -71,6 +99,11 @@ paths:
         schema:
           type: integer
         description: 페이지 번호 수 입력
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: 한번에 불러올 프로젝트 수 입력
       responses:
         200:
           description: 페이지 목록

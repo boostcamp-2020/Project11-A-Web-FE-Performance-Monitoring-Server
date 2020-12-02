@@ -1,0 +1,108 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          description: 가입할 이메일 입력
+          type: string
+        pwd:
+          description: 비밀번호 입력
+          type: string
+      require:
+      - email
+      - pwd
+    Login:
+      type: object
+      properties:
+        projectIds:
+          description: 속한 프로젝트 ID들
+          type: array
+          items:
+            type: string
+        _id:
+          description: 오브젝트 ID
+          type: string
+        email:
+          type: string
+        pwd:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        __v:
+          type: number
+        token:
+          description: JWT 토큰
+          type: string
+paths:
+  /api/auth/join:
+    post:
+      tags:
+        - Auth
+      summary: 회원가입을 진행한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              email: soos0228@naver.com
+              pwd: Tjrals228@
+      responses:
+        201:
+          description: 회원가입 성공
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: 로그인을 진행한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              email: soos0228@naver.com
+              pwd: Tjrals228@
+      responses:
+        200:
+          description: 로그인 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+              example:
+                projectIds: [
+                  "5fc5d83a104030b16fdccd00",
+                  "5fc5ff2899b3d368aa12ebb6",
+                  "5fc5ff2c99b3d368aa12ebb7",
+                  "5fc6029427527268a31ca315",
+                  "5fc6029a6bd08568e232761f",
+                  "5fc6029d6bd08568e2327620",
+                  "5fc602e1e98c7368eff5ea9f",
+                  "5fc602e4e98c7368eff5eaa0",
+                  "5fc602e6e98c7368eff5eaa1",
+                  "5fc602f876facc68608e26ae",
+                  "5fc602fb76facc68608e26af"
+                ]
+                _id: "5fc5d814104030b16fdcccff"
+                email: "soos0228@naver.com"
+                pwd: "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                createdAt: "2020-12-01T05:43:48.432Z"
+                updatedAt: "2020-12-01T08:46:51.994Z"
+                __v: 0
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0SWRzIjpbIjVmYzVkODNhMTA0MDMwYjE2ZmRjY2QwMCIsIjVmYzVmZjI4OTliM2QzNjhhYTEyZWJiNiIsIjVmYzVmZjJjOTliM2QzNjhhYTEyZWJiNyIsIjVmYzYwMjk0Mjc1MjcyNjhhMzFjYTMxNSIsIjVmYzYwMjlhNmJkMDg1NjhlMjMyNzYxZiIsIjVmYzYwMjlkNmJkMDg1NjhlMjMyNzYyMCIsIjVmYzYwMmUxZTk4YzczNjhlZmY1ZWE5ZiIsIjVmYzYwMmU0ZTk4YzczNjhlZmY1ZWFhMCIsIjVmYzYwMmU2ZTk4YzczNjhlZmY1ZWFhMSIsIjVmYzYwMmY4NzZmYWNjNjg2MDhlMjZhZSIsIjVmYzYwMmZiNzZmYWNjNjg2MDhlMjZhZiJdLCJfaWQiOiI1ZmM1ZDgxNDEwNDAzMGIxNmZkY2NjZmYiLCJlbWFpbCI6InNvb3MwMjI4QG5hdmVyLmNvbSIsInB3ZCI6IiQyYiQxNCRHYm1FVGZNYnlDY3VNTzhadkplSTV1UkFhWEx2SDZrT3ZoZFRhVFVNS2psWEFKZlVoNExGaSIsImNyZWF0ZWRBdCI6IjIwMjAtMTItMDFUMDU6NDM6NDguNDMyWiIsInVwZGF0ZWRBdCI6IjIwMjAtMTItMDFUMDg6NDY6NTEuOTk0WiIsIl9fdiI6MCwiaWF0IjoxNjA2ODk4NDA2fQ.LUbdFifjLLaFQjbNbJEyVfV98UgaekjgAYJNzb5TMZw"
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
