@@ -1,5 +1,7 @@
+import { Types } from 'mongoose';
+
 export interface Issue {
-  _id: string;
+  _id: string | Types.ObjectId;
   projectId: string;
   errorName: string;
   errorMessage: string;
