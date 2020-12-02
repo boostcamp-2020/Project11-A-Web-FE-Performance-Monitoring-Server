@@ -35,11 +35,14 @@ GET {{host}}/api/issue
 
 ### 페이지가 string이여도 에러
 
-GET {{host}}/api/issue
-?page=abc
+GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+GET {{host}}/api/issue/list/5fc5d83a104030b16fdccd00
+?page=1
+?limit=10
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
