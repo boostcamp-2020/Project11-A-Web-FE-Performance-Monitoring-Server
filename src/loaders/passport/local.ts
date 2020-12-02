@@ -1,7 +1,7 @@
 import { Strategy, IVerifyOptions } from 'passport-local';
 import jwt from 'jsonwebtoken';
 
-import { User } from '@interfaces/user';
+import { User } from '@interfaces/models/user';
 import { Document } from 'mongoose';
 import passportConfig from '@config/passport';
 import bcrypt from '@root/utils/passwordBcrypt';
