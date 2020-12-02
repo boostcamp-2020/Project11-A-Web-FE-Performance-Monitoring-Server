@@ -10,7 +10,7 @@ const catchErrorService = async (
     let targetIssue = await db.Issue.findOne({
       errorName: event.type,
       errorMessage: event.value,
-      projectId: project._id,
+      projectId: project._id as string,
     });
     if (!targetIssue) {
       targetIssue = await new db.Issue({
