@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
 
-import getEventService from '@services/issue/getIssue';
+import getEventService from '@services/event/getEvent';
 import { UserToken } from '@interfaces/userToken';
 
 const getEvent = async (
