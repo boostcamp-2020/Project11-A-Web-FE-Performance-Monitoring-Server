@@ -1,26 +1,20 @@
 import db from '@models';
 import { PaginateResult, Document } from 'mongoose';
-import { Project } from '@interfaces/project';
-
-interface options {
-  page: number;
-}
+import { Issue } from '@interfaces/models/issue';
+import Options from '@interfaces/pageOption';
 
 const getIssues = async (
   _id: string,
   projectId: string,
-  { page }: options,
-): Promise<PaginateResult<Project & Document>> => {
+  options: Options,
+): Promise<PaginateResult<Issue & Document>> => {
   try {
-    const projectIssues = await db.Project.paginate(
-      { _id: projectId },
-      { page, populate: 'issues' },
-    );
+    const Issues = await db.Issue.paginate({ projectId }, { ...options });
 
-    if (!projectIssues) {
+    if (!Issues) {
       throw new Error('이슈가 없습니다.');
     }
-    return projectIssues;
+    return Issues;
   } catch (error) {
     throw new Error(error);
   }

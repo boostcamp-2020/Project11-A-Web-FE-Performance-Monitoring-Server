@@ -1,17 +1,17 @@
 import db from '@models';
 import { Document, PaginateResult } from 'mongoose';
-import { Project } from '@interfaces/project';
+import { Project } from '@interfaces/models/project';
+import Option from '@interfaces/pageOption';
 
 const get = async (
   _id: string,
-  page: number,
+  option: Option,
 ): Promise<PaginateResult<Project & Document>> => {
   try {
     const projectList = await db.Project.paginate(
       { $or: [{ owner: _id }, { admins: _id }, { members: _id }] },
       {
-        page,
-        limit: 10,
+        ...option,
         sort: { createdAt: -1 },
         populate: ['owner', 'admins', 'members'],
       },
