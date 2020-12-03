@@ -5,15 +5,11 @@ const getIssue = async (_id: string, issueId: string): Promise<Issue> => {
   try {
     const targetIssue = await db.Issue.findOne({
       _id: issueId,
-    })
-      .populate({
-        path: 'events',
-        options: { limit: 5, sort: { createdAt: -1 } },
-      })
-      .populate({
-        path: 'comments',
-        options: { limit: 5, sort: { createdAt: -1 } },
-      });
+    }).populate({
+      path: 'events',
+      select: '_id',
+      options: { sort: { timeStamp: -1 } },
+    });
     if (!targetIssue) {
       throw new Error('찾는 이슈가 없습니다.');
     }
