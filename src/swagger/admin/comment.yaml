@@ -168,7 +168,7 @@ paths:
         - bearerAuth: []
       tags:
         - Comment
-      summary: 댓글을 삭제한다.
+      summary: 댓글을 수정한다.
       parameters:
         - name: updateCommentId
           in: path
@@ -181,7 +181,7 @@ paths:
         content:
           application/json:
             schema:
-              type: "object"
+              type: object
               properties:
                 comment:
                   description: 수정할 댓글 내용 입력

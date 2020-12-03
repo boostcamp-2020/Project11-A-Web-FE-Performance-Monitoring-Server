@@ -1,35 +1,34 @@
 components:
   schemas:
-    Event:
+    EventResponse:
       type: object
       properties:
         _id: 
           type: string
         issueId: 
-          description: 이슈 정보를 불러온다.
-          type: object
-        release: 
-          type: string
-        environment:
+          description: 이슈 Id를 불러온다.
           type: string
         timeStamp: 
           type: string
+          example: 2020-12-01 13:11:12.454Z
         createdBy: 
           type: object
           properties:
             ipAddress: 
               type: string
-            email: 
-              type: string
+              example: 1.1.1.1
         url: 
           type: string
+          example: "http://server.com"
         os:
           type: object
           properties:
             version: 
               type: string
+              example: 10.4
             name: 
               type: string
+              example: MacOS
         browser:
           type: object
           properties:
@@ -49,23 +48,60 @@ components:
           type: array
           items:
             type: object
+          example:
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/layer.js"
+            function: "Layer.handle [as handle_request]"
+            lineno: 95
+            colno: 5
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/express.example.js"
+            function: mainHandler
+            lineno: 21
+            colno: 9
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/route.js"
+            function: next
+            lineno: 137
+            colno: 13
+        errorContexts:
+          description: 에러 컨텍스트
+          type: array
+          items:
+            type: array
+            items:
+              type: string
         runtime:
           description: Express 전용
           type: object
           properties:
             version:
               type: string
+              example: 1.12
             name:
               type: string
+              example: Node
         serverName:
           type: string
           description: Express 전용
+          example: (Express만) munhyelaui-MacBook.local
         transaction:
           type: string
           description: Express 전용
+          example: (Express만) GET /debug-sentry
         userIp:
           type: string
           description: Express 전용
+          example: (Express만) 1.1.1.1
+        message: 
+          type: string
+          example: 안뇽
+          description: Message 전용
+        level: 
+          type: string
+          example: info
+        contexts: 
+          type: object
+          example:
+            mes: 메세지
+            not: 알림
 paths:
   /api/event/{eventId}:
     get:
@@ -87,7 +123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Event'
+                $ref: '#components/schemas/EventResponse'
         default:
           description: Error
           content:
