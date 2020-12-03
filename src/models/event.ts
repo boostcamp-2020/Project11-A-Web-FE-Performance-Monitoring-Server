@@ -5,8 +5,6 @@ const Event = new mongoose.Schema({
   issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
   createdBy: {
     ip: String,
-    email: String,
-    userId: String,
   },
   sdk: {
     version: String,
