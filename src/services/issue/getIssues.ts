@@ -9,7 +9,10 @@ const getIssues = async (
   options: Options,
 ): Promise<PaginateResult<Issue & Document>> => {
   try {
-    const Issues = await db.Issue.paginate({ projectId }, { ...options });
+    const Issues = await db.Issue.paginate(
+      { projectId, isResolved: false },
+      { ...options },
+    );
 
     if (!Issues) {
       throw new Error('이슈가 없습니다.');
