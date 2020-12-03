@@ -37,6 +37,73 @@ components:
           description: JWT 토큰
           type: string
 paths:
+  /api/comment/{issueId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Comment
+      summary: 해당 이슈의 댓글 목록을 불러온다. (오래된 순으로)
+      parameters:
+      - name: issueId
+        in: path
+        required: true
+        description: 이슈 아이디 입력
+        schema:
+          type : string
+          example: 5fc5d859104030b16fdccd01
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: 페이지 번호 수 입력 (기본 1)
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: 한번에 불러올 댓글 수 입력 (기본 10)
+      responses:
+        200:
+          description: 댓글 목록 출력
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagenation'
+              example:
+                "docs":
+                  - "_id": "5fc84ca305d47878bd9b4364"
+                    "userId": 
+                      "_id": "5fc5d814104030b16fdcccff"
+                      "email": "soos0228@naver.com"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "description": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
+                    "createdAt": "2020-12-03T02:25:39.731Z"
+                    "updatedAt": "2020-12-03T02:25:39.731Z"
+                    "__v": 0
+                  - "_id": "5fc84ca305d47878bd9b4365"
+                    "userId":
+                      "_id": "5fc5d814104030b16fdcccff"
+                      "email": "soos0228@naver.com"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "description": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
+                    "createdAt": "2020-12-03T02:25:39.921Z"
+                    "updatedAt": "2020-12-03T02:25:39.921Z"
+                    "__v": 0
+                "totalDocs": 2
+                "limit": 10
+                "totalPages": 1
+                "page": 1
+                "pagingCounter": 1
+                "hasPrevPage": false
+                "hasNextPage": false
+                "prevPage": null
+                "nextPage": null
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/comment:
     post:
       security:

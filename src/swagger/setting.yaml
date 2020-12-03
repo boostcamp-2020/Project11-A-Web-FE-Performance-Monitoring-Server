@@ -14,12 +14,16 @@ components:
             description: 해당하는 요소의 목록
             type: object
         totalDocs:
+          description: 전체 doc 갯수
           type: integer
         limit: 
+          description: 설정한 limit 값
           type: integer
         totalPages: 
+          description: 총 페이지 수
           type: integer
         page: 
+          description: 현재 페이지
           type: integer
         pagingCounter:
           type: integer
