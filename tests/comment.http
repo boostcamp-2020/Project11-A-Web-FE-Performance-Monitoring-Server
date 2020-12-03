@@ -31,13 +31,25 @@ Authorization: Bearer {{authToken}}
 
 ###
 
+GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/comment/5fc5d859104030b16fdccd01
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
 post {{host}}/api/comment
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "issueId": "5fc5b12b0ad5397003cad48c",
-  "comment": "나는 댓글이당. 백엔드 빨리 마치고싶다...."
+  "issueId": "5fc5d859104030b16fdccd01",
+  "comment": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
 }
 
 ###
@@ -48,7 +60,7 @@ Authorization: Bearer {{authToken}}
 
 ###
 @updateCommentId = 5fc60e25da7ce91b1807b167
-put {{host}}/api/comment/{{updateCommentId}}
+patch {{host}}/api/comment/{{updateCommentId}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
