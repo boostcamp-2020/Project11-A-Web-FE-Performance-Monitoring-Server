@@ -1,5 +1,7 @@
 import { User as IUser } from '@interfaces/models/user';
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
+import IPagination from '@interfaces/pagenation';
 
 const User = new mongoose.Schema(
   {
@@ -14,9 +16,17 @@ const User = new mongoose.Schema(
       type: String,
     },
 
+    nickname: {
+      type: String,
+    },
+
     projectIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
   },
   { timestamps: true },
 );
 
-export default mongoose.model<IUser & mongoose.Document>('User', User);
+User.plugin(mongoosePaginate);
+export default mongoose.model<IUser & mongoose.Document>(
+  'User',
+  User,
+) as IPagination<IUser & mongoose.Document>;
