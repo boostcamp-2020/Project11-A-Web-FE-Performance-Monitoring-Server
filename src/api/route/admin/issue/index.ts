@@ -8,5 +8,6 @@ router.use(passportMiddleware);
 
 router.get('/list/:projectId', Controller.getIssues);
 router.get('/:issueId', Controller.getIssue);
+router.patch('/', Controller.changeIssuesStatus);
 
 export default router;
