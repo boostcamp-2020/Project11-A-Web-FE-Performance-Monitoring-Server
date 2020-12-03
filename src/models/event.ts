@@ -23,11 +23,13 @@ const Event = new mongoose.Schema({
   timeStamp: Date,
   url: String,
   stacktrace: [Object],
-  context: [String],
+  contexts: Object,
+  message: String,
   version: String,
   platform: String,
   serverName: String,
   transaction: String,
   userIp: String,
+  errorContexts: [[String]],
 });
 export default mongoose.model<IEvent & mongoose.Document>('Event', Event);

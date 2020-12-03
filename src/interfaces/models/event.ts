@@ -1,6 +1,10 @@
 import { StackTrace } from '@interfaces/models/stackTrace';
 import { Types } from 'mongoose';
 
+type AnyStringObject = {
+  [K in string]: string;
+};
+
 export interface Event {
   _id?: string | Types.ObjectId;
   issueId?: string | Types.ObjectId;
@@ -9,7 +13,6 @@ export interface Event {
   timeStamp: Date;
   createdBy: {
     ipAdress?: string;
-    email?: string;
   };
   os?: {
     version: string;
@@ -27,10 +30,13 @@ export interface Event {
   type?: string; // error.name
   value?: string; // error.message
   stacktrace?: StackTrace[]; // error.stack
-  context?: string[][];
+  contexts?: AnyStringObject;
   version?: string;
   platform?: string;
   serverName?: string;
   transaction?: string;
   userIp?: string;
+  message?: string;
+  level?: string;
+  errorContexts: string[][];
 }
