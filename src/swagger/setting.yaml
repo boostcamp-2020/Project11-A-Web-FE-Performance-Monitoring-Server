@@ -4,6 +4,10 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    sdkAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     pagenation:
       type: object
@@ -37,3 +41,4 @@ components:
           type: integer
 security:
   - bearerAuth: []
+  - sdkAuth: []
