@@ -1,8 +1,8 @@
-import errorRouter from './error';
+import eventRouter from './error';
 import { Router } from 'express';
 
 const router = Router();
 
-router.use('/error', errorRouter);
+router.use('/event', eventRouter);
 
 export default router;
