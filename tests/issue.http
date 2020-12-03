@@ -46,3 +46,13 @@ GET {{host}}/api/issue/list/5fc5d83a104030b16fdccd00
 ?limit=10
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
+
+###
+
+PATCH {{host}}/api/issue
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "issueList": ["5fc5d859104030b16fdccd01"]
+}

@@ -36,7 +36,8 @@ Authorization: Bearer {{authToken}}
 
 {
   "platform": "Issue 페이지 전용",
-  "projectName": "1234123"
+  "projectName": "1234123",
+  "admins": ["5fc5a7c375918444e6a3ef9"]
 }
 
 ###
