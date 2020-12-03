@@ -8,8 +8,11 @@ const router = Router();
 router.use(passportMiddleware);
 
 router.get('/mailtest', Controller.mailTest);
-router.get('/:projectId', Controller.getSDKToken);
-router.post('/', Controller.createProject);
+router.get('/:projectId', Controller.getProject);
 router.get('/', Controller.getProjects);
+
+router.post('/', Controller.createProject);
+
+router.put('/:projectId', Controller.updateProject);
 
 export default router;
