@@ -11,17 +11,13 @@ const Issue = new mongoose.Schema(
       required: true,
     },
 
-    errorName: {
-      type: String,
-      required: true,
-    },
+    errorName: String, // Error 만 존재
 
-    errorMessage: {
-      type: String,
-      require: true,
-    },
+    errorMessage: String, // Error 만 존재
 
-    isResolved: { type: Boolean, required: true },
+    message: String, // Message 만 존재
+
+    isResolved: { type: Boolean, required: true, default: false },
 
     comments: [
       { type: mongoose.Schema.Types.ObjectId, ref: 'Comment', default: [] },
