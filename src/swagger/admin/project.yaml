@@ -1,0 +1,146 @@
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        _id:
+          type: string
+        platform:
+          type: string
+        projectName:
+          type: string
+        createdAt: 
+          type: string
+        updateAt:
+          type: string
+        role:
+          type: string
+          description: 역할 (owner, admin, member 등)
+        sdkToken:
+          type: string
+        owner:
+          type: object
+          properties:
+            projectIds:
+              description: 속한 프로젝트 ID들
+              type: array
+              items:
+                type: string
+            _id:
+              description: 오브젝트 ID
+              type: string
+            email:
+              type: string
+            pwd:
+              type: string
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            __v:
+              type: number
+        admins:
+          type: array
+          items: string
+        members:
+          type: array
+          items: string
+        issues:
+          type: array
+          items: string
+paths:
+  /api/project:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 프로젝트를 생성한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                platform:
+                  description: 플랫폼 입력
+                  type: string
+                projectName:
+                  description: 프로젝트 이름 입력
+                  type: string
+              require:
+              - platform
+              - projectName
+      responses:
+        201:
+          description: 프로젝트 생성
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 자신이 속한 프로젝트 목록을 받아온다.
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: 페이지 번호 수 입력
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: 한번에 불러올 프로젝트 수 입력
+      responses:
+        200:
+          description: 페이지 목록
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagenation'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/project/{projectId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 특정 프로젝트 정보를 불러온다.
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: 프로젝트 아이디 입력
+          schema:
+            type : string
+      responses:
+        200:
+          description: 프로젝트 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

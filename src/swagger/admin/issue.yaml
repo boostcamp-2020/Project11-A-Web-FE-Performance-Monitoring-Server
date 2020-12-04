@@ -1,0 +1,255 @@
+components:
+  schemas:
+    Issue:
+      type: object
+      properties:
+        _id: 
+          type: string
+        projectId: 
+          description: 프로젝트 정보를 불러온다.
+          type: object
+        errorName: 
+          type: string
+        errorMessage:
+          type: string
+        isResolved: 
+          type: boolean
+        createdAt:
+          type: string
+        updateAt:
+          type: string
+        comments: 
+          type: array
+          items: 
+            type: string
+        events:
+          type: array
+          items:
+            $ref: '#components/schemas/Event'
+paths:
+  /api/issue/{issueId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Issue
+      summary: 특정 이슈 정보를 불러온다.
+      parameters:
+        - name: issueId
+          in: path
+          required: true
+          description: 이슈 아이디 입력
+          schema:
+            type: string
+            example: 5fc5d859104030b16fdccd01
+      responses:
+        200:
+          description: 이슈 정보 출력 - 댓글, 이슈를 최대 5개까지만 불러옴
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+              example:
+                "comments": []
+                "events":
+                  - createdBy:
+                      ip: "111.111.111.111"
+                    "sdk":
+                      "version": "0.0.1"
+                      "name": "string"
+                    "os":
+                      "name": "Mac"
+                      "version": "10.2.4"
+                    "stacktrace": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                    "context": [
+                      "가",
+                      "나",
+                      "다"
+                    ]
+                    "_id": "5fc5e23abf24d9c7343049f1"
+                    "timeStamp": "2020-11-12T00:00:00.000Z"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "__v": 0
+                  - createdBy:
+                      ip: "111.111.111.111"
+                    "sdk":
+                      "version": "0.0.1"
+                      "name": "string"
+                    "os":
+                      "name": "Mac"
+                      "version": "10.2.4"
+                    "stacktrace": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                    "context": [
+                      "가",
+                      "나",
+                      "다"
+                    ]
+                    "_id": "5fc5e23abf24d9c7343049f1"
+                    "timeStamp": "2020-11-12T00:00:00.000Z"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "__v": 0
+                  - createdBy:
+                      ip: "111.111.111.111"
+                    "sdk":
+                      "version": "0.0.1"
+                      "name": "string"
+                    "os":
+                      "name": "Mac"
+                      "version": "10.2.4"
+                    "stacktrace": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                    "context": [
+                      "가",
+                      "나",
+                      "다"
+                    ]
+                    "_id": "5fc5e23abf24d9c7343049f1"
+                    "timeStamp": "2020-11-12T00:00:00.000Z"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "__v": 0
+                  - createdBy:
+                      ip: "111.111.111.111"
+                    "sdk":
+                      "version": "0.0.1"
+                      "name": "string"
+                    "os":
+                      "name": "Mac"
+                      "version": "10.2.4"
+                    "stacktrace": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                    "context": [
+                      "가",
+                      "나",
+                      "다"
+                    ]
+                    "_id": "5fc5e23abf24d9c7343049f1"
+                    "timeStamp": "2020-11-12T00:00:00.000Z"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "__v": 0
+                  - createdBy:
+                      ip: "111.111.111.111"
+                    "sdk":
+                      "version": "0.0.1"
+                      "name": "string"
+                    "os":
+                      "name": "Mac"
+                      "version": "10.2.4"
+                    "stacktrace": [
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                    "context": [
+                      "가",
+                      "나",
+                      "다"
+                    ]
+                    "_id": "5fc5e23abf24d9c7343049f1"
+                    "timeStamp": "2020-11-12T00:00:00.000Z"
+                    "issueId": "5fc5d859104030b16fdccd01"
+                    "__v": 0
+                "_id": "5fc5d859104030b16fdccd01"
+                "projectId": "5fc5d83a104030b16fdccd00"
+                "errorName": "new Error"
+                "errorMessage": "그냥 에러임"
+                "isResolved": false
+                "createdAt": "2020-12-01T05:44:57.908Z"
+                "updatedAt": "2020-12-02T00:21:51.425Z"
+                "__v": 23
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/issue/list/{projectId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Issue
+      summary: 특정 프로젝트의 이슈 목록을 불러온다.
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: 프로젝트 아이디 입력
+          schema:
+            type: string
+            example: 5fc5d83a104030b16fdccd00
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 페이지 번호 입력
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: 한번에 불러올 이슈 수 입력
+      responses:
+        200:
+          description: 이슈 정보 출력
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagenation'
+              example:
+                "docs": 
+                  comment: []
+                  event: ["5fc5e238bf24d9c7343049ee",
+                    "5fc5e23abf24d9c7343049ef",
+                    "5fc5e23abf24d9c7343049f0",
+                    "5fc5e23abf24d9c7343049f1",
+                    "5fc5e23bbf24d9c7343049f2",
+                    "5fc5e23bbf24d9c7343049f3",
+                    "5fc5e23bbf24d9c7343049f4",
+                    "5fc5e23bbf24d9c7343049f5",
+                    "5fc5e23bbf24d9c7343049f6",
+                    "5fc5e23bbf24d9c7343049f7",
+                    "5fc5e23cbf24d9c7343049f8",
+                    "5fc5e23cbf24d9c7343049f9",
+                    "5fc5e23cbf24d9c7343049fa",
+                    "5fc6de1fed76e21d40026ea9"]
+                  "_id": "5fc5d859104030b16fdccd01"
+                  "projectId": "5fc5d83a104030b16fdccd00"
+                  "errorName": "new Error"
+                  "errorMessage": "그냥 에러임"
+                  "isResolved": false
+                  "createdAt": "2020-12-01T05:44:57.908Z"
+                  "updatedAt": "2020-12-02T00:21:51.425Z"
+                  "__v": 23
+                "totalDocs": 1
+                "limit": 10
+                "totalPages": 1
+                "page": 1
+                "pagingCounter": 1
+                "hasPrevPage": false
+                "hasNextPage": false
+                "prevPage": null
+                "nextPage": null
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

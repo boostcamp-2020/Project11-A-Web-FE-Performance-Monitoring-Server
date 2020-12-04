@@ -1,0 +1,52 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
+@host = {{develop}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+
+GET {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+POST {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "platform": "Issue 페이지 전용",
+  "projectName": "1234123"
+}
+
+###
+
+GET {{host}}/api/project/5fc602e6e98c7368eff5eaa1
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/project/mailtest
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}

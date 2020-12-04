@@ -1,0 +1,132 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          description: 가입할 이메일 입력
+          type: string
+        pwd:
+          description: 비밀번호 입력
+          type: string
+      require:
+      - email
+      - pwd
+    Login:
+      type: object
+      properties:
+        projectIds:
+          description: 속한 프로젝트 ID들
+          type: array
+          items:
+            type: string
+        _id:
+          description: 오브젝트 ID
+          type: string
+        email:
+          type: string
+        pwd:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        __v:
+          type: number
+        token:
+          description: JWT 토큰
+          type: string
+paths:
+  /api/comment:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Comment
+      summary: 댓글을 입력한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                issueId:
+                  description: 해당 이슈 아이디 입력
+                  type: string
+                comment:
+                  description: 댓글 내용 입력
+                  type: string
+              require:
+              - issueId
+              - comment
+            example:
+              issueId: 5fc5b12b0ad5397003cad48c
+              comment: 나는 댓글이당.
+      responses:
+        201:
+          description: 댓글 입력 성공
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/comment/{deleteCommentId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Comment
+      summary: 댓글을 삭제한다.
+      parameters:
+        - name: deleteCommentId
+          in: path
+          required: true
+          description: 댓글 ID 입력
+          schema:
+            type: string
+            example: 5fc60e25da7ce91b1807b167
+      responses:
+        200:
+          description: 댓글 삭제 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/comment/{updateCommentId}:
+    patch:
+      security:
+        - bearerAuth: []
+      tags:
+        - Comment
+      summary: 댓글을 삭제한다.
+      parameters:
+        - name: updateCommentId
+          in: path
+          required: true
+          description: 댓글 ID 입력
+          schema:
+            type: string
+            example: 5fc60e25da7ce91b1807b167
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                comment:
+                  description: 수정할 댓글 내용 입력
+                  type: string
+              require:
+              - comment
+      responses:
+        200:
+          description: 댓글 수정 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

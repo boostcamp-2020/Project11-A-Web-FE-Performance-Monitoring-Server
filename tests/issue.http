@@ -1,0 +1,48 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
+@host = {{develop}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+
+GET {{host}}/api/issue
+?page=1
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+### 페이지가 없으면 에러
+
+GET {{host}}/api/issue
+
+### 페이지가 string이여도 에러
+
+GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/issue/list/5fc5d83a104030b16fdccd00
+?page=1
+?limit=10
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}

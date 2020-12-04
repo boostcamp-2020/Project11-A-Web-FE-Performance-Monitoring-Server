@@ -1,0 +1,35 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    pagenation:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            description: 해당하는 요소의 목록
+            type: object
+        totalDocs:
+          type: integer
+        limit: 
+          type: integer
+        totalPages: 
+          type: integer
+        page: 
+          type: integer
+        pagingCounter:
+          type: integer
+        hasPrevPage: 
+          type: boolean
+        hasNextPage:
+          type: boolean
+        prevPage:
+          type: integer
+        nextPage:
+          type: integer
+security:
+  - bearerAuth: []

@@ -1,0 +1,6 @@
+components:
+  schemas: 
+    ErrorResponse: 
+      properties: 
+        message: 
+          type: string
