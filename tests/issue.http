@@ -1,6 +1,7 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
+@server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
 
@@ -14,8 +15,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
-  "pwd": "asksA1@aa!"
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
 }
 
 ###
@@ -37,3 +38,8 @@ GET {{host}}/api/issue
 GET {{host}}/api/issue
 ?page=abc
 
+###
+
+GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}

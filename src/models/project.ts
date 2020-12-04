@@ -17,13 +17,19 @@ const Project = new mongoose.Schema(
       required: true,
     },
 
-    admins: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    admins: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] },
+    ],
 
-    members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    members: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] },
+    ],
 
     projectName: { type: String, index: true, required: true },
 
-    issues: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Issue' }],
+    issues: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'Issue', default: [] },
+    ],
   },
   { timestamps: true },
 );

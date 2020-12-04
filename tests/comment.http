@@ -24,23 +24,34 @@ content-type: {{contentType}}
 
 ###
 
-GET {{host}}/api/project
+GET {{host}}/api/issue
+?page=1
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
 
-POST {{host}}/api/project
+post {{host}}/api/comment
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "platform": "Issue 페이지 전용",
-  "projectName": "1234123"
+  "issueId": "5fc5b12b0ad5397003cad48c",
+  "comment": "나는 댓글이당. 백엔드 빨리 마치고싶다...."
 }
 
 ###
-
-GET {{host}}/api/project/5fc492ab6a919a86e0fa5119
+@deleteCommentId = 5fc60e25da7ce91b1807b167
+delete {{host}}/api/comment/{{deleteCommentId}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
+
+###
+@updateCommentId = 5fc60e25da7ce91b1807b167
+put {{host}}/api/comment/{{updateCommentId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "comment": "커맨드 수정했다."
+}

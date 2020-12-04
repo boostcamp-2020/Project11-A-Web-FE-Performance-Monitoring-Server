@@ -1,7 +1,7 @@
 components:
   schemas:
     User:
-      type: "object"
+      type: object
       properties:
         email:
           description: 가입할 이메일 입력
@@ -16,10 +16,12 @@ components:
       type: object
       properties:
         projectIds:
+          description: 속한 프로젝트 ID들
           type: array
           items:
             type: string
         _id:
+          description: 오브젝트 ID
           type: string
         email:
           type: string
@@ -32,6 +34,7 @@ components:
         __v:
           type: number
         token:
+          description: JWT 토큰
           type: string
 paths:
   /api/auth/join:
@@ -43,14 +46,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/User'
+              $ref: '#/components/schemas/User'
       responses:
         201:
           description: 회원가입 성공
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/auth/login:
     post:
       tags:
@@ -60,13 +65,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/User'
+              $ref: '#/components/schemas/User'
       responses:
         200:
           description: 로그인 성공
-          schema:
-            $ref: '#/components/schemas/Login'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
         default:
           description: Error
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

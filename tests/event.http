@@ -14,8 +14,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
-  "pwd": "asksA1@aa!"
+  "email": "soos0228@naver.com",
+  "pwd": "Tjrals228@"
 }
 
 ###
@@ -23,7 +23,7 @@ content-type: {{contentType}}
 
 ###
 
-@eventId = asdf
+@eventId = 5fc5e238bf24d9c7343049ee
 GET {{host}}/api/event/{{eventId}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}

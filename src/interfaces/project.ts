@@ -1,6 +1,8 @@
+import { Types } from 'mongoose';
+
 export interface Project {
-  _id?: string;
-  platform: 'node' | 'express' | 'javascript' | 'react';
+  _id?: string | Types.ObjectId;
+  platform: string;
   owner: string;
   admins?: string[];
   members?: string[];

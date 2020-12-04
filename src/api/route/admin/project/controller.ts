@@ -4,7 +4,7 @@ import { UserToken } from '@interfaces/userToken';
 import createService from '@root/services/project/createProject';
 import getService from '@root/services/project/getProjects';
 import getProjectService from '@services/project/getProject';
-import { ajv, validate } from '@utils/pageCheck';
+import createSDKToken from '@utils/createSDKToken';
 
 const createProject = async (
   req: Request,
@@ -16,7 +16,7 @@ const createProject = async (
     const { _id } = user as UserToken;
     const projectInfo = { ...body, owner: _id };
     const token = await createService(projectInfo);
-    return res.status(200).json({ token });
+    return res.status(201).json({ token });
   } catch (err) {
     next(new Error(err));
   }
@@ -28,15 +28,16 @@ const getProjects = async (
   next: NextFunction,
 ): Promise<void | Response<void>> => {
   try {
-    const valid = validate(req.query);
-    if (!valid) {
-      next(new Error(ajv.errorsText(validate.errors)));
-    }
-    const page = typeof req.query.page === 'string' ? req.query.page : '1';
+    const page =
+      typeof req.query.page !== 'string'
+        ? '1'
+        : isNaN(+req.query.page)
+        ? '1'
+        : req.query.page;
     const { user } = req;
     const { _id } = user as UserToken;
     const projectList = await getService(_id, parseInt(page));
-    return res.status(200).json(projectList);
+    return res.json(projectList);
   } catch (err) {
     next(new Error(err));
   }
@@ -58,4 +59,20 @@ const getProject = async (
   }
 };
 
-export default { createProject, getProjects, getProject };
+const getSDKToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void | Response<void>> => {
+  try {
+    const { projectId } = req.params;
+    const { _id } = req.user as UserToken;
+    await getProjectService(_id, projectId);
+    const token = createSDKToken(projectId);
+    return res.status(200).json({ token });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export default { createProject, getProjects, getProject, getSDKToken };

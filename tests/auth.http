@@ -2,7 +2,7 @@
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
 @server = http://118.67.129.120:3000
-@host = {{server}}
+@host = {{develop}}
 @contentType = application/json
 
 ###
@@ -14,8 +14,8 @@ POST {{host}}/api/auth/join
 content-type: {{contentType}}
 
 {
-  "email": "asdfsg@naver.com",
-  "pwd": "asksA1@aa!"
+  "email": "saaaa@naver.com",
+  "pwd": "Tjrals228@"
 }
 
 ###

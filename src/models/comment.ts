@@ -4,9 +4,7 @@ import mongoose from 'mongoose';
 const Comment = new mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    browser: {
-      type: String,
-    },
+    description: String,
   },
   { timestamps: true },
 );
