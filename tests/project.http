@@ -41,6 +41,12 @@ Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/project/5fc492ab6a919a86e0fa5119
+GET {{host}}/api/project/5fc602e6e98c7368eff5eaa1
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/project/mailtest
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}

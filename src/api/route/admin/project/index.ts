@@ -7,7 +7,8 @@ const router = Router();
 
 router.use(passportMiddleware);
 
-router.get('/:projectId', Controller.getProject);
+router.get('/mailtest', Controller.mailTest);
+router.get('/:projectId', Controller.getSDKToken);
 router.post('/', Controller.createProject);
 router.get('/', Controller.getProjects);
 

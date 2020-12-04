@@ -1,5 +1,5 @@
 import db from '@models';
-import { Project } from '@interfaces/project';
+import { Project } from '@interfaces/models/project';
 import createSDKToken from '@utils/createSDKToken';
 
 const create = async (project: Project): Promise<string> => {

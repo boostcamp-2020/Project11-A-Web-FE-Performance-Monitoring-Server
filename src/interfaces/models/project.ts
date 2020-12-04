@@ -8,4 +8,5 @@ export interface Project {
   members?: string[];
   projectName: string;
   issues?: string[];
+  emails?: string[];
 }

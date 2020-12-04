@@ -1,4 +1,4 @@
-import { Comment as IComment } from '@interfaces/comment';
+import { Comment as IComment } from '@interfaces/models/comment';
 import mongoose from 'mongoose';
 
 const Comment = new mongoose.Schema(

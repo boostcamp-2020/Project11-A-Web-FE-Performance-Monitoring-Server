@@ -48,7 +48,7 @@ module.exports = {
           description: 'Santry Backend API', // Description (optional)
         },
       },
-      apis: ['./src/api/route/**/*.yaml'],
+      apis: ['./src/swagger/**/*.yaml'],
     }),
   ]
 };

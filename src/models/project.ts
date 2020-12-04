@@ -1,4 +1,4 @@
-import { Project as IProject } from '@interfaces/project';
+import { Project as IProject } from '@interfaces/models/project';
 import mongoose from 'mongoose';
 import IPagination from '@interfaces/pagenation';
 import mongoosePaginate from 'mongoose-paginate-v2';
@@ -30,6 +30,8 @@ const Project = new mongoose.Schema(
     issues: [
       { type: mongoose.Schema.Types.ObjectId, ref: 'Issue', default: [] },
     ],
+
+    emails: [{ type: String, default: [] }],
   },
   { timestamps: true },
 );

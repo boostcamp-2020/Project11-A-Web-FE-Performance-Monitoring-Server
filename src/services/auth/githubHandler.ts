@@ -3,7 +3,7 @@ import got from 'got';
 import githubConfig from '@config/github';
 import { GithubToken } from '@interfaces/githubToken';
 import db from '@models';
-import { User } from '@interfaces/user';
+import { User } from '@interfaces/models/user';
 import jwt from 'jsonwebtoken';
 import passportConfig from '@config/passport';
 

@@ -1,6 +1,6 @@
 import db from '@models';
-import { Event } from '@interfaces/event';
-import { Project } from '@interfaces/project';
+import { Event } from '@root/interfaces/models/event';
+import { Project } from '@interfaces/models/project';
 
 const catchErrorService = async (
   event: Event,
