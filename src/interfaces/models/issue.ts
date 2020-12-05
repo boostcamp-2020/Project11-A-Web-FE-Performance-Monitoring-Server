@@ -5,6 +5,7 @@ export interface Issue {
   projectId: string;
   errorName?: string;
   errorMessage?: string;
+  errorStack?: string;
   message?: string;
   isResolved: boolean;
   comments?: Array<string>;
