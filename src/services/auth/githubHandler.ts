@@ -27,9 +27,11 @@ const githubCallback = async (code: string): Promise<User> => {
     },
   });
   const callbackBody: { id: string; login: string } = JSON.parse(getUser.body);
-  let user = await db.User.findOne({ email: 'Github-' + callbackBody.id });
+  let user = await db.User.findOne({
+    email: 'Github-' + callbackBody.id,
+  }).exec();
   if (!user) {
-    user = await new db.User({
+    user = new db.User({
       email: 'Github-' + callbackBody.id,
       nickname: callbackBody.login,
     });

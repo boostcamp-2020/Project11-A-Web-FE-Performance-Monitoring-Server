@@ -18,22 +18,24 @@ const create = async (project: Project): Promise<string> => {
     members.push(...project.members);
   }
   const membersInDB = members.map((v) =>
-    db.User.findById(v).catch((err) => {
-      throw `${v}는 존재하지 않는 멤버입니다. 에러 상세내용: ${err}`;
-    }),
+    db.User.findById(v)
+      .exec()
+      .catch((err) => {
+        throw `${v}는 존재하지 않는 멤버입니다. 에러 상세내용: ${err}`;
+      }),
   );
   await Promise.all(membersInDB);
-  const projectDoc = await new db.Project(project);
+  const projectDoc = new db.Project(project);
+  const token = createSDKToken(projectDoc._id.toJSON());
   await Promise.all(
     members.map((memberObjectId) =>
       db.User.findByIdAndUpdate(
         memberObjectId,
         { $addToSet: { projectIds: projectDoc._id } },
         // { $push: { projectIds: projectDoc._id } }, 중복 가능 코드, https://kb.objectrocket.com/mongo-db/using-nodejs-and-mongoose-to-update-array-1205
-      ),
+      ).exec(),
     ),
   );
-  const token = createSDKToken(projectDoc._id.toJSON());
   await projectDoc.save();
   return token;
 };

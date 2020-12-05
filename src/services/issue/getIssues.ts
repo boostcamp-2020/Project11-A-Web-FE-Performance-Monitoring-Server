@@ -8,19 +8,11 @@ const getIssues = async (
   projectId: string,
   options: Options,
 ): Promise<PaginateResult<Issue & Document>> => {
-  try {
-    const Issues = await db.Issue.paginate(
-      { projectId, isResolved: false },
-      { ...options },
-    );
-
-    if (!Issues) {
-      throw new Error('이슈가 없습니다.');
-    }
-    return Issues;
-  } catch (error) {
-    throw new Error(error);
-  }
+  const Issues = await db.Issue.paginate(
+    { projectId, isResolved: false },
+    { ...options },
+  );
+  return Issues;
 };
 
 export default { getIssues };

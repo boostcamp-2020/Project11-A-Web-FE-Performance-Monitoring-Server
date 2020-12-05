@@ -8,7 +8,11 @@ const getComments = async (
   issueId: string,
   option: Option,
 ): Promise<PaginateResult<Comment & Document>> => {
-  const commentList = db.Comment.paginate(
+  const targetIssue = await db.Issue.findById(issueId).exec();
+  if (!targetIssue) {
+    throw '찾는 이슈가 없습니다.';
+  }
+  const commentListQuery = db.Comment.paginate(
     { issueId },
     {
       ...option,
@@ -16,15 +20,14 @@ const getComments = async (
       populate: { path: 'userId', select: 'email' },
     },
   );
-  const targetIssue = await db.Issue.findById(issueId);
-  if (!targetIssue) {
-    throw '찾는 이슈가 없습니다.';
-  }
-  const targetProject = db.Project.findOne({
+  const targetProjectQuery = db.Project.findOne({
     _id: targetIssue.projectId,
     $or: [{ owner: userId }, { admins: userId }, { members: userId }],
-  });
-  await Promise.all([commentList, targetProject]);
+  }).exec();
+  const [commentList, targetProject] = await Promise.all([
+    commentListQuery,
+    targetProjectQuery,
+  ]);
   if (!targetProject) {
     throw '당신의 프로젝트가 아닙니다.';
   }

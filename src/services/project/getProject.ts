@@ -18,7 +18,8 @@ const get = async (
     .populate('issues')
     .populate({ path: 'owner', select: 'nickname' })
     .populate({ path: 'members', select: 'nickname' })
-    .populate({ path: 'admins', select: 'nickname' });
+    .populate({ path: 'admins', select: 'nickname' })
+    .exec();
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }

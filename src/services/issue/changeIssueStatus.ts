@@ -4,12 +4,12 @@ const changeIssueStatus = async (
   userId: string,
   issueList: string[],
 ): Promise<void> => {
-  const issue = await db.Issue.findById(issueList[0]);
+  const issue = await db.Issue.findById(issueList[0]).exec();
   const projectId = issue?.projectId;
   const targetProject = await db.Project.findOne({
     _id: projectId,
     $or: [{ owner: userId }, { admins: userId }],
-  });
+  }).exec();
   if (!targetProject) {
     throw '당신의 프로젝트가 아니거나 권한이 없습니다.';
   }
