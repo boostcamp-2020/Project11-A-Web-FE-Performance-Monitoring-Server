@@ -7,7 +7,6 @@ const Project = new mongoose.Schema(
   {
     platform: {
       type: String,
-      index: true,
       required: true,
     },
 
@@ -18,17 +17,29 @@ const Project = new mongoose.Schema(
     },
 
     admins: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
     ],
 
     members: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
     ],
 
-    projectName: { type: String, index: true, required: true },
+    projectName: { type: String, required: true },
 
     issues: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'Issue', default: [] },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Issue',
+        default: [],
+      },
     ],
 
     emails: [{ type: String, default: [] }],
