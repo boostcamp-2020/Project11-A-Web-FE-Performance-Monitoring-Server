@@ -53,7 +53,7 @@ const catchEventService = async (
   targetIssue.save();
   console.log(' line53 : ' + Number(new Date().getTime() - startTime));
 
-  await errorSample.save();
+  errorSample.save();
   console.log(' line57 : ' + Number(new Date().getTime() - startTime));
 };
 
