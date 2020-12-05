@@ -7,7 +7,7 @@ const emailValidation = (
   next: NextFunction,
 ): void => {
   if (!emailPattern.test(req.body.email)) {
-    throw new Error('이메일 규칙이 다릅니다.');
+    return next(new Error('이메일 규칙이 다릅니다.'));
   }
   next();
 };

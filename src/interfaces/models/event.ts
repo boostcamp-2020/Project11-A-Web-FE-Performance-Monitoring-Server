@@ -12,7 +12,7 @@ export interface Event {
   environment?: string;
   timeStamp: Date;
   createdBy: {
-    ipAdress?: string;
+    ipAddress?: string;
   };
   os?: {
     version: string;

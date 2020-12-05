@@ -9,7 +9,7 @@ const pwdValidation = (
   next: NextFunction,
 ): void => {
   if (!pwdPattern.test(req.body.pwd)) {
-    throw new Error('비밀번호 규칙이 다릅니다.');
+    return next(new Error('비밀번호 규칙이 다릅니다.'));
   }
   next();
 };
