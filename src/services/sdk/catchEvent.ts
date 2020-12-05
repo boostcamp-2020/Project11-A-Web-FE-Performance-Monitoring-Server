@@ -35,7 +35,7 @@ const catchEventService = async (
     targetProject.issues?.push(targetIssue._id);
     await targetProject.save();
   }
-  const errorSample = await new db.Event({
+  const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
   });
