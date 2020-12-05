@@ -105,7 +105,7 @@ paths:
         - sdkAuth: []
       tags:
         - SDK
-      summary: 로그인 한 유저의 정보를 불러온다.
+      summary: SDK에서 서버로 오류 및 메세지를 전송한다.
       requestBody:
         content:
           application/json:

@@ -43,24 +43,27 @@ components:
               type: string
             name:
               type: string
-        stacktrace:
-          description: stacktrace
-          type: array
-          items:
-            type: object
-          example:
-          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/layer.js"
-            function: "Layer.handle [as handle_request]"
-            lineno: 95
-            colno: 5
-          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/express.example.js"
-            function: mainHandler
-            lineno: 21
-            colno: 9
-          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/route.js"
-            function: next
-            lineno: 137
-            colno: 13
+        error:
+          type: object
+          properties:
+            stacktrace:
+              description: stacktrace
+              type: array
+              items:
+                type: object
+              example:
+              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/layer.js"
+                function: "Layer.handle [as handle_request]"
+                lineno: 95
+                colno: 5
+              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/express.example.js"
+                function: mainHandler
+                lineno: 21
+                colno: 9
+              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/route.js"
+                function: next
+                lineno: 137
+                colno: 13
         errorContexts:
           description: 에러 컨텍스트
           type: array
