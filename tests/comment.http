@@ -15,8 +15,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "soos0228@naver.com",
-  "pwd": "Tjrals228@"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###
@@ -24,20 +24,13 @@ content-type: {{contentType}}
 
 ###
 
-GET {{host}}/api/issue
-?page=1
+GET {{host}}/api/issue/list/5fcca3cdef5f6a1a1a774576
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/issue/5fc5d859104030b16fdccd01
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
-
-###
-
-GET {{host}}/api/comment/5fc5d859104030b16fdccd01
+GET {{host}}/api/comment/5fccb3e7e1689a32b4ffaf45
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -48,8 +41,8 @@ content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "issueId": "5fc5d859104030b16fdccd01",
-  "comment": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
+  "issueId": "5fccb3e7e1689a32b4ffaf45",
+  "comment": "아 내일 월요일.."
 }
 
 ###
@@ -59,11 +52,11 @@ content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
-@updateCommentId = 5fc60e25da7ce91b1807b167
+@updateCommentId = 5fccb6591579f709506c1ccc
 patch {{host}}/api/comment/{{updateCommentId}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "comment": "커맨드 수정했다."
+  "comment": "저녁을 맛나게 먹을겁니다."
 }

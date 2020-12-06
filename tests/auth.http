@@ -8,14 +8,14 @@
 ###
 GET {{host}}/status
 
-###
+### 회원가입
 
 POST {{host}}/api/auth/join
 content-type: {{contentType}}
 
 {
-  "email": "saaaa@naver.com",
-  "pwd": "Tjrals228@"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###
@@ -25,8 +25,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "asdfssaaa@naver.com",
-  "pwd": "asksA1@aa!"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###
