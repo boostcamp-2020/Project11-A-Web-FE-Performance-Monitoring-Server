@@ -36,7 +36,7 @@ export interface Event {
   serverName?: string;
   transaction?: string;
   userIp?: string;
-  message?: string;
+  message?: string; // log일 경우만
   level?: string;
   errorContexts: string[][];
 }
