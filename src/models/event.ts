@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 
 const Event = new mongoose.Schema({
   issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
+  release: String,
+  environment: String,
   createdBy: {
     ipAddress: String,
   },
