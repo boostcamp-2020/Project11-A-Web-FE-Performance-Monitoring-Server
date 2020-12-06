@@ -18,12 +18,10 @@ const catchEventService = async (
   Object.keys(option).forEach(
     (key: string) => option[key] === undefined && delete option[key],
   );
-  console.time('find');
   let targetIssue = await db.Issue.findOne({
     ...option,
     projectId: project._id as string,
   });
-  console.timeEnd('find');
 
   if (!targetIssue) {
     targetIssue = await new db.Issue({
