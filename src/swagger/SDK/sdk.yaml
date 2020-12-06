@@ -98,6 +98,15 @@ components:
           example:
             mes: 메세지
             not: 알림
+        errorContext: 
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+          example:
+            - ['hi', 'hello']
+            - ['bye', 'goodBye']
 paths:
   /api/sdk/event:
     post:
