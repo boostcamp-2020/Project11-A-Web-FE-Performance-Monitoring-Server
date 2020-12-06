@@ -2,9 +2,10 @@ import db from '@models';
 import { Event } from '@root/interfaces/models/event';
 import { Project } from '@interfaces/models/project';
 import { sendMail, sendLevel } from '@utils/sendMail';
+import { StackTrace } from '@interfaces/models/stackTrace';
 
 type Option = {
-  [K in string]: string | undefined;
+  [K in string]: string | StackTrace | undefined;
 };
 
 const catchEventService = async (
@@ -14,7 +15,7 @@ const catchEventService = async (
   const option: Option = {
     errorName: event.type,
     errorMessage: event.value,
-    errorStack: event.stacktrace?.join(''),
+    errorStack: event.stacktrace?.[0],
     message: event.message,
   };
   Object.keys(option).forEach(

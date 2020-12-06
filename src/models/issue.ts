@@ -16,7 +16,7 @@ const Issue = new mongoose.Schema(
 
     errorMessage: { type: String }, // Error 만 존재
 
-    errorStack: { type: String }, // Error 만 존재
+    errorStack: { type: Object }, // Error 만 존재
 
     message: { type: String }, // Message 만 존재
 
