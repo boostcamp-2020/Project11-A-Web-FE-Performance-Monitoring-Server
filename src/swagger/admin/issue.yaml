@@ -27,7 +27,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#components/schemas/Event'
+            $ref: '#components/schemas/EventResponse'
 paths:
   /api/issue:
     patch:
