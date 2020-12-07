@@ -12,6 +12,8 @@ components:
           type: string
         errorMessage:
           type: string
+        errorStack:
+          type: object
         isResolved: 
           type: boolean
         createdAt:
@@ -82,6 +84,11 @@ paths:
                 "projectId": "5fc5d83a104030b16fdccd00"
                 "errorName": "new Error"
                 "errorMessage": "그냥 에러임"
+                "errorStack": 
+                  "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                  "function": "mainHandler"
+                  "lineno": 20
+                  "colno": 9
                 "isResolved": false
                 "createdAt": "2020-12-01T05:44:57.908Z"
                 "updatedAt": "2020-12-02T00:21:51.425Z"
