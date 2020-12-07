@@ -8,7 +8,7 @@
 
 ###
 
-POST {{host}}/sdk/error
+POST {{host}}/sdk/event
 content-type: {{contentType}}
 Authorization: Bearer {{token}}
 

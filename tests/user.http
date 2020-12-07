@@ -24,35 +24,23 @@ content-type: {{contentType}}
 
 ###
 
-GET {{host}}/api/issue
-?page=1
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
-
-### 페이지가 없으면 에러
-
-GET {{host}}/api/issue
-
-### 페이지가 string이여도 에러
-
-GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+@findUser = kang
+GET {{host}}/api/user/{{findUser}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/issue/list/5fc5d83a104030b16fdccd00
-?page=1
-?limit=10
+GET {{host}}/api/user
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
 
-PATCH {{host}}/api/issue
+PATCH {{host}}/api/user
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "issueList": ["5fc5d859104030b16fdccd01"]
+  "nickname": "자연인"
 }

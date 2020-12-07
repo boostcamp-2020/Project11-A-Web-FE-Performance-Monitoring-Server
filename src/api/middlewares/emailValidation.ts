@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-
-const emailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+import emailPattern from '@utils/emailCheck';
 
 const emailValidation = (
   req: Request,

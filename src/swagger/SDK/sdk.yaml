@@ -1,12 +1,11 @@
 components:
   schemas:
-    EventResponse:
+    EventRequest:
       type: object
       properties:
-        _id: 
+        release: 
           type: string
-        issueId: 
-          description: 이슈 Id를 불러온다.
+        environment:
           type: string
         timeStamp: 
           type: string
@@ -34,15 +33,19 @@ components:
           properties:
             version:
               type: string
+              example: 78.02.1
             name:
               type: string
+              example: Chrome
         sdk:
           type: object
           properties:
             version:
               type: string
+              example: 0.0.23
             name:
               type: string
+              example: "@santry/node"
         stacktrace:
           description: stacktrace
           type: array
@@ -61,13 +64,6 @@ components:
             function: next
             lineno: 137
             colno: 13
-        errorContexts:
-          description: 에러 컨텍스트
-          type: array
-          items:
-            type: array
-            items:
-              type: string
         runtime:
           description: Express 전용
           type: object
@@ -103,27 +99,21 @@ components:
             mes: 메세지
             not: 알림
 paths:
-  /api/event/{eventId}:
-    get:
+  /api/sdk/event:
+    post:
       security:
-        - bearerAuth: []
+        - sdkAuth: []
       tags:
-        - Event
-      summary: 특정 이벤트 정보를 불러온다.
-      parameters:
-        - name: eventId
-          in: path
-          required: true
-          description: 이벤트 오브젝트 아이디 입력
-          schema:
-            type : string
+        - SDK
+      summary: 로그인 한 유저의 정보를 불러온다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
       responses:
-        200:
-          description: 이벤트 정보 출력
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/EventResponse'
+        201:
+          description: 요청 성공
         default:
           description: Error
           content:

@@ -1,9 +1,35 @@
 import { Response, Request, NextFunction } from 'express';
 
+import getService from '@services/comment/getComments';
 import createService from '@services/comment/createComment';
 import updateService from '@services/comment/updateComment';
 import deleteService from '@services/comment/deleteComment';
 import { UserToken } from '@interfaces/userToken';
+
+const getComments = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void | Response<void>> => {
+  const { _id } = req.user as UserToken;
+  const { issueId } = req.params;
+  let { page, limit } = req.query;
+  if (typeof page !== 'string') {
+    page = '1';
+  }
+  if (typeof limit !== 'string') {
+    limit = '10';
+  }
+  try {
+    const commentList = await getService(_id, issueId, {
+      page: parseInt(page),
+      limit: parseInt(limit),
+    });
+    return res.status(200).json(commentList);
+  } catch (err) {
+    next(new Error(err));
+  }
+};
 
 const createComment = async (
   req: Request,
@@ -57,4 +83,4 @@ const deleteComment = async (
   }
 };
 
-export default { createComment, deleteComment, updateComment };
+export default { getComments, createComment, deleteComment, updateComment };

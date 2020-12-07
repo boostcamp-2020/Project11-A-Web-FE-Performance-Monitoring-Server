@@ -5,6 +5,7 @@ import createService from '@root/services/project/createProject';
 import getService from '@root/services/project/getProjects';
 import getProjectService from '@services/project/getProject';
 import createSDKToken from '@utils/createSDKToken';
+import updateService from '@services/project/updateProject';
 
 import { Project } from '@interfaces/models/project';
 import sendMail from '@utils/sendMail';
@@ -57,22 +58,6 @@ const getProject = async (
 ): Promise<void | Response<void>> => {
   try {
     const { projectId } = req.params;
-    const { user } = req;
-    const { _id } = user as UserToken;
-    const projectDetail = await getProjectService(_id, projectId);
-    return res.status(200).json(projectDetail);
-  } catch (err) {
-    next(new Error(err));
-  }
-};
-
-const getSDKToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void | Response<void>> => {
-  try {
-    const { projectId } = req.params;
     const { _id } = req.user as UserToken;
     const projectDetail = await getProjectService(_id, projectId);
     const token = createSDKToken(projectId);
@@ -81,6 +66,25 @@ const getSDKToken = async (
       role: projectDetail.role,
       sdkToken: token,
     });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const updateProject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void | Response<void>> => {
+  try {
+    const { projectId } = req.params;
+    let { admins, members } = req.body;
+    const { projectName } = req.body;
+    admins = admins ? admins : [];
+    members = members ? members : [];
+    const { _id } = req.user as UserToken;
+    await updateService(_id, projectId, { admins, members, projectName });
+    return res.status(200).end();
   } catch (err) {
     next(new Error(err));
   }
@@ -105,6 +109,6 @@ export default {
   createProject,
   getProjects,
   getProject,
-  getSDKToken,
   mailTest,
+  updateProject,
 };

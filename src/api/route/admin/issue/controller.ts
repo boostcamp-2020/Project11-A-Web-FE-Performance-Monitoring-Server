@@ -3,6 +3,7 @@ import { Response, Request, NextFunction } from 'express';
 import issueService from '@services/issue/getIssues';
 import getIssueService from '@services/issue/getIssue';
 import { UserToken } from '@interfaces/userToken';
+import changeIssuesStatusService from '@services/issue/changeIssueStatus';
 
 const getIssues = async (
   req: Request,
@@ -45,4 +46,25 @@ const getIssue = async (
   }
 };
 
-export default { getIssue, getIssues };
+const changeIssuesStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void | Response> => {
+  const user = req.user as UserToken;
+  let { issueList } = req.body;
+  if (!issueList) {
+    return next(new Error('issueList가 없습니다.'));
+  }
+  if (typeof issueList === 'string') {
+    issueList = [issueList];
+  }
+  try {
+    await changeIssuesStatusService(user._id, issueList);
+    return res.status(200).end();
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export default { getIssue, getIssues, changeIssuesStatus };

@@ -5,8 +5,6 @@ const Event = new mongoose.Schema({
   issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
   createdBy: {
     ip: String,
-    email: String,
-    userId: String,
   },
   sdk: {
     version: String,
@@ -23,11 +21,13 @@ const Event = new mongoose.Schema({
   timeStamp: Date,
   url: String,
   stacktrace: [Object],
-  context: [String],
+  contexts: Object,
+  message: String,
   version: String,
   platform: String,
   serverName: String,
   transaction: String,
   userIp: String,
+  errorContexts: [[String]],
 });
 export default mongoose.model<IEvent & mongoose.Document>('Event', Event);
