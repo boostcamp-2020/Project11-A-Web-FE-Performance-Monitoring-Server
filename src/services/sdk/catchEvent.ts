@@ -13,10 +13,10 @@ const catchEventService = async (
   project: Project,
 ): Promise<void> => {
   const option: Option = {
-    errorName: event.type,
+    eventName: event.type || event.message,
     errorMessage: event.value,
     errorStack: event.stacktrace?.[0],
-    message: event.message,
+    issueType: event.type ? 'error' : 'message',
   };
   Object.keys(option).forEach(
     (key: string) => option[key] === undefined && delete option[key],
