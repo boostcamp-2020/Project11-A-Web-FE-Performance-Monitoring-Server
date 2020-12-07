@@ -12,13 +12,13 @@ const Issue = new mongoose.Schema(
       required: true,
     },
 
-    errorName: { type: String }, // Error 만 존재
+    eventName: { type: String }, // Error 만 존재
 
     errorMessage: { type: String }, // Error 만 존재
 
     errorStack: { type: Object }, // Error 만 존재
 
-    message: { type: String }, // Message 만 존재
+    issueType: { type: String },
 
     isResolved: { type: Boolean, required: true, default: false },
 
