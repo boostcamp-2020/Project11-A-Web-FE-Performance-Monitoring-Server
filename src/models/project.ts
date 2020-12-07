@@ -1,6 +1,6 @@
 import { Project as IProject } from '@interfaces/models/project';
 import mongoose from 'mongoose';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const Project = new mongoose.Schema(

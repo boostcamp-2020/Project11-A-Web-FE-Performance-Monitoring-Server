@@ -1,10 +1,10 @@
 import db from '@models';
 
-type MemberList = {
+interface MemberList {
   admins?: string[];
   members: string[];
   projectName?: string;
-};
+}
 
 const updateProject = async (
   userId: string,

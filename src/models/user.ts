@@ -1,7 +1,7 @@
 import { User as IUser } from '@interfaces/models/user';
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 
 const User = new mongoose.Schema(
   {

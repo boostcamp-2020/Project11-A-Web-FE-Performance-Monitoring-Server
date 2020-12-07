@@ -4,9 +4,9 @@ import mailConfig from '@config/nodemailer';
 
 const sendLevel = ['fatal', 'error'];
 
-const sendMail = (project: Project): boolean => {
+const sendMail = (project: Project): void => {
   if (!project.emails) {
-    return false;
+    return;
   }
   const transporter = nodemailer.createTransport(mailConfig);
   const mailForm = {
@@ -16,8 +16,7 @@ const sendMail = (project: Project): boolean => {
     //html: html형식으로 가능
   };
   project.emails.forEach((v) => transporter.sendMail({ ...mailForm, to: v }));
-
-  return true;
+  return;
 };
 
 export { sendMail, sendLevel };

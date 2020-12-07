@@ -1,5 +1,5 @@
 import { Issue as IIssue } from '@interfaces/models/issue';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 

@@ -4,9 +4,9 @@ import { Project } from '@interfaces/models/project';
 import { sendMail, sendLevel } from '@utils/sendMail';
 import { StackTrace } from '@interfaces/models/stackTrace';
 
-type Option = {
-  [K in string]: string | StackTrace | undefined;
-};
+interface Option {
+  [K: string]: string | StackTrace | undefined;
+}
 
 const catchEventService = async (
   event: Event,
