@@ -82,13 +82,14 @@ paths:
               example:
                 "_id": "5fc5d859104030b16fdccd01"
                 "projectId": "5fc5d83a104030b16fdccd00"
-                "errorName": "new Error"
+                "eventName": 에러 네임 or 메세지 네임
                 "errorMessage": "그냥 에러임"
                 "errorStack": 
                   "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
                   "function": "mainHandler"
                   "lineno": 20
                   "colno": 9
+                issueType: error 또는 message
                 "isResolved": false
                 "createdAt": "2020-12-01T05:44:57.908Z"
                 "updatedAt": "2020-12-02T00:21:51.425Z"
@@ -171,8 +172,14 @@ paths:
                     "5fc6de1fed76e21d40026ea9"]
                   "_id": "5fc5d859104030b16fdccd01"
                   "projectId": "5fc5d83a104030b16fdccd00"
-                  "errorName": "new Error"
+                  "eventName": 에러 네임 or 메세지 네임
                   "errorMessage": "그냥 에러임"
+                  "errorStack": 
+                    "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                    "function": "mainHandler"
+                    "lineno": 20
+                    "colno": 9
+                  issueType: error 또는 message
                   "isResolved": false
                   "createdAt": "2020-12-01T05:44:57.908Z"
                   "updatedAt": "2020-12-02T00:21:51.425Z"
@@ -194,8 +201,14 @@ paths:
                     "5fc6de1fed76e21d40026ea9"]
                   "_id": "5fc5d859104030b16fdccd01"
                   "projectId": "5fc5d83a104030b16fdccd00"
-                  "errorName": "new Error"
+                  "eventName": 에러 네임 or 메세지 네임
                   "errorMessage": "그냥 에러임"
+                  "errorStack": 
+                    "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                    "function": "mainHandler"
+                    "lineno": 20
+                    "colno": 9
+                  issueType: error 또는 message
                   "isResolved": false
                   "createdAt": "2020-12-01T04:44:57.908Z"
                   "updatedAt": "2020-12-02T00:21:51.425Z"
