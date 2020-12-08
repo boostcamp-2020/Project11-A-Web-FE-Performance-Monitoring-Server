@@ -15,15 +15,15 @@ export interface Event {
     ipAddress?: string;
   };
   os?: {
-    version: string;
+    version?: string;
     name: string;
   };
   browser?: {
-    version: string;
+    version?: string;
     name: string;
   };
-  sdk: {
-    version: string;
+  sdk?: {
+    version?: string;
     name: string;
   };
   url?: string;
