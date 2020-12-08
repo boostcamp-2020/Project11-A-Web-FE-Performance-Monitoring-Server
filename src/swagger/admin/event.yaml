@@ -43,27 +43,24 @@ components:
               type: string
             name:
               type: string
-        error:
-          type: object
-          properties:
-            stacktrace:
-              description: stacktrace
-              type: array
-              items:
-                type: object
-              example:
-              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/layer.js"
-                function: "Layer.handle [as handle_request]"
-                lineno: 95
-                colno: 5
-              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/express.example.js"
-                function: mainHandler
-                lineno: 21
-                colno: 9
-              - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/route.js"
-                function: next
-                lineno: 137
-                colno: 13
+        stacktrace:
+          description: stacktrace
+          type: array
+          items:
+            type: object
+          example:
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/layer.js"
+            function: "Layer.handle [as handle_request]"
+            lineno: 95
+            colno: 5
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/express.example.js"
+            function: mainHandler
+            lineno: 21
+            colno: 9
+          - filename: "/Users/MoonHyeRa/Desktop/boostcamp2020/membership/Project11-A-Web-FE-Performance-Monitoring-SDK/examples/node_modules/express/lib/router/route.js"
+            function: next
+            lineno: 137
+            colno: 13
         errorContexts:
           description: 에러 컨텍스트
           type: array
@@ -106,6 +103,96 @@ components:
             mes: 메세지
             not: 알림
 paths:
+  /api/event/list/{issueId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Event
+      summary: 검색한 이벤트의 정보를 모두 불러온다.
+      parameters:
+        - name: issueId
+          in: path
+          required: true
+          description: 이슈 오브젝트 아이디 입력
+          schema:
+            type : string
+        - name: release
+          in: query
+          description: 릴리즈 버전 입력
+          schema:
+            type : string
+        - name: environment
+          in: query
+          description: 환경 입력
+          schema:
+            type : string
+        - name: sdk
+          in: query
+          description: SDK 입력
+          schema:
+            type : string
+            example: SAntry 1.1.1
+        - name: OS
+          in: query
+          description: OS 입력
+          schema:
+            type : string
+            example: Ubuntu 20.04
+        - name: browser
+          in: query
+          description: 브라우저 입력
+          schema:
+            type : string
+            example: InternetExplorer 6.0
+        - name: url
+          in: query
+          description: URL입력
+          schema:
+            type : string
+        - name: message
+          in: query
+          description: 메세지 입력
+          schema:
+            type : string
+        - name: version
+          in: query
+          description: Version 입력
+          schema:
+            type : string
+        - name: serverName
+          in: query
+          description: 서버 네임 입력
+          schema:
+            type : string
+        - name: transaction
+          in: query
+          description: transaction 입력
+          schema:
+            type : string
+        - name: userIp
+          in: query
+          description: userIp 입력
+          schema:
+            type : string
+        - name: level
+          in: query
+          description: level 입력
+          schema:
+            type : string
+      responses:
+        200:
+          description: 이벤트 정보 출력
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/pagenation'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/event/{eventId}:
     get:
       security:
