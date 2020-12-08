@@ -1,4 +1,5 @@
 import db from '@models';
+import { Types } from 'mongoose';
 
 interface MemberList {
   admins?: string[];
@@ -18,7 +19,10 @@ const updateProject = async (
   if (!targetProject) {
     throw '권한이 없습니다.';
   }
-  if (targetProject.owner === userId) {
+  if (typeof targetProject.owner === 'string') {
+    throw '날수 없는 오류인데?';
+  }
+  if (targetProject.owner.equals(userId)) {
     await db.Project.findByIdAndUpdate(projectId, {
       ...memberList,
     }).exec();
