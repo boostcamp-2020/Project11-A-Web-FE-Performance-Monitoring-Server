@@ -16,7 +16,11 @@ type Key =
   | 'serverName'
   | 'version';
 
-const addStatistics = async (issueId: string, event: Event): Promise<void> => {
+const addStatistics = async (
+  issueId: string,
+  inputEvent: Event,
+): Promise<void> => {
+  const event: Event = JSON.parse(JSON.stringify(inputEvent));
   const tempDB = db.Statistics.findOne({ issueId }).exec();
   const tempStatistic: preStatistics = {};
   if (event.browser) {
