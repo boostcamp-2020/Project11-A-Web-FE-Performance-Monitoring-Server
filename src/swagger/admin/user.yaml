@@ -121,7 +121,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pagenation'
+                $ref: '#/components/schemas/pagination'
               example:
                 "docs":
                   - "_id": "5fc862c22e22259e55398daf"
