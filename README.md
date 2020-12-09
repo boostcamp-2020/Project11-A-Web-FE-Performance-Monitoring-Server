@@ -41,10 +41,10 @@
 |[강석민](https://github.com/kangsukmin)|[김원호](https://github.com/gitdog01)|[김은빈](https://github.com/Eunbin-Kim)|[문혜라](https://github.com/maong0927)|
 
 ### 저장소 주소
-[FrontEnd Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-admin)
-[BackEnd Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-server)
-[SDK Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-SDK)
-[통합 위키](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-SDK/wiki)
+[FrontEnd Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-admin)<br>
+[BackEnd Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-server)<br>
+[SDK Repository](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-SDK)<br>
+[통합 위키](https://github.com/boostcamp-2020/Project11-A-Web-FE-Performance-Monitoring-SDK/wiki)<br>
 
 
 ## 프로젝트 설명
@@ -83,7 +83,7 @@ $ npm install @santry/browser
 
 ```
 
-- 프로젝트 단위로 관리를 할 수 있습니다.
+- 프로젝트 단위로 관리를 할 수 있습니다.<br>
 ![](https://i.imgur.com/76x1vlR.jpg)
 
 - 같은 에러들을 하나의 이슈로 묶어서 관리할 수 있습니다.
