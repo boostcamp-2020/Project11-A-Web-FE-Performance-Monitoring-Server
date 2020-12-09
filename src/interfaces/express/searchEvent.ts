@@ -16,18 +16,12 @@ export interface InputOption {
 export interface SearchOption {
   release?: string;
   environment?: string;
-  sdk?: {
-    name: string;
-    version?: string;
-  };
-  os?: {
-    name: string;
-    version?: string;
-  };
-  browser?: {
-    name: string;
-    version?: string;
-  };
+  'sdk.name'?: string;
+  'sdk.version'?: string;
+  'os.name'?: string;
+  'os.version'?: string;
+  'browser.name'?: string;
+  'browser.version'?: string;
   url?: string;
   message?: string;
   version?: string;

@@ -14,27 +14,30 @@ const getEvents = async (
     const osOption = input.os.split(' ');
     delete input.os;
     if (osOption.length === 1) {
-      searchOption.os = { name: osOption[0] };
+      searchOption['os.name'] = osOption[0];
     } else {
-      searchOption.os = { name: osOption[0], version: osOption[1] };
+      searchOption['os.name'] = osOption[0];
+      searchOption['os.version'] = osOption[1];
     }
   }
   if (input.sdk) {
     const sdkOption = input.sdk.split(' ');
     delete input.sdk;
     if (sdkOption.length === 1) {
-      searchOption.sdk = { name: sdkOption[0] };
+      searchOption['sdk.name'] = sdkOption[0];
     } else {
-      searchOption.sdk = { name: sdkOption[0], version: sdkOption[1] };
+      searchOption['sdk.name'] = sdkOption[0];
+      searchOption['sdk.version'] = sdkOption[1];
     }
   }
   if (input.browser) {
     const browser = input.browser.split(' ');
     delete input.browser;
     if (browser.length === 1) {
-      searchOption.browser = { name: browser[0] };
+      searchOption['browser.name'] = browser[0];
     } else {
-      searchOption.browser = { name: browser[0], version: browser[1] };
+      searchOption['browser.name'] = browser[0];
+      searchOption['browser.version'] = browser[1];
     }
   }
   searchOption = { ...input, ...searchOption } as SearchOption;

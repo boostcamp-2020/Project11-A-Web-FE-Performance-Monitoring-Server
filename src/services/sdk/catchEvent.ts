@@ -47,11 +47,11 @@ const catchEventService = async (
     targetProject.issues?.push(targetIssue._id);
     await targetStatistic.save();
   }
-  const addPromise = addStatistic(targetIssue._id, event);
   const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
   });
+  const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
   let mailPromise;
   if (sendLevel.includes(event.level as string)) {
