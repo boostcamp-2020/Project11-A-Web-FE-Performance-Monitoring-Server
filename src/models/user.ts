@@ -1,7 +1,7 @@
 import { User as IUser } from '@interfaces/models/user';
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 
 const User = new mongoose.Schema(
   {
@@ -14,10 +14,12 @@ const User = new mongoose.Schema(
 
     pwd: {
       type: String,
+      trim: true,
     },
 
     nickname: {
       type: String,
+      index: true,
     },
 
     projectIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],

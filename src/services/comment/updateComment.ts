@@ -5,7 +5,7 @@ const updateComment = async (
   commentId: string,
   description: string,
 ): Promise<void> => {
-  const targetComment = await db.Comment.findById(commentId);
+  const targetComment = await db.Comment.findById(commentId).exec();
   if (!targetComment) {
     throw '찾는 댓글이 없습니다.';
   }

@@ -15,39 +15,32 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "soos0228@naver.com",
-  "pwd": "Tjrals228@"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###
 @authToken = {{login.response.body.token}}
+@issueId = 5fccc9e046a4c4263c1e0932
 
 ###
 
-GET {{host}}/api/issue
-?page=1
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
-
-### 페이지가 없으면 에러
-
-GET {{host}}/api/issue
-
-### 페이지가 string이여도 에러
-
-GET {{host}}/api/issue/5fc5d859104030b16fdccd01
+GET {{host}}/api/issue/{{issueId}}
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/issue/list/5fc5d83a104030b16fdccd00
+@projectId = 5fcca3cdef5f6a1a1a774576
+
+###
+GET {{host}}/api/issue/list/{{projectId}}
 ?page=1
 ?limit=10
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
-###
+### 이슈 resolve하기
 
 PATCH {{host}}/api/issue
 content-type: {{contentType}}

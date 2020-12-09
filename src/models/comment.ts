@@ -1,7 +1,7 @@
 import { Comment as IComment } from '@interfaces/models/comment';
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 
 const Comment = new mongoose.Schema(
   {

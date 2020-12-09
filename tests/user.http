@@ -15,8 +15,8 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "soos0228@naver.com",
-  "pwd": "Tjrals228@"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###

@@ -3,8 +3,10 @@ import mongoose from 'mongoose';
 
 const Event = new mongoose.Schema({
   issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
+  release: String,
+  environment: String,
   createdBy: {
-    ip: String,
+    ipAddress: String,
   },
   sdk: {
     version: String,
@@ -29,5 +31,6 @@ const Event = new mongoose.Schema({
   transaction: String,
   userIp: String,
   errorContexts: [[String]],
+  level: String,
 });
 export default mongoose.model<IEvent & mongoose.Document>('Event', Event);

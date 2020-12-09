@@ -10,7 +10,7 @@ const getEvent = async (_id: string, eventId: string): Promise<Event> => {
   }
   const targetIssue = await db.Issue.findOne({
     _id: targetEvent.issueId,
-  });
+  }).exec();
   if (!targetIssue) {
     throw '찾는 이슈가 없습니다.';
   }
@@ -21,7 +21,8 @@ const getEvent = async (_id: string, eventId: string): Promise<Event> => {
     .populate('issues')
     .populate({ path: 'owner', select: 'email' })
     .populate({ path: 'members', select: 'email' })
-    .populate({ path: 'admins', select: 'email' });
+    .populate({ path: 'admins', select: 'email' })
+    .exec();
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }

@@ -12,7 +12,7 @@ export interface Event {
   environment?: string;
   timeStamp: Date;
   createdBy: {
-    ipAdress?: string;
+    ipAddress?: string;
   };
   os?: {
     version: string;
@@ -36,7 +36,7 @@ export interface Event {
   serverName?: string;
   transaction?: string;
   userIp?: string;
-  message?: string;
+  message?: string; // log일 경우만
   level?: string;
   errorContexts: string[][];
 }

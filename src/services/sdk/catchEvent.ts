@@ -1,47 +1,57 @@
 import db from '@models';
 import { Event } from '@root/interfaces/models/event';
 import { Project } from '@interfaces/models/project';
+import { sendMail, sendLevel } from '@utils/sendMail';
+import { StackTrace } from '@interfaces/models/stackTrace';
 
-type Option = {
-  [K in string]: string | undefined;
-};
+interface Option {
+  [K: string]: string | StackTrace | undefined;
+}
 
 const catchEventService = async (
   event: Event,
   project: Project,
 ): Promise<void> => {
   const option: Option = {
-    errorName: event.type,
+    eventName: event.type || event.message,
     errorMessage: event.value,
-    message: event.message,
+    errorStack: event.stacktrace?.[0],
+    issueType: event.type ? 'error' : 'message',
   };
   Object.keys(option).forEach(
     (key: string) => option[key] === undefined && delete option[key],
   );
-  let targetIssue = await db.Issue.findOne({
+  const targetIssueQuery = db.Issue.findOne({
     ...option,
     projectId: project._id as string,
-  });
+  }).exec();
+  const targetProjectQuery = db.Project.findById(project._id).exec();
+  const [constTargetIssue, targetProject] = await Promise.all([
+    targetIssueQuery,
+    targetProjectQuery,
+  ]);
+  let targetIssue = constTargetIssue;
+  if (!targetProject) {
+    throw '찾는 프로젝트가 없습니다.';
+  }
   if (!targetIssue) {
-    targetIssue = await new db.Issue({
+    targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
       isResolved: false,
     });
-    const targetProject = await db.Project.findById(project._id);
-    if (!targetProject) {
-      throw '찾는 프로젝트가 없습니다.';
-    }
     targetProject.issues?.push(targetIssue._id);
     await targetProject.save();
   }
-  const errorSample = await new db.Event({
+  const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
   });
   targetIssue.events.push(errorSample._id);
-  await targetIssue.save();
-  await errorSample.save();
+  if (sendLevel.includes(event.level as string)) {
+    sendMail(targetProject);
+  }
+  await Promise.all([errorSample.save(), targetIssue.save()]);
 };
 
 export default catchEventService;

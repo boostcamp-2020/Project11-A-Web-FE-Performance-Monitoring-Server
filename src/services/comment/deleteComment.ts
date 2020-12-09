@@ -4,7 +4,7 @@ const deleteComment = async (
   userId: string,
   commentId: string,
 ): Promise<void> => {
-  await db.Comment.findOneAndDelete({ userId, _id: commentId });
+  await db.Comment.findOneAndDelete({ userId, _id: commentId }).exec();
 };
 
 export default deleteComment;

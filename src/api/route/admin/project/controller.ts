@@ -7,9 +7,6 @@ import getProjectService from '@services/project/getProject';
 import createSDKToken from '@utils/createSDKToken';
 import updateService from '@services/project/updateProject';
 
-import { Project } from '@interfaces/models/project';
-import sendMail from '@utils/sendMail';
-
 const createProject = async (
   req: Request,
   res: Response,
@@ -90,25 +87,9 @@ const updateProject = async (
   }
 };
 
-const mailTest = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
-  const a: Project = {
-    platform: 'node',
-    owner: '나야나!',
-    projectName: '샘플이야!',
-    emails: ['soos0228@naver.com', 'soos3121@gmail.com'],
-  };
-  await sendMail(a);
-  return res.status(200).end();
-};
-
 export default {
   createProject,
   getProjects,
   getProject,
-  mailTest,
   updateProject,
 };

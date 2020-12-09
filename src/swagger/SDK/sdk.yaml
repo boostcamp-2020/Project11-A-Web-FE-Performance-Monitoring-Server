@@ -98,6 +98,15 @@ components:
           example:
             mes: 메세지
             not: 알림
+        errorContext: 
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+          example:
+            - ['hi', 'hello']
+            - ['bye', 'goodBye']
 paths:
   /api/sdk/event:
     post:
@@ -105,7 +114,7 @@ paths:
         - sdkAuth: []
       tags:
         - SDK
-      summary: 로그인 한 유저의 정보를 불러온다.
+      summary: SDK에서 서버로 오류 및 메세지를 전송한다.
       requestBody:
         content:
           application/json:
