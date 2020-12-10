@@ -4,13 +4,9 @@ import createSDKToken from '@utils/createSDKToken';
 import emailPattern from '@utils/emailCheck';
 
 const create = async (project: Project): Promise<string> => {
-  try {
-    project.emails?.forEach((v) => {
-      if (!emailPattern.test(v)) throw `${v}는 올바른 이메일 형식이 아닙니다.`;
-    });
-  } catch (err) {
-    throw new Error(err);
-  }
+  project.emails?.forEach((v) => {
+    if (!emailPattern.test(v)) throw `${v}는 올바른 이메일 형식이 아닙니다.`;
+  });
   if (project.issues) {
     throw '새 프로젝트에는 이슈를 추가할 수 없습니다.';
   }
