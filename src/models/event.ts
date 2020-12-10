@@ -24,7 +24,7 @@ const Event = new mongoose.Schema({
   },
   timeStamp: Date,
   url: String,
-  stacktrace: [Object],
+  stackTrace: [Object],
   contexts: Object,
   message: String,
   version: String,
@@ -32,11 +32,7 @@ const Event = new mongoose.Schema({
   serverName: String,
   transaction: String,
   userIp: String,
-  errorContexts: {
-    preErrorContext : [String],
-    errorContext : [String],
-    postErrorContext : [String],
-  },
+  errorContexts: [Object],
   level: String,
 });
 
