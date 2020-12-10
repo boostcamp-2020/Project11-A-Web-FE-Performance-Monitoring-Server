@@ -14,7 +14,7 @@ const sdkTokenVerify = async (
       return res.status(401).end();
     }
     const [tokenType, token]: string[] = req.headers.authorization.split(' ');
-    if (tokenType !== 'Bearer') {
+    if (tokenType.toLowerCase() !== 'bearer') {
       return res.status(401).end();
     }
     const projectId = jwt.verify(token, tokenConfig.secretOrKey);
