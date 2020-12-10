@@ -38,5 +38,9 @@ export interface Event {
   userIp?: string;
   message?: string; // log일 경우만
   level?: string;
-  errorContexts: string[][];
+  errorContexts?: {
+    preErrorContext?: string[];
+    ErrorContext?: string[];
+    postErrorContext?: string[];
+  };
 }
