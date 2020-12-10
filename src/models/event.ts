@@ -36,7 +36,7 @@ const Event = new mongoose.Schema({
     preErrorContext : [String],
     errorContext : [String],
     postErrorContext : [String],
-  }
+  },
   level: String,
 });
 
