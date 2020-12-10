@@ -1,8 +1,9 @@
 import db from '@models';
-import { Event } from '@root/interfaces/models/event';
+import { Event } from '@interfaces/models/event';
 import { Project } from '@interfaces/models/project';
 import { sendMail, sendLevel } from '@utils/sendMail';
 import { StackTrace } from '@interfaces/models/stackTrace';
+import addStatistic from './statistics';
 
 interface Option {
   [K: string]: string | StackTrace | undefined;
@@ -40,18 +41,29 @@ const catchEventService = async (
       projectId: project._id,
       isResolved: false,
     });
+    const targetStatistic = new db.Statistics({
+      issueId: targetIssue._id,
+    });
     targetProject.issues?.push(targetIssue._id);
-    await targetProject.save();
+    await targetStatistic.save();
   }
   const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
   });
+  const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
+  let mailPromise;
   if (sendLevel.includes(event.level as string)) {
-    sendMail(targetProject);
+    mailPromise = sendMail(targetProject);
   }
-  await Promise.all([errorSample.save(), targetIssue.save()]);
+  await Promise.all([
+    errorSample.save(),
+    targetIssue.save(),
+    targetProject.save(),
+    mailPromise,
+    addPromise,
+  ]);
 };
 
 export default catchEventService;

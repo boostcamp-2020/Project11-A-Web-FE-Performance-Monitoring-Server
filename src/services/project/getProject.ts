@@ -16,9 +16,9 @@ const get = async (
     $or: [{ owner: _id }, { admins: _id }, { members: _id }],
   })
     .populate('issues')
-    .populate({ path: 'owner', select: 'nickname' })
-    .populate({ path: 'members', select: 'nickname' })
-    .populate({ path: 'admins', select: 'nickname' })
+    .populate({ path: 'owner', select: ['email', 'nickname'] })
+    .populate({ path: 'members', select: ['email', 'nickname'] })
+    .populate({ path: 'admins', select: ['email', 'nickname'] })
     .exec();
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';

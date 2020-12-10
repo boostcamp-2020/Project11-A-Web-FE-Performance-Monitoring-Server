@@ -4,7 +4,7 @@ const SwaggerJSDocWebpackPlugin = require('swagger-jsdoc-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.ts',
   target: 'node',
   externals: [nodeExternals()],

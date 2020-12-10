@@ -1,5 +1,7 @@
 import { Event as IEvent } from '@interfaces/models/event';
+import IPagination from '@interfaces/pagination';
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const Event = new mongoose.Schema({
   issueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Issue' },
@@ -37,4 +39,9 @@ const Event = new mongoose.Schema({
   }
   level: String,
 });
-export default mongoose.model<IEvent & mongoose.Document>('Event', Event);
+
+Event.plugin(mongoosePaginate);
+export default mongoose.model<IEvent & mongoose.Document>(
+  'Event',
+  Event,
+) as IPagination<IEvent & mongoose.Document>;

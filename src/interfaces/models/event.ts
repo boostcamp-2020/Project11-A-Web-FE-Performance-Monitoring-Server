@@ -15,22 +15,24 @@ export interface Event {
     ipAddress?: string;
   };
   os?: {
-    version: string;
+    version?: string;
     name: string;
   };
   browser?: {
-    version: string;
+    version?: string;
     name: string;
   };
-  sdk: {
-    version: string;
+  sdk?: {
+    version?: string;
     name: string;
   };
   url?: string;
   type?: string; // error.name
   value?: string; // error.message
   stacktrace?: StackTrace[]; // error.stack
-  contexts?: AnyStringObject;
+  contexts?: {
+    [K in string]: AnyStringObject;
+  };
   version?: string;
   platform?: string;
   serverName?: string;

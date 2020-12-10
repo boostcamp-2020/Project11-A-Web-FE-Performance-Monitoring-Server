@@ -1,0 +1,102 @@
+components:
+  schemas:
+    Tag:
+      type: object
+      properties:
+        _id:
+          type: string
+        issueId:
+          type: string
+        environment:
+          type: object
+          properties:
+            해당 값:
+              type: number
+          example:
+            production: 10
+        level:
+          type: object
+          properties:
+            해당 값:
+              type: number
+          example:
+            fatal: 6
+            error: 4
+        release:
+          type: object
+          properties:
+            해당 값:
+              type: number
+          example:
+            'santry@0.0.1': 10
+        sdk:
+          type: object
+          properties:
+            해당 값:
+              type: number
+          example:
+            '@santry/node 1.2.2': 10
+        browser:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        url:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        os:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        transaction:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        userIp:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        serverName:
+          type: object
+          properties:
+            해당 값:
+              type: number
+        version:
+          type: object
+          properties:
+            해당 값:
+              type: number
+paths:
+  /api/tag/{issueId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Tag
+      summary: 이벤트 통계를 보여준다.
+      parameters:
+        - name: issueId
+          in: path
+          required: true
+          description: 이슈 아이디 입력
+          schema:
+            type : string
+            example: 5fcf73c2446a1704e8923440
+      responses:
+        200:
+          description: 태그 통계 로드
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
