@@ -449,6 +449,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   /api/project/{projectId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 프로젝트를 삭제한다.
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: 프로젝트 ID 입력
+          schema:
+            type: string
+      responses:
+        200:
+          description: 프로젝트 삭제 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       security:
         - bearerAuth: []
