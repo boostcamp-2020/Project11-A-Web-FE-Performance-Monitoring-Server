@@ -99,9 +99,12 @@ components:
           example: info
         contexts: 
           type: object
-          example:
-            mes: 메세지
-            not: 알림
+          properties:
+            exa:
+              type: object
+              example:
+                mes: 메세지
+                not: 알림
 paths:
   /api/event/list/{issueId}:
     get:

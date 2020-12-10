@@ -30,7 +30,9 @@ export interface Event {
   type?: string; // error.name
   value?: string; // error.message
   stacktrace?: StackTrace[]; // error.stack
-  contexts?: AnyStringObject;
+  contexts?: {
+    [K in string]: AnyStringObject;
+  };
   version?: string;
   platform?: string;
   serverName?: string;
