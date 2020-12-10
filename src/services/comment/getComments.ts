@@ -17,7 +17,7 @@ const getComments = async (
     {
       ...option,
       sort: { createdAt: -1 },
-      populate: { path: 'userId', select: 'email' },
+      populate: { path: 'userId', select: ['email', 'nickname'] },
     },
   );
   const targetProjectQuery = db.Project.findOne({
