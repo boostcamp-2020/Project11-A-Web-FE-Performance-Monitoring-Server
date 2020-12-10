@@ -75,6 +75,7 @@ paths:
                     "userId": 
                       "_id": "5fc5d814104030b16fdcccff"
                       "email": "soos0228@naver.com"
+                      "nickname": "강석민 캠퍼"
                     "issueId": "5fc5d859104030b16fdccd01"
                     "description": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
                     "createdAt": "2020-12-03T02:25:39.731Z"
@@ -84,6 +85,7 @@ paths:
                     "userId":
                       "_id": "5fc5d814104030b16fdcccff"
                       "email": "soos0228@naver.com"
+                      "nickname": "강석민 캠퍼"
                     "issueId": "5fc5d859104030b16fdccd01"
                     "description": "나는 댓글이당. 백엔드 빨리 마치고싶다....2"
                     "createdAt": "2020-12-03T02:25:39.921Z"
