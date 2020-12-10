@@ -43,7 +43,7 @@ paths:
         - bearerAuth: []
       tags:
         - Comment
-      summary: 해당 이슈의 댓글 목록을 불러온다. (오래된 순으로)
+      summary: 해당 이슈의 댓글 목록을 불러온다. (최근 순으로)
       parameters:
       - name: issueId
         in: path

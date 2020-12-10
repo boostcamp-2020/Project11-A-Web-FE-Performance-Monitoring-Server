@@ -16,7 +16,7 @@ const getComments = async (
     { issueId },
     {
       ...option,
-      sort: { createdAt: 1 },
+      sort: { createdAt: -1 },
       populate: { path: 'userId', select: 'email' },
     },
   );
