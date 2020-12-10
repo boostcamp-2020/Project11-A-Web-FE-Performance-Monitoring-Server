@@ -10,7 +10,7 @@ import passportConfig from '@config/passport';
 const githubURL = `https://github.com/login/oauth/authorize?client_id=${githubConfig.client_id}`;
 
 const githubCallback = async (code: string): Promise<User> => {
-  const { body }: { body: GithubToken } = await axios.post(
+  const { data }: { data: GithubToken } = await axios.post(
     'https://github.com/login/oauth/access_token',
     {
       json: {
@@ -23,10 +23,10 @@ const githubCallback = async (code: string): Promise<User> => {
   );
   const getUser = await axios.get('https://api.github.com/user', {
     headers: {
-      Authorization: `${body.token_type} ${body.access_token}`,
+      Authorization: `${data.token_type} ${data.access_token}`,
     },
   });
-  const callbackBody: { id: string; login: string } = JSON.parse(getUser.body);
+  const callbackBody: { id: string; login: string } = JSON.parse(getUser.data);
   let user = await db.User.findOne({
     email: 'Github-' + callbackBody.id,
   }).exec();
