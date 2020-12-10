@@ -29,7 +29,7 @@ export interface Event {
   url?: string;
   type?: string; // error.name
   value?: string; // error.message
-  stackTrace?: StackTrace[]; // error.stack
+  stacktrace?: StackTrace[]; // error.stack
   contexts?: {
     [K in string]: AnyStringObject;
   };
