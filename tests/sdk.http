@@ -4,18 +4,50 @@
 @server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
-@token = eyJhbGciOiJIUzI1NiJ9.NWZjNWQ4M2ExMDQwMzBiMTZmZGNjZDAw.rJ5P-saqBsp29VxX0EIzAFr766cUa25K4M5neWnNmzA
+@token = eyJhbGciOiJIUzI1NiJ9.NWZjY2EzY2RlZjVmNmExYTFhNzc0NTc2.ELrQvSQitY-4RIc0Bbrx2J75SjTjI7sxJa-ovQNjvr8
 
 ###
 
-POST {{host}}/sdk/error
+POST {{host}}/sdk/event
 content-type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
+  "release": "1.1.1",
+  "environment": "dev",
   "timeStamp": "2020-11-12",
   "createdBy": {
     "ip": "111.111.111.111"
+  },
+  "stacktrace": [1, 2, 3, 4],
+  "platform": "node",
+  "sdk": {
+    "version": "0.0.1",
+    "name": "string"
+  },
+  "context": ["가", "나", "다"],
+  "os": {
+    "name": "Mac",
+    "version": "10.2.4"
+  },
+  "type": "Type Error",
+  "value": "잘못된 타입 에러",
+  "version": "1.1.1",
+  "level": "error"
+}
+
+###
+
+POST {{host}}/sdk/event
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "release": "1.1.1",
+  "environment": "dev",
+  "timeStamp": "2020-11-13",
+  "createdBy": {
+    "ip": "2.2.2.2"
   },
   "stacktrace": [1, 2, 3, 4],
   "platform": "react",
@@ -28,7 +60,43 @@ Authorization: Bearer {{token}}
     "name": "Mac",
     "version": "10.2.4"
   },
-  "type": "new Error",
-  "value": "그냥 에러임",
-  "version": "1.1.1"
+  "type": "Type Error",
+  "value": "잘못된 타입 에러",
+  "version": "1.1.1",
+  "contexts": {
+    "msg": "쇠고기 다시다",
+    "item":  "갈비탕"
+  },
+}
+
+###
+
+POST {{host}}/sdk/event
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "release": "1.1.1",
+  "environment": "dev",
+  "timeStamp": "2020-11-13",
+  "createdBy": {
+    "ip": "2.2.2.2"
+  },
+  "platform": "express",
+  "sdk": {
+    "version": "0.0.1",
+    "name": "string"
+  },
+  "context": ["가", "나", "다"],
+  "os": {
+    "name": "Windows",
+    "version": "20H2"
+  },
+  "version": "1.1.1",
+  "contexts": {
+    "msg": "미원",
+    "item":  "짜장면"
+  },
+  "message": "메세지 전송 테스트 중입니다.",
+  "level": "info"
 }

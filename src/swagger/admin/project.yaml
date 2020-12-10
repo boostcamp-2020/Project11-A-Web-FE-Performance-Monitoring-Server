@@ -65,9 +65,29 @@ paths:
                 platform:
                   description: 플랫폼 입력
                   type: string
+                  example: NodeJS
                 projectName:
                   description: 프로젝트 이름 입력
                   type: string
+                  example: SAntry 프로젝트
+                emails:
+                  description: 이메일 입력
+                  type: array
+                  items:
+                    type: string
+                  example: ['asdf@naver.com', 'asdf.gmail.com']
+                admins:
+                  description: 어드민으로 등록할 유저 objectId 입력
+                  type: array
+                  items:
+                    type: string
+                  example: ['objectid1', 'objectid2']
+                members:
+                  description: 멤버로 등록할 유저 objectId 입력
+                  type: array
+                  items:
+                    type: string
+                  example: ['objectid1', 'objectid2']
               require:
               - platform
               - projectName
@@ -98,19 +118,330 @@ paths:
         name: page
         schema:
           type: integer
-        description: 페이지 번호 수 입력
+        description: 페이지 번호 수 입력 ( 미입력시 1 )
       - in: query
         name: limit
         schema:
           type: integer
-        description: 한번에 불러올 프로젝트 수 입력
+        description: 한번에 불러올 프로젝트 수 입력 ( 미입력시 10 )
       responses:
         200:
           description: 페이지 목록
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pagenation'
+                $ref: '#/components/schemas/pagination'
+              example:
+                "docs":
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc602fb76facc68608e26af"
+                  "platform": "react"
+                  "projectName": "React Project7"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 
+                  "createdAt": "2020-12-01T08:46:51.997Z"
+                  "updatedAt": "2020-12-01T08:46:51.997Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc602e6e98c7368eff5eaa1"
+                  "platform": "react"
+                  "projectName": "React Project5"
+                  "owner": 
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:46:30.934Z"
+                  "updatedAt": "2020-12-01T08:46:30.934Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc602e4e98c7368eff5eaa0"
+                  "platform": "react"
+                  "projectName": "React Project4"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:46:28.185Z"
+                  "updatedAt": "2020-12-01T08:46:28.185Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc602e1e98c7368eff5ea9f"
+                  "platform": "react"
+                  "projectName": "React Project3"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:46:25.280Z"
+                  "updatedAt": "2020-12-01T08:46:25.280Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc6029d6bd08568e2327620"
+                  "platform": "react"
+                  "projectName": "React Project2"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:45:17.140Z"
+                  "updatedAt": "2020-12-01T08:45:17.140Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc6029a6bd08568e232761f"
+                  "platform": "react"
+                  "projectName": "React Project1"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:45:14.560Z"
+                  "updatedAt": "2020-12-01T08:45:14.560Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc6029427527268a31ca315"
+                  "platform": "react"
+                  "projectName": "React Project"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:45:08.535Z"
+                  "updatedAt": "2020-12-01T08:45:08.535Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc5ff2c99b3d368aa12ebb7"
+                  "platform": "node"
+                  "projectName": "nodeProject"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:30:36.269Z"
+                  "updatedAt": "2020-12-01T08:30:36.269Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc5ff2899b3d368aa12ebb6"
+                  "platform": "node"
+                  "projectName": "nodeProject"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T08:30:32.146Z"
+                  "updatedAt": "2020-12-01T08:30:32.146Z"
+                  "__v": 0
+                - "admins": []
+                  "members": []
+                  "issues": []
+                  "emails": []
+                  "_id": "5fc5d83a104030b16fdccd00"
+                  "platform": "Issue 페이지 전용"
+                  "projectName": "1234123"
+                  "owner":
+                    "projectIds": [
+                      "5fc5d83a104030b16fdccd00",
+                      "5fc5ff2899b3d368aa12ebb6",
+                      "5fc5ff2c99b3d368aa12ebb7",
+                      "5fc6029427527268a31ca315",
+                      "5fc6029a6bd08568e232761f",
+                      "5fc6029d6bd08568e2327620",
+                      "5fc602e1e98c7368eff5ea9f",
+                      "5fc602e4e98c7368eff5eaa0",
+                      "5fc602e6e98c7368eff5eaa1",
+                      "5fc602f876facc68608e26ae",
+                      "5fc602fb76facc68608e26af"
+                    ]
+                    "_id": "5fc5d814104030b16fdcccff"
+                    "email": "soos0228@naver.com"
+                    "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                    "createdAt": "2020-12-01T05:43:48.432Z"
+                    "updatedAt": "2020-12-01T08:46:51.994Z"
+                    "__v": 0
+                  "createdAt": "2020-12-01T05:44:26.825Z"
+                  "updatedAt": "2020-12-01T05:44:26.825Z"
+                  "__v": 0
+                "totalDocs": 10,
+                "limit": 10,
+                "totalPages": 1,
+                "page": 1,
+                "pagingCounter": 1,
+                "hasPrevPage": false,
+                "hasNextPage": false,
+                "prevPage": null,
+                "nextPage": null
         default:
           description: Error
           content:
@@ -118,6 +449,70 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   /api/project/{projectId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 프로젝트를 삭제한다.
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: 프로젝트 ID 입력
+          schema:
+            type: string
+      responses:
+        200:
+          description: 프로젝트 삭제 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - Project
+      summary: 프로젝트의 정보를 변경한다.
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: 프로젝트 아이디 입력
+          schema:
+            type : string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectName:
+                  type: string
+                  description: Owner만 변경 가능합니다.
+                  example: SAntry 프로젝트
+                admins:
+                  type: array
+                  items:
+                    type: string
+                  example: ['objectId1', 'objectId1']
+                members:
+                  type: array
+                  items:
+                    type: string
+                  example: ['objectId1', 'objectId1']
+      responses:
+        200:
+          description: 프로젝트 수정 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     get:
       security:
         - bearerAuth: []
@@ -138,6 +533,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+              example:
+                "admins": ['objecid1', 'objectid2']
+                "members": ['objecid1', 'objectid2']
+                "issues": ['objecid1', 'objectid2']
+                "emails": ['asdf@gmail.com', 'sasdf@gmail.com']
+                "_id": "5fc602e6e98c7368eff5eaa1"
+                "platform": "react"
+                "projectName": "React Project5"
+                "owner":
+                  "_id": "5fc5d814104030b16fdcccff"
+                "createdAt": "2020-12-01T08:46:30.934Z"
+                "updatedAt": "2020-12-01T08:46:30.934Z"
+                "__v": 0
+                "role": "owner"
+                "sdkToken": "eyJhbGciOiJIUzI1NiJ9.NWZjNjAyZTZlOThjNzM2OGVmZjVlYWEx.mrKrigApweINpUuApUiSyrJYKRr5bjdsqEaNtgoBHXg"
         default:
           description: Error
           content:

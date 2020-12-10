@@ -15,14 +15,39 @@ POST {{host}}/api/auth/login
 content-type: {{contentType}}
 
 {
-  "email": "soos0228@naver.com",
-  "pwd": "Tjrals228@"
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
 }
 
 ###
 @authToken = {{login.response.body.token}}
 
-###
+### 프로젝트 작성
+
+### 필수 정보
+
+POST {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "platform": "Node",
+  "projectName": "첫번째 예시 폐이지"
+}
+
+### email 추가
+
+POST {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "platform": "Express",
+  "projectName": "두번째 이메일 포함",
+  "emails": ["soos0228@naver.com", "soos3121@gmail.com"]
+}
+
+### 프로젝트 로드
 
 GET {{host}}/api/project
 content-type: {{contentType}}
@@ -30,23 +55,7 @@ Authorization: Bearer {{authToken}}
 
 ###
 
-POST {{host}}/api/project
+GET {{host}}/api/project/5fcca349ef5f6a1a1a774575
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
-{
-  "platform": "Issue 페이지 전용",
-  "projectName": "1234123"
-}
-
-###
-
-GET {{host}}/api/project/5fc602e6e98c7368eff5eaa1
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
-
-###
-
-GET {{host}}/api/project/mailtest
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}

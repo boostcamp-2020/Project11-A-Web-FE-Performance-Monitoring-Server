@@ -1,5 +1,5 @@
 import { Issue as IIssue } from '@interfaces/models/issue';
-import IPagination from '@interfaces/pagenation';
+import IPagination from '@interfaces/pagination';
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
@@ -8,20 +8,19 @@ const Issue = new mongoose.Schema(
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project',
+      index: true,
       required: true,
     },
 
-    errorName: {
-      type: String,
-      required: true,
-    },
+    eventName: { type: String }, // Error 만 존재
 
-    errorMessage: {
-      type: String,
-      require: true,
-    },
+    errorMessage: { type: String }, // Error 만 존재
 
-    isResolved: { type: Boolean, required: true },
+    errorStack: { type: Object }, // Error 만 존재
+
+    issueType: { type: String },
+
+    isResolved: { type: Boolean, required: true, default: false },
 
     comments: [
       { type: mongoose.Schema.Types.ObjectId, ref: 'Comment', default: [] },

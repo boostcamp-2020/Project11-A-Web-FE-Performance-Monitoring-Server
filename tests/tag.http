@@ -1,0 +1,30 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@server = http://192.168.0.18:3000
+@host = {{develop}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
+}
+
+###
+@authToken = {{login.response.body.token}}
+@issueId = 5fcf73c2446a1704e8923440
+
+###
+
+GET {{host}}/api/tag/{{issueId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}

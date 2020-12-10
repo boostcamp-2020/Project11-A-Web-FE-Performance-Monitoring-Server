@@ -1,0 +1,150 @@
+components:
+  schemas:
+    Profile:
+      type: object
+      properties:
+        projectIds: 
+          description: 현재 진행중인 프로젝트 ID 목록
+          type: array
+          items:
+            type: string
+        _id:
+          type: string
+        email: 
+          type: string
+        pwd: 
+          type: string
+        nickname:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        __v:
+          type: number
+paths:
+  /api/user:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - User
+      summary: 로그인 한 유저의 정보를 불러온다.
+      responses:
+        200:
+          description: 로그인한 유저 정보 출력
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              example:
+                "projectIds": [
+                  "5fc5d83a104030b16fdccd00",
+                  "5fc5ff2899b3d368aa12ebb6",
+                  "5fc5ff2c99b3d368aa12ebb7",
+                  "5fc6029427527268a31ca315",
+                  "5fc6029a6bd08568e232761f",
+                  "5fc6029d6bd08568e2327620",
+                  "5fc602e1e98c7368eff5ea9f",
+                  "5fc602e4e98c7368eff5eaa0",
+                  "5fc602e6e98c7368eff5eaa1",
+                  "5fc602f876facc68608e26ae",
+                  "5fc602fb76facc68608e26af"
+                ]
+                "_id": "5fc5d814104030b16fdcccff"
+                "email": "soos0228@naver.com"
+                "pwd": "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                "createdAt": "2020-12-01T05:43:48.432Z"
+                "updatedAt": "2020-12-01T08:46:51.994Z"
+                "__v": 0
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      security:
+        - bearerAuth: []
+      tags:
+        - User
+      summary: 닉네임을 변경한다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  description: 수정할 닉네임 입력
+                  type: string
+                  example: 원호행님
+              require:
+              - nickname
+      responses:
+        200:
+          description: 닉네임 수정 완료
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/user/{nickname}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - User
+      summary: 유저 검색 기능
+      parameters:
+        - name: nickname
+          in: path
+          required: true
+          description: 유저 닉네임 입력
+          schema:
+            type: string
+            example: kang
+        - in: query
+          name: page
+          description: 페이지 출력 ( 기본값 1 )
+          schema:
+            type: number
+        - in: query
+          name: limit
+          description: 한번에 불러올 갯수 ( 기본값 10 )
+          schema:
+            type: number
+      responses:
+        200:
+          description: 유저 정보 출력
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagination'
+              example:
+                "docs":
+                  - "_id": "5fc862c22e22259e55398daf"
+                    "nickname": "Kangsukmin"
+                    "email": "sidjisjd"
+                  - "_id": "5fc862f48700a180e8511d4f"
+                    "nickname": "kangsuk"
+                    "email": "50981395"
+                  - "_id": "5fc863258700a180e8511de0"
+                    "email": "sdfsdf"
+                    "nickname": "sukkang"
+                "totalDocs": 3
+                "limit": 10
+                "totalPages": 1
+                "page": 1
+                "pagingCounter": 1
+                "hasPrevPage": false
+                "hasNextPage": false
+                "prevPage": null
+                "nextPage": null
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

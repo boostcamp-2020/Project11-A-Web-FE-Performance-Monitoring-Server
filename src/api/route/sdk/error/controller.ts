@@ -1,23 +1,27 @@
-import catchErrorService from '@services/sdk/catchError';
+import catchEventService from '@root/services/sdk/catchEvent';
 import { Response, NextFunction } from 'express';
 import { SDKRequest } from '@interfaces/express/sdkRequest';
 
-const catchError = async (
+const catchEvent = async (
   req: SDKRequest,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const event = req.body;
+    let event = req.body;
+    if (event.error) {
+      event = { ...event, ...event.error };
+      delete event.error;
+    }
     const { project } = req;
     if (!project) {
       return next(new Error('토큰이 없습니다.'));
     }
-    await catchErrorService(event, project);
+    await catchEventService(event, project);
     return res.status(201).end();
   } catch (error) {
     next(new Error(error));
   }
 };
 
-export default { catchError };
+export default { catchEvent };

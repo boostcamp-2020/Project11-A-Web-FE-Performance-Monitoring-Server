@@ -96,6 +96,7 @@ paths:
                 _id: "5fc5d814104030b16fdcccff"
                 email: "soos0228@naver.com"
                 pwd: "$2b$14$GbmETfMbyCcuMO8ZvJeI5uRAaXLvH6kOvhdTaTUMKjlXAJfUh4LFi"
+                nickname: "kangsukmin"
                 createdAt: "2020-12-01T05:43:48.432Z"
                 updatedAt: "2020-12-01T08:46:51.994Z"
                 __v: 0

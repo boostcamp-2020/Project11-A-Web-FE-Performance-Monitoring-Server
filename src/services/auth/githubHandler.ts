@@ -1,4 +1,4 @@
-import got from 'got';
+import axios from 'axios';
 
 import githubConfig from '@config/github';
 import { GithubToken } from '@interfaces/githubToken';
@@ -10,31 +10,35 @@ import passportConfig from '@config/passport';
 const githubURL = `https://github.com/login/oauth/authorize?client_id=${githubConfig.client_id}`;
 
 const githubCallback = async (code: string): Promise<User> => {
-  try {
-    const { body }: { body: GithubToken } = await got.post(
-      'https://github.com/login/oauth/access_token',
-      {
-        json: {
-          client_id: githubConfig.client_id,
-          client_secret: githubConfig.client_secret,
-          code,
-        },
-        responseType: 'json',
+  const { data }: { data: GithubToken } = await axios.post(
+    'https://github.com/login/oauth/access_token',
+    {
+      json: {
+        client_id: githubConfig.client_id,
+        client_secret: githubConfig.client_secret,
+        code,
       },
-    );
-    const getUser = await got('https://api.github.com/user', {
-      headers: {
-        Authorization: `${body.token_type} ${body.access_token}`,
-      },
+      responseType: 'json',
+    },
+  );
+  const getUser = await axios.get('https://api.github.com/user', {
+    headers: {
+      Authorization: `${data.token_type} ${data.access_token}`,
+    },
+  });
+  const callbackBody: { id: string; login: string } = JSON.parse(getUser.data);
+  let user = await db.User.findOne({
+    email: 'Github-' + callbackBody.id,
+  }).exec();
+  if (!user) {
+    user = new db.User({
+      email: 'Github-' + callbackBody.id,
+      nickname: callbackBody.login,
     });
-    const callbackBody: { id: string } = JSON.parse(getUser.body);
-    const user = await new db.User({ email: callbackBody.id });
     await user.save();
-    const token = jwt.sign(user.toJSON(), passportConfig.secretOrKey);
-    return { ...user.toJSON(), token };
-  } catch (err) {
-    throw new Error(err);
   }
+  const token = jwt.sign(user.toJSON(), passportConfig.secretOrKey);
+  return { ...user.toJSON(), token };
 };
 
 export default { githubURL, githubCallback };

@@ -7,6 +7,6 @@ const router = Router();
 
 router.use(sdkMiddleware);
 
-router.post('/', controller.catchError);
+router.post('/', controller.catchEvent);
 
 export default router;

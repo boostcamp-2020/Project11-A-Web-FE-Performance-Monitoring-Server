@@ -12,6 +12,8 @@ components:
           type: string
         errorMessage:
           type: string
+        errorStack:
+          type: object
         isResolved: 
           type: boolean
         createdAt:
@@ -25,8 +27,36 @@ components:
         events:
           type: array
           items:
-            $ref: '#components/schemas/Event'
+            $ref: '#components/schemas/EventResponse'
 paths:
+  /api/issue:
+    patch:
+      security:
+        - bearerAuth: []
+      tags:
+        - Issue
+      summary: 여러 이슈를 해결한다. (isResolved => true로)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                issueList:
+                  description: 이슈리스트 입력
+                  type: string || Array
+                  example: [5fc5d859104030b16fdccd01]
+              require:
+              - issueList
+      responses:
+        200:
+          description: 이슈 해결
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/issue/{issueId}:
     get:
       security:
@@ -44,137 +74,47 @@ paths:
             example: 5fc5d859104030b16fdccd01
       responses:
         200:
-          description: 이슈 정보 출력 - 댓글, 이슈를 최대 5개까지만 불러옴
+          description: 이슈 정보 출력 - 댓글(Count 목적), 이슈(최근에 작성된 순으로)를 전부 받음
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Issue'
               example:
-                "comments": []
-                "events":
-                  - createdBy:
-                      ip: "111.111.111.111"
-                    "sdk":
-                      "version": "0.0.1"
-                      "name": "string"
-                    "os":
-                      "name": "Mac"
-                      "version": "10.2.4"
-                    "stacktrace": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ]
-                    "context": [
-                      "가",
-                      "나",
-                      "다"
-                    ]
-                    "_id": "5fc5e23abf24d9c7343049f1"
-                    "timeStamp": "2020-11-12T00:00:00.000Z"
-                    "issueId": "5fc5d859104030b16fdccd01"
-                    "__v": 0
-                  - createdBy:
-                      ip: "111.111.111.111"
-                    "sdk":
-                      "version": "0.0.1"
-                      "name": "string"
-                    "os":
-                      "name": "Mac"
-                      "version": "10.2.4"
-                    "stacktrace": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ]
-                    "context": [
-                      "가",
-                      "나",
-                      "다"
-                    ]
-                    "_id": "5fc5e23abf24d9c7343049f1"
-                    "timeStamp": "2020-11-12T00:00:00.000Z"
-                    "issueId": "5fc5d859104030b16fdccd01"
-                    "__v": 0
-                  - createdBy:
-                      ip: "111.111.111.111"
-                    "sdk":
-                      "version": "0.0.1"
-                      "name": "string"
-                    "os":
-                      "name": "Mac"
-                      "version": "10.2.4"
-                    "stacktrace": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ]
-                    "context": [
-                      "가",
-                      "나",
-                      "다"
-                    ]
-                    "_id": "5fc5e23abf24d9c7343049f1"
-                    "timeStamp": "2020-11-12T00:00:00.000Z"
-                    "issueId": "5fc5d859104030b16fdccd01"
-                    "__v": 0
-                  - createdBy:
-                      ip: "111.111.111.111"
-                    "sdk":
-                      "version": "0.0.1"
-                      "name": "string"
-                    "os":
-                      "name": "Mac"
-                      "version": "10.2.4"
-                    "stacktrace": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ]
-                    "context": [
-                      "가",
-                      "나",
-                      "다"
-                    ]
-                    "_id": "5fc5e23abf24d9c7343049f1"
-                    "timeStamp": "2020-11-12T00:00:00.000Z"
-                    "issueId": "5fc5d859104030b16fdccd01"
-                    "__v": 0
-                  - createdBy:
-                      ip: "111.111.111.111"
-                    "sdk":
-                      "version": "0.0.1"
-                      "name": "string"
-                    "os":
-                      "name": "Mac"
-                      "version": "10.2.4"
-                    "stacktrace": [
-                      1,
-                      2,
-                      3,
-                      4
-                    ]
-                    "context": [
-                      "가",
-                      "나",
-                      "다"
-                    ]
-                    "_id": "5fc5e23abf24d9c7343049f1"
-                    "timeStamp": "2020-11-12T00:00:00.000Z"
-                    "issueId": "5fc5d859104030b16fdccd01"
-                    "__v": 0
                 "_id": "5fc5d859104030b16fdccd01"
                 "projectId": "5fc5d83a104030b16fdccd00"
-                "errorName": "new Error"
+                "eventName": 에러 네임 or 메세지 네임
                 "errorMessage": "그냥 에러임"
+                "errorStack": 
+                  "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                  "function": "mainHandler"
+                  "lineno": 20
+                  "colno": 9
+                issueType: error 또는 message
                 "isResolved": false
                 "createdAt": "2020-12-01T05:44:57.908Z"
                 "updatedAt": "2020-12-02T00:21:51.425Z"
                 "__v": 23
+                "comments": [
+                  "5fc844ad3194da6253e0de50",
+                  "5fc844ae3194da6253e0de51",
+                  "5fc844ae3194da6253e0de52",
+                  "5fc844af3194da6253e0de53"
+                  ]
+                "events":
+                  - "_id": "5fc6de1fed76e21d40026ea9"
+                  - "_id": "5fc5e238bf24d9c7343049ee"
+                  - "_id": "5fc5e23abf24d9c7343049ef"
+                  - "_id": "5fc5e23abf24d9c7343049f0"
+                  - "_id": "5fc5e23abf24d9c7343049f1"
+                  - "_id": "5fc5e23bbf24d9c7343049f2"
+                  - "_id": "5fc5e23bbf24d9c7343049f3"
+                  - "_id": "5fc5e23bbf24d9c7343049f4"
+                  - "_id": "5fc5e23bbf24d9c7343049f5"
+                  - "_id": "5fc5e23bbf24d9c7343049f6"
+                  - "_id": "5fc5e23bbf24d9c7343049f7"
+                  - "_id": "5fc5e23cbf24d9c7343049f8"
+                  - "_id": "5fc5e23cbf24d9c7343049f9"
+                  - "_id": "5fc5e23cbf24d9c7343049fa"
         default:
           description: Error
           content:
@@ -208,14 +148,14 @@ paths:
           description: 한번에 불러올 이슈 수 입력
       responses:
         200:
-          description: 이슈 정보 출력
+          description: 이슈 정보 출력 ( 최신 순 )
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pagenation'
+                $ref: '#/components/schemas/pagination'
               example:
                 "docs": 
-                  comment: []
+                - comment: []
                   event: ["5fc5e238bf24d9c7343049ee",
                     "5fc5e23abf24d9c7343049ef",
                     "5fc5e23abf24d9c7343049f0",
@@ -232,13 +172,48 @@ paths:
                     "5fc6de1fed76e21d40026ea9"]
                   "_id": "5fc5d859104030b16fdccd01"
                   "projectId": "5fc5d83a104030b16fdccd00"
-                  "errorName": "new Error"
+                  "eventName": 에러 네임 or 메세지 네임
                   "errorMessage": "그냥 에러임"
+                  "errorStack": 
+                    "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                    "function": "mainHandler"
+                    "lineno": 20
+                    "colno": 9
+                  issueType: error 또는 message
                   "isResolved": false
                   "createdAt": "2020-12-01T05:44:57.908Z"
                   "updatedAt": "2020-12-02T00:21:51.425Z"
                   "__v": 23
-                "totalDocs": 1
+                - comment: []
+                  event: ["5fc5e238bf24d9c7343049ee",
+                    "5fc5e23abf24d9c7343049ef",
+                    "5fc5e23abf24d9c7343049f0",
+                    "5fc5e23abf24d9c7343049f1",
+                    "5fc5e23bbf24d9c7343049f2",
+                    "5fc5e23bbf24d9c7343049f3",
+                    "5fc5e23bbf24d9c7343049f4",
+                    "5fc5e23bbf24d9c7343049f5",
+                    "5fc5e23bbf24d9c7343049f6",
+                    "5fc5e23bbf24d9c7343049f7",
+                    "5fc5e23cbf24d9c7343049f8",
+                    "5fc5e23cbf24d9c7343049f9",
+                    "5fc5e23cbf24d9c7343049fa",
+                    "5fc6de1fed76e21d40026ea9"]
+                  "_id": "5fc5d859104030b16fdccd01"
+                  "projectId": "5fc5d83a104030b16fdccd00"
+                  "eventName": 에러 네임 or 메세지 네임
+                  "errorMessage": "그냥 에러임"
+                  "errorStack": 
+                    "filename": "C:\\Users\\sukmi\\Code\\Santry sample\\express.js"
+                    "function": "mainHandler"
+                    "lineno": 20
+                    "colno": 9
+                  issueType: error 또는 message
+                  "isResolved": false
+                  "createdAt": "2020-12-01T04:44:57.908Z"
+                  "updatedAt": "2020-12-02T00:21:51.425Z"
+                  "__v": 23
+                "totalDocs": 2
                 "limit": 10
                 "totalPages": 1
                 "page": 1
