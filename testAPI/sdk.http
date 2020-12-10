@@ -4,7 +4,7 @@
 @server = http://118.67.129.120:3000
 @host = {{develop}}
 @contentType = application/json
-@token = eyJhbGciOiJIUzI1NiJ9.NWZjY2EzY2RlZjVmNmExYTFhNzc0NTc2.ELrQvSQitY-4RIc0Bbrx2J75SjTjI7sxJa-ovQNjvr8
+@token = eyJhbGciOiJIUzI1NiJ9.NWZjZjczNWY0NDZhMTcwNGU4OTIzNDM2.02mk-h5GIHVqWAlkZfy6o29JalEJgj2df18z94rpRWI
 
 ###
 

@@ -2,7 +2,7 @@
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
 @server = http://118.67.129.120:3000
-@host = {{develop}}
+@host = {{server}}
 @contentType = application/json
 
 ###
@@ -30,7 +30,7 @@ Authorization: Bearer {{authToken}}
 
 ###
 
-GET {{host}}/api/comment/5fccb3e7e1689a32b4ffaf45
+GET {{host}}/api/comment/5fcf73c2446a1704e8923440
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -41,8 +41,8 @@ content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "issueId": "5fccb3e7e1689a32b4ffaf45",
-  "comment": "아 내일 월요일.."
+  "issueId": "5fcf73c2446a1704e8923440",
+  "comment": "이제 프론트로 떠날시간"
 }
 
 ###
