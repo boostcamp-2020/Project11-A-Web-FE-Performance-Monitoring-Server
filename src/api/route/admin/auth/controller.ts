@@ -61,4 +61,23 @@ const githubCallback = async (
   }
 };
 
-export default { join, login, checkEmail, githubLogin, githubCallback };
+const tokenCheck = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<Response<void> | void> => {
+  try {
+    return res.status(200).json(req.user);
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export default {
+  join,
+  login,
+  checkEmail,
+  githubLogin,
+  githubCallback,
+  tokenCheck,
+};

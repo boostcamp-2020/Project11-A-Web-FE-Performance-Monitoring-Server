@@ -4,6 +4,7 @@ import passport from 'passport';
 import Controller from './controller';
 import emailValidation from '@middlewares/emailValidation';
 import pwdValidation from '@middlewares/pwdValidation';
+import passportMiddleware from '@middlewares/passportJwt';
 
 const router = Router();
 
@@ -14,6 +15,7 @@ router.post(
   Controller.login,
 );
 router.post('/checkEmail', emailValidation, Controller.checkEmail);
+router.get('/tokenCheck', passportMiddleware, Controller.tokenCheck);
 router.get('/github', Controller.githubLogin);
 router.get('/github/callback', Controller.githubCallback);
 
