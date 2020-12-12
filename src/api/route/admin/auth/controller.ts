@@ -1,6 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 
-import authService from '@root/services/auth/signup';
+import authService from '@services/auth/signup';
+import loginService from '@services/auth/login';
 import checkEmailService from '@services/auth/checkEmail';
 import githubService from '@services/auth/githubHandler';
 
@@ -18,10 +19,18 @@ const join = async (
   }
 };
 
-const login = (req: Request, res: Response): Response<void> => {
-  return res.json({
-    ...req.user,
-  });
+const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<Response<any> | void> => {
+  const { email, pwd } = req.body;
+  try {
+    const user = await loginService(email, pwd);
+    return res.status(200).json(user);
+  } catch (err) {
+    return next(new Error(err));
+  }
 };
 
 const checkEmail = async (
