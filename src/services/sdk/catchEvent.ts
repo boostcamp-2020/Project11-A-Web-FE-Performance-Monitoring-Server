@@ -4,6 +4,7 @@ import { Project } from '@interfaces/models/project';
 import { sendMail, sendLevel } from '@utils/sendMail';
 import { StackTrace } from '@interfaces/models/stackTrace';
 import addStatistic from './statistics';
+import { alertCheck } from '@utils/alertLevel';
 
 interface Option {
   [K: string]: string | StackTrace | undefined;
@@ -54,7 +55,7 @@ const catchEventService = async (
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
   let mailPromise;
-  if (sendLevel.includes(event.level as string)) {
+  if (alertCheck(targetProject.alertLevel as string, event.level as string)) {
     mailPromise = sendMail(targetProject);
   }
   await Promise.all([
