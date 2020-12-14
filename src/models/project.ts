@@ -46,7 +46,7 @@ const Project = new mongoose.Schema(
 
     alertLevel: [
       {
-        type: mongoose.Schema.Types.Number,
+        type: Number,
         default: 1,
       },
     ],
