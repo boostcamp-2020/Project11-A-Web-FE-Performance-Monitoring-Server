@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "paths": {
       "@root/*":["./*"],
+      "@test/*":["../test/*"],
       "@api":["./api"],
       "@api/*":["./api/*"],
       "@controllers":["./api/controllers"],

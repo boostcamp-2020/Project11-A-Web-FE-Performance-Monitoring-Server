@@ -1,0 +1,51 @@
+@hostname = localhost
+@port = 3000
+@develop = http://{{hostname}}:{{port}}
+@server = http://192.168.0.18:3000
+@host = {{server}}
+@contentType = application/json
+
+###
+GET {{host}}/status
+
+###
+
+# @name login
+POST {{host}}/api/auth/login
+content-type: {{contentType}}
+
+{
+  "email": "testId1@naver.com",
+  "pwd": "aaAA1234@"
+}
+
+###
+@authToken = {{login.response.body.token}}
+@issueId = 5fd1fce00173a51706017343
+
+###
+
+GET {{host}}/api/issue/{{issueId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+@projectId = 5fd1f8570173a51706017342
+
+###
+GET {{host}}/api/issue/list/{{projectId}}
+?page=1
+?limit=10
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+### 이슈 resolve하기
+
+PATCH {{host}}/api/issue
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "issueList": ["5fc5d859104030b16fdccd01"]
+}
