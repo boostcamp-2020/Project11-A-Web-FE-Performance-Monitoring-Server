@@ -40,9 +40,10 @@ export interface Event {
   userIp?: string;
   message?: string; // log일 경우만
   level?: string;
-  errorContexts?: {
-    preErrorContext?: string[];
-    ErrorContext?: string[];
-    postErrorContext?: string[];
-  };
+  errorContexts?: ErrorContext[];
+}
+interface ErrorContext {
+  preErrorContext?: string[];
+  ErrorContext?: string[];
+  postErrorContext?: string[];
 }

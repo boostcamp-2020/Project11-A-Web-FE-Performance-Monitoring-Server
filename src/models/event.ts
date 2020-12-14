@@ -32,11 +32,7 @@ const Event = new mongoose.Schema({
   serverName: String,
   transaction: String,
   userIp: String,
-  errorContexts: {
-    preErrorContext : [String],
-    errorContext : [String],
-    postErrorContext : [String],
-  }
+  errorContexts: [Object],
   level: String,
 });
 
