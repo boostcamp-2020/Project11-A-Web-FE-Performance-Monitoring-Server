@@ -1,11 +1,11 @@
-import { Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { SDKRequest } from '@interfaces/express/sdkRequest';
+import { User } from '@interfaces/models/user';
 import tokenConfig from '@config/passport';
 import db from '@models';
 
-const sdkTokenVerify = async (
-  req: SDKRequest,
+const userTokenVerify = async (
+  req: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -17,16 +17,16 @@ const sdkTokenVerify = async (
     if (tokenType.toLowerCase() !== 'bearer') {
       return res.status(401).end();
     }
-    const projectId = jwt.verify(token, tokenConfig.secretOrKey);
-    const project = await db.Project.findById(projectId);
-    if (!project) {
+    const user = jwt.verify(token, tokenConfig.secretOrKey) as User;
+    const userData = await db.User.findById(user._id);
+    if (!userData) {
       return next(new Error('올바르지 않은 토큰입니다.'));
     }
-    req.project = project;
+    req.user = userData;
     return next();
   } catch (err) {
     next(new Error(err));
   }
 };
 
-export default sdkTokenVerify;
+export default userTokenVerify;

@@ -1,8 +1,8 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
-@server = http://118.67.129.120:3000
-@host = {{develop}}
+@server = http://192.168.0.18:3000
+@host = {{server}}
 @contentType = application/json
 
 ###

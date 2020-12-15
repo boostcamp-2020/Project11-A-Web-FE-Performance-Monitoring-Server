@@ -1,7 +1,7 @@
 @hostname = localhost
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
-@server = http://118.67.129.120:3000
+@server = http://192.168.0.18:3000
 @host = {{develop}}
 @contentType = application/json
 
@@ -21,31 +21,41 @@ content-type: {{contentType}}
 
 ###
 @authToken = {{login.response.body.token}}
-@issueId = 5fccc9e046a4c4263c1e0932
 
-###
+### 프로젝트 작성
 
-GET {{host}}/api/issue/{{issueId}}
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
+### 필수 정보
 
-###
-
-@projectId = 5fcca3cdef5f6a1a1a774576
-
-###
-GET {{host}}/api/issue/list/{{projectId}}
-?page=1
-?limit=10
-content-type: {{contentType}}
-Authorization: Bearer {{authToken}}
-
-### 이슈 resolve하기
-
-PATCH {{host}}/api/issue
+POST {{host}}/api/project
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
 {
-  "issueList": ["5fc5d859104030b16fdccd01"]
+  "platform": "Node",
+  "projectName": "첫번째 예시 폐이지"
 }
+
+### email 추가
+
+POST {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "platform": "Express",
+  "projectName": "두번째 이메일 포함",
+  "emails": ["soos0228@navercom", "soos3121@gmail.com"]
+}
+
+### 프로젝트 로드
+
+GET {{host}}/api/project
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/project/5fcf7e139a69850fb6505b4b
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+

@@ -21,10 +21,17 @@ content-type: {{contentType}}
 
 ###
 @authToken = {{login.response.body.token}}
-@issueId = 5fcf73c2446a1704e8923440
+@issueId = 5fd07933e29c2824c8ecdf37
 
 ###
 
 GET {{host}}/api/tag/{{issueId}}
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{host}}/api/event/list/{{issueId}}
+?sdk=@santry/node
 content-type: {{contentType}}
 Authorization: Bearer {{authToken}}
