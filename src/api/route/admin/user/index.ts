@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import Controller from './controller';
-import passportMiddleware from '@middlewares/passportJwt';
+import authMiddleware from '@middlewares/authMiddleware';
 
 const router = Router();
 
-router.use(passportMiddleware);
+router.use(authMiddleware);
 
 router.get('/:nickname', Controller.getUsers);
 router.get('/', Controller.getUser);

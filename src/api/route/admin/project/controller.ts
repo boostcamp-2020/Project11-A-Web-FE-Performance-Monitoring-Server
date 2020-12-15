@@ -35,7 +35,7 @@ const getProjects = async (
       page = '1';
     }
     if (typeof limit !== 'string') {
-      limit = '10';
+      limit = '12';
     }
     const { user } = req;
     const { _id } = user as UserToken;
