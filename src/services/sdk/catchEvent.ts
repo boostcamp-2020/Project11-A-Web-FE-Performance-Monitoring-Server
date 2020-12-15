@@ -28,6 +28,7 @@ const catchEventService = async (
   const targetIssueQuery = db.Issue.findOne({
     ...option,
     projectId: project._id as string,
+    session,
   }).exec();
   const targetProjectQuery = db.Project.findById(project._id).exec();
   const [constTargetIssue, targetProject] = await Promise.all([
@@ -44,6 +45,7 @@ const catchEventService = async (
       ...option,
       projectId: project._id,
       isResolved: false,
+      session,
     });
     targetStatistic = new db.Statistics({
       issueId: targetIssue._id,
