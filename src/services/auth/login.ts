@@ -15,7 +15,7 @@ const login = async (email: string, pwd: string): Promise<UserWithToken> => {
     throw '가입되지 않은 이메일입니다.';
   }
   const isCorrectPasswordPromise = bcrypt.checkPw(pwd, user.pwd);
-  const token = jwt.sign(user.toJSON(), passportConfig.secretOrKey);
+  const token = jwt.sign(user._id.toString(), passportConfig.secretOrKey);
   const isCorrectPassword = await isCorrectPasswordPromise;
   if (!isCorrectPassword) {
     throw '비밀번호가 다릅니다.';
