@@ -35,21 +35,19 @@ const catchEventService = async (
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }
+  let init = false;
   if (!targetIssue) {
+    init = true;
     targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
       isResolved: false,
     });
-    const targetStatistic = new db.Statistics({
-      issueId: targetIssue._id,
-    });
-    targetProject.issues?.push(targetIssue._id);
-    await targetStatistic.save();
   }
   try {
     await targetIssue.save();
   } catch (err) {
+    init = false;
     targetIssue = await db.Issue.findOne({
       ...option,
       projectId: project._id as string,
@@ -57,6 +55,13 @@ const catchEventService = async (
     if (!targetIssue) {
       throw 'unique 이외의 오류입니다.';
     }
+  }
+  if (init) {
+    const targetStatistic = new db.Statistics({
+      issueId: targetIssue._id,
+    });
+    await targetStatistic?.save();
+    targetProject.issues?.push(targetIssue._id);
   }
   const errorSample = new db.Event({
     ...event,
