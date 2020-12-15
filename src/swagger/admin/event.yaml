@@ -63,7 +63,7 @@ components:
             colno: 13
         errorContexts:
           description: 에러 컨텍스트
-          type: array
+          type: object
           items:
             type: array
             items:

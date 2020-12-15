@@ -1,4 +1,5 @@
 import db from '@models';
+import mongoose from 'mongoose';
 import { Event } from '@interfaces/models/event';
 import { Project } from '@interfaces/models/project';
 import { sendMail, sendLevel } from '@utils/sendMail';
@@ -22,6 +23,8 @@ const catchEventService = async (
   Object.keys(option).forEach(
     (key: string) => option[key] === undefined && delete option[key],
   );
+  const session = await mongoose.startSession();
+  session.startTransaction();
   const targetIssueQuery = db.Issue.findOne({
     ...option,
     projectId: project._id as string,
@@ -35,33 +38,33 @@ const catchEventService = async (
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }
+  let targetStatistic;
   if (!targetIssue) {
     targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
       isResolved: false,
     });
-    const targetStatistic = new db.Statistics({
+    targetStatistic = new db.Statistics({
       issueId: targetIssue._id,
     });
     targetProject.issues?.push(targetIssue._id);
-    await targetStatistic.save();
   }
+  await targetIssue.save();
+  session.endSession();
   const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
   });
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
-  let mailPromise;
   if (sendLevel.includes(event.level as string)) {
-    mailPromise = sendMail(targetProject);
+    sendMail(targetProject);
   }
   await Promise.all([
     errorSample.save(),
-    targetIssue.save(),
     targetProject.save(),
-    mailPromise,
+    targetStatistic?.save(),
     addPromise,
   ]);
 };
