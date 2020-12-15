@@ -47,6 +47,17 @@ const catchEventService = async (
     targetProject.issues?.push(targetIssue._id);
     await targetStatistic.save();
   }
+  try {
+    await targetIssue.save();
+  } catch (err) {
+    targetIssue = await db.Issue.findOne({
+      ...option,
+      projectId: project._id as string,
+    }).exec();
+    if (!targetIssue) {
+      throw 'unique 이외의 오류입니다.';
+    }
+  }
   const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
