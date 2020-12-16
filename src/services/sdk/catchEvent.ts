@@ -1,5 +1,4 @@
 import db from '@models';
-import mongoose from 'mongoose';
 import { Event } from '@interfaces/models/event';
 import { Project } from '@interfaces/models/project';
 import { sendMail } from '@utils/sendMail';
@@ -24,12 +23,9 @@ const catchEventService = async (
   Object.keys(option).forEach(
     (key: string) => option[key] === undefined && delete option[key],
   );
-  const session = await mongoose.startSession();
-  session.startTransaction();
   const targetIssueQuery = db.Issue.findOne({
     ...option,
     projectId: project._id as string,
-    session,
   }).exec();
   const targetProjectQuery = db.Project.findById(project._id).exec();
   const [constTargetIssue, targetProject] = await Promise.all([
@@ -47,7 +43,6 @@ const catchEventService = async (
       ...option,
       projectId: project._id,
       isResolved: false,
-      session,
     });
   }
   try {
@@ -69,8 +64,6 @@ const catchEventService = async (
     await targetStatistic?.save();
     targetProject.issues?.push(targetIssue._id);
   }
-  await targetIssue.save();
-  session.endSession();
   const errorSample = new db.Event({
     ...event,
     issueId: targetIssue._id,
@@ -82,8 +75,8 @@ const catchEventService = async (
   }
   await Promise.all([
     errorSample.save(),
+    targetIssue.save(),
     targetProject.save(),
-    targetStatistic?.save(),
     addPromise,
   ]);
 };
