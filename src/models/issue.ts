@@ -34,7 +34,7 @@ const Issue = new mongoose.Schema(
 );
 
 Issue.index(
-  { eventName: 1, errorMessage: 1, errorStack: 1, issueType: 1 },
+  { eventName: 1, errorMessage: 1, errorStack: 1, issueType: 1, projectId: 1 },
   { unique: true },
 );
 Issue.plugin(mongoosePaginate);
