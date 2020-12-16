@@ -35,17 +35,33 @@ const catchEventService = async (
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }
+  let init = false;
   if (!targetIssue) {
+    init = true;
     targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
       isResolved: false,
     });
+  }
+  try {
+    await targetIssue.save();
+  } catch (err) {
+    init = false;
+    targetIssue = await db.Issue.findOne({
+      ...option,
+      projectId: project._id as string,
+    }).exec();
+    if (!targetIssue) {
+      throw 'unique 이외의 오류입니다.';
+    }
+  }
+  if (init) {
     const targetStatistic = new db.Statistics({
       issueId: targetIssue._id,
     });
+    await targetStatistic?.save();
     targetProject.issues?.push(targetIssue._id);
-    await targetStatistic.save();
   }
   const errorSample = new db.Event({
     ...event,
@@ -53,15 +69,13 @@ const catchEventService = async (
   });
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
-  let mailPromise;
   if (sendLevel.includes(event.level as string)) {
-    mailPromise = sendMail(targetProject);
+    sendMail(targetProject);
   }
   await Promise.all([
     errorSample.save(),
     targetIssue.save(),
     targetProject.save(),
-    mailPromise,
     addPromise,
   ]);
 };

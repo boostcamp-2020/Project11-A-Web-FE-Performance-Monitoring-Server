@@ -17,8 +17,8 @@ const userTokenVerify = async (
     if (tokenType.toLowerCase() !== 'bearer') {
       return res.status(401).end();
     }
-    const user = jwt.verify(token, tokenConfig.secretOrKey) as User;
-    const userData = await db.User.findById(user._id);
+    const user = jwt.verify(token, tokenConfig.secretOrKey) as string;
+    const userData = await db.User.findById(user);
     if (!userData) {
       return next(new Error('올바르지 않은 토큰입니다.'));
     }

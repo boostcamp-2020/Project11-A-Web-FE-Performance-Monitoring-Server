@@ -5,7 +5,10 @@ import passportConfig from '@config/passport';
 import bcrypt from '@root/utils/passwordBcrypt';
 import db from '@models';
 
-interface UserWithToken extends User {
+interface UserWithToken {
+  _id: string;
+  email: string;
+  nickname?: string;
   token: string;
 }
 
@@ -15,12 +18,12 @@ const login = async (email: string, pwd: string): Promise<UserWithToken> => {
     throw '가입되지 않은 이메일입니다.';
   }
   const isCorrectPasswordPromise = bcrypt.checkPw(pwd, user.pwd);
-  const token = jwt.sign(user.toJSON(), passportConfig.secretOrKey);
+  const token = jwt.sign(user._id.toString(), passportConfig.secretOrKey);
   const isCorrectPassword = await isCorrectPasswordPromise;
   if (!isCorrectPassword) {
     throw '비밀번호가 다릅니다.';
   }
-  return { ...user.toJSON(), token };
+  return { _id: user._id, email: user.email, nickname: user.nickname, token };
 };
 
 export default login;
