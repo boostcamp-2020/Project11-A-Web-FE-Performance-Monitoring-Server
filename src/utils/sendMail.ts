@@ -3,8 +3,6 @@ import { Project } from '@interfaces/models/project';
 import mailConfig from '@config/nodemailer';
 import { logger } from '@config/winston';
 
-const sendLevel = ['fatal', 'error'];
-
 const sendMail = (project: Project): void => {
   try {
     if (!project.emails) {
@@ -26,4 +24,4 @@ const sendMail = (project: Project): void => {
   }
 };
 
-export { sendMail, sendLevel };
+export { sendMail };
