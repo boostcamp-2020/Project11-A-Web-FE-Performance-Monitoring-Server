@@ -43,6 +43,11 @@ const Project = new mongoose.Schema(
     ],
 
     emails: [{ type: String, default: [] }],
+
+    alertLevel: {
+      type: String,
+      default: 'error',
+    },
   },
   { timestamps: true },
 );

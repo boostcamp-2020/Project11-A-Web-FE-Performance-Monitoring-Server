@@ -35,15 +35,15 @@ const createComment = async (
   req: Request,
   res: Response,
   next: NextFunction,
-): Promise<void> => {
+): Promise<void | Response<void>> => {
   const { _id } = req.user as UserToken;
   const { comment, issueId } = req.body;
   if (!comment) {
     return next(new Error('내용을 입력하세요.'));
   }
   try {
-    await createService(_id, issueId, comment);
-    return res.status(201).end();
+    const commentId = await createService(_id, issueId, comment);
+    return res.status(201).json({ _id: commentId });
   } catch (err) {
     next(new Error(err));
   }
