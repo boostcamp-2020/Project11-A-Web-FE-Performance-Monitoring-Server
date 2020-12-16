@@ -1,7 +1,7 @@
 import db from '@models';
 import { Event } from '@interfaces/models/event';
 import { Project } from '@interfaces/models/project';
-import { sendMail, sendLevel } from '@utils/sendMail';
+import { sendMail } from '@utils/sendMail';
 import { StackTrace } from '@interfaces/models/stackTrace';
 import addStatistic from './statistics';
 import { alertCheck } from '@utils/alertLevel';
@@ -70,9 +70,8 @@ const catchEventService = async (
   });
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
-  let mailPromise;
   if (alertCheck(targetProject.alertLevel as string, event.level as string)) {
-    mailPromise = sendMail(targetProject);
+    sendMail(targetProject);
   }
   await Promise.all([
     errorSample.save(),
