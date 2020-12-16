@@ -17,6 +17,32 @@ export default describe('Project', () => {
   const auth: { token?: string } = {};
   beforeAll(async () => await loginFunction(auth));
 
+  test('Uncorrect Token Type', (done) => {
+    request(app)
+      .get('/api/project')
+      .set('Authorization', 'token ' + auth.token)
+      .expect(401)
+      .end((err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  test('Uncorrect Token Value', (done) => {
+    request(app)
+      .get('/api/project')
+      .set(
+        'Authorization',
+        'bearer ' +
+          'eyJhbGciOiJIUzI1NiJ9.NWZjZjczNWY0NDZhMTcwNGU4OTIzNDM2.02mk-h5GIHVqWAlkZfy6o29JalEJgj2df18z94rpRWI',
+      )
+      .expect(500)
+      .end((err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
   test('Has no project', (done) => {
     request(app)
       .get('/api/project')

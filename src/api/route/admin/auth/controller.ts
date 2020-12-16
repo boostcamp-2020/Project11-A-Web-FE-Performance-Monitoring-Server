@@ -36,16 +36,17 @@ const login = async (
 const checkEmail = async (
   req: Request,
   res: Response,
+  next: NextFunction,
 ): Promise<void | Response<void>> => {
   try {
     const checkResult = await checkEmailService.checkEmail(req.body.email);
     if (checkResult) {
       return res.status(200).end();
     } else {
-      return res.status(400).json({ message: '이미 존재하는 이메일 입니다.' });
+      throw '이미 존재하는 이메일 입니다.';
     }
   } catch (err) {
-    throw new Error(err);
+    next(new Error(err));
   }
 };
 
