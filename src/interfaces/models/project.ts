@@ -9,4 +9,5 @@ export interface Project {
   projectName: string;
   issues?: string[];
   emails?: string[];
+  alertLevel?: string;
 }

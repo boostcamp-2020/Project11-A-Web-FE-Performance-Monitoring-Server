@@ -33,6 +33,10 @@ const Issue = new mongoose.Schema(
   { timestamps: true },
 );
 
+Issue.index(
+  { eventName: 1, errorMessage: 1, errorStack: 1, issueType: 1, projectId: 1 },
+  { unique: true },
+);
 Issue.plugin(mongoosePaginate);
 export default mongoose.model<IIssue & mongoose.Document>(
   'Issue',

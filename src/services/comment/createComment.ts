@@ -4,7 +4,7 @@ const createComment = async (
   userId: string,
   issueId: string,
   description: string,
-): Promise<void> => {
+): Promise<string> => {
   const targetComment = new db.Comment({
     userId,
     issueId,
@@ -23,6 +23,7 @@ const createComment = async (
   }
   targetIssue.comments?.push(targetComment._id);
   await Promise.all([targetComment.save(), targetIssue.save()]);
+  return targetComment._id;
 };
 
 export default createComment;

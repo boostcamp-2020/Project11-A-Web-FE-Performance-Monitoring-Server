@@ -2,9 +2,10 @@ import db from '@models';
 import mongoose from 'mongoose';
 import { Event } from '@interfaces/models/event';
 import { Project } from '@interfaces/models/project';
-import { sendMail, sendLevel } from '@utils/sendMail';
+import { sendMail } from '@utils/sendMail';
 import { StackTrace } from '@interfaces/models/stackTrace';
 import addStatistic from './statistics';
+import { alertCheck } from '@utils/alertLevel';
 
 interface Option {
   [K: string]: string | StackTrace | undefined;
@@ -39,17 +40,33 @@ const catchEventService = async (
   if (!targetProject) {
     throw '찾는 프로젝트가 없습니다.';
   }
-  let targetStatistic;
+  let init = false;
   if (!targetIssue) {
+    init = true;
     targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
       isResolved: false,
       session,
     });
-    targetStatistic = new db.Statistics({
+  }
+  try {
+    await targetIssue.save();
+  } catch (err) {
+    init = false;
+    targetIssue = await db.Issue.findOne({
+      ...option,
+      projectId: project._id as string,
+    }).exec();
+    if (!targetIssue) {
+      throw 'unique 이외의 오류입니다.';
+    }
+  }
+  if (init) {
+    const targetStatistic = new db.Statistics({
       issueId: targetIssue._id,
     });
+    await targetStatistic?.save();
     targetProject.issues?.push(targetIssue._id);
   }
   await targetIssue.save();
@@ -60,7 +77,7 @@ const catchEventService = async (
   });
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
-  if (sendLevel.includes(event.level as string)) {
+  if (alertCheck(targetProject.alertLevel as string, event.level as string)) {
     sendMail(targetProject);
   }
   await Promise.all([
