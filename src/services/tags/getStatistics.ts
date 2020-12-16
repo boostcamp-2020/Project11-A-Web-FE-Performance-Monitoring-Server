@@ -1,5 +1,5 @@
 import db from '@models';
-import { Document, PaginateResult } from 'mongoose';
+import { Document } from 'mongoose';
 import { Statistics } from '@interfaces/models/statistics';
 
 const getUsers = async (issueId: string): Promise<Statistics & Document> => {
