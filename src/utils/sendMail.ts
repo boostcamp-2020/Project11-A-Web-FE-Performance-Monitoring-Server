@@ -2,8 +2,6 @@ import nodemailer from 'nodemailer';
 import { Project } from '@interfaces/models/project';
 import mailConfig from '@config/nodemailer';
 
-const sendLevel = ['fatal', 'error'];
-
 const sendMail = (project: Project): void => {
   try {
     if (!project.emails) {
@@ -21,4 +19,4 @@ const sendMail = (project: Project): void => {
   } catch (err) {}
 };
 
-export { sendMail, sendLevel };
+export { sendMail };
