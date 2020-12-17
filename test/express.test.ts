@@ -2,6 +2,7 @@ import { beforeFunction, afterFunction } from './setting';
 
 import expressInit from './test/expressInit';
 import authTest from './test/auth';
+import userTest from './test/user';
 import projectTest from './test/project';
 import sdkTest from './test/sdk';
 import issueTest from './test/issue';
@@ -21,3 +22,4 @@ projectTest;
 sdkTest;
 issueTest;
 commentTest;
+userTest;

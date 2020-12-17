@@ -20,7 +20,7 @@ const sdkTokenVerify = async (
     const projectId = jwt.verify(token, tokenConfig.secretOrKey);
     const project = await db.Project.findById(projectId);
     if (!project) {
-      return next(new Error('올바르지 않은 토큰입니다.'));
+      throw '올바르지 않은 토큰입니다.';
     }
     req.project = project;
     return next();

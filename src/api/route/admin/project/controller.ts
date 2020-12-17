@@ -77,11 +77,16 @@ const updateProject = async (
   try {
     const { projectId } = req.params;
     let { admins, members } = req.body;
-    const { projectName } = req.body;
+    const { projectName, alertLevel } = req.body;
     admins = admins ? admins : [];
     members = members ? members : [];
     const { _id } = req.user as UserToken;
-    await updateService(_id, projectId, { admins, members, projectName });
+    await updateService(_id, projectId, {
+      admins,
+      members,
+      projectName,
+      alertLevel,
+    });
     return res.status(200).end();
   } catch (err) {
     next(new Error(err));

@@ -43,12 +43,38 @@ export default describe('Auth', () => {
       });
   });
 
-  test(`SignIn existed [email: ${users[0]}]`, (done) => {
+  test(`SignIn existed [email: ${users[0].email}]`, (done) => {
     request(app)
       .post('/api/auth/join')
       .send(users[0])
       .set('Accept', 'application/json')
       .expect(500)
+      .end((err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  test(`CheckEmail [email: ${users[0].email}]`, (done) => {
+    request(app)
+      .post('/api/auth/checkEmail')
+      .send({ email: users[0].email })
+      .set('Accept', 'application/json')
+      .expect(500, {
+        message: '이미 존재하는 이메일 입니다.',
+      })
+      .end((err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  test(`CheckEmail [email: testEmail@naver.com]`, (done) => {
+    request(app)
+      .post('/api/auth/checkEmail')
+      .send({ email: 'testEmail@naver.com' })
+      .set('Accept', 'application/json')
+      .expect(200)
       .end((err) => {
         if (err) return done(err);
         done();

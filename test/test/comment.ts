@@ -83,7 +83,22 @@ export default describe('Comment', () => {
       });
   });
 
-  test('Result Create 2 Projects', (done) => {
+  test('Create Comment with no Desc', (done) => {
+    request(app)
+      .post('/api/comment')
+      .set('Accept', 'application/json')
+      .set('Authorization', 'bearer ' + auth.token)
+      .send({ issueId: issue._id })
+      .expect(500, {
+        message: '내용을 입력하세요.',
+      })
+      .end((err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  test('Result Create 2 Comments', (done) => {
     request(app)
       .get(`/api/comment/${issue._id}`)
       .set('Authorization', 'bearer ' + auth.token)
@@ -152,6 +167,21 @@ export default describe('Comment', () => {
       .set('Authorization', 'bearer ' + auth.token);
     expect(secondRes.status).toBe(200);
     expect(secondRes.body.docs[0].description).toBe('댓글 변경');
+  });
+
+  test('Update the Comment with no desc', async () => {
+    const commentRes = await request(app)
+      .get(`/api/comment/${issue._id}`)
+      .set('Authorization', 'bearer ' + auth.token);
+    expect(commentRes.status).toBe(200);
+    expect(commentRes.body.docs.length).toBe(2);
+    const commentId: string = commentRes.body.docs[0]._id;
+    const updateRes = await request(app)
+      .patch(`/api/comment/${commentId}`)
+      .set('Authorization', 'bearer ' + auth.token)
+      .send({});
+    expect(updateRes.status).toBe(500);
+    expect(updateRes.body).toEqual({ message: '내용을 입력하세요.' });
   });
 
   test('Delete the Comment', async () => {

@@ -2,6 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const SwaggerJSDocWebpackPlugin = require('swagger-jsdoc-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: 'production',
@@ -50,5 +51,15 @@ module.exports = {
       },
       apis: ['./src/swagger/**/*.yaml'],
     }),
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({ 
+      terserOptions: { 
+        ecma: 6, 
+        compress: { drop_console: true }, 
+        output: { comments: false }, 
+      }
+    })]
+  }
 };

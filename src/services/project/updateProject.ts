@@ -1,10 +1,11 @@
 import db from '@models';
-import { Types } from 'mongoose';
+import { alertLevel } from '@utils/alertLevel';
 
 interface MemberList {
   admins?: string[];
   members: string[];
   projectName?: string;
+  alertLevel?: string;
 }
 
 const updateProject = async (
@@ -19,8 +20,15 @@ const updateProject = async (
   if (!targetProject) {
     throw '권한이 없습니다.';
   }
+  if (
+    memberList.alertLevel &&
+    (memberList.alertLevel !== 'unsubscribe' ||
+      !alertLevel.includes(memberList.alertLevel))
+  ) {
+    throw '설정된 레벨이 아닙니다.';
+  }
   if (typeof targetProject.owner === 'string') {
-    throw '날수 없는 오류인데?';
+    throw 'owner 타입이 다릅니다.';
   }
   if (targetProject.owner.equals(userId)) {
     await db.Project.findByIdAndUpdate(projectId, {

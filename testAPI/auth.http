@@ -2,7 +2,7 @@
 @port = 3000
 @develop = http://{{hostname}}:{{port}}
 @server = http://192.168.0.18:3000
-@host = {{server}}
+@host = {{develop}}
 @contentType = application/json
 
 ###
@@ -31,6 +31,12 @@ content-type: {{contentType}}
 
 ###
 @authToken = {{login.response.body.token}}
+
+###
+
+GET {{host}}/api/auth/tokenCheck
+content-type: {{contentType}}
+Authorization: Bearer {{authToken}}
 
 ###
 
