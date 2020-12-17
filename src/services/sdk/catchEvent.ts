@@ -45,7 +45,6 @@ const catchEventService = async (
     targetIssue = new db.Issue({
       ...option,
       projectId: project._id,
-      isResolved: false,
     });
   }
   try {
