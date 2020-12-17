@@ -22,8 +22,8 @@ const updateProject = async (
   }
   if (
     memberList.alertLevel &&
-    (memberList.alertLevel !== 'unsubscribe' ||
-      !alertLevel.includes(memberList.alertLevel))
+    memberList.alertLevel !== 'unsubscribe' &&
+    !alertLevel.includes(memberList.alertLevel)
   ) {
     throw '설정된 레벨이 아닙니다.';
   }
