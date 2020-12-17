@@ -10,7 +10,7 @@ const getIssues = async (
 ): Promise<PaginateResult<Issue & Document>> => {
   const Issues = await db.Issue.paginate(
     { projectId, isResolved: false },
-    { ...options, sort: { createdAt: -1 } },
+    { ...options, sort: { updatedAt: -1 } },
   );
   return Issues;
 };
