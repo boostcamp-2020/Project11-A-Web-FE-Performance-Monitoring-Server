@@ -18,7 +18,6 @@ const catchEventService = async (
     eventName: event.type || event.message,
     errorMessage: event.value,
     errorStack: {
-      filename: event.stacktrace?.[0].filename,
       function: event.stacktrace?.[0].function,
     },
     issueType: event.type ? 'error' : 'message',

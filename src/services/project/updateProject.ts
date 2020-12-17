@@ -1,10 +1,10 @@
 import db from '@models';
-import { Types } from 'mongoose';
 
 interface MemberList {
   admins?: string[];
   members: string[];
   projectName?: string;
+  alertLevel?: string;
 }
 
 const updateProject = async (
