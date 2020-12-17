@@ -2,7 +2,7 @@ import db from '@models';
 import { Project } from '@interfaces/models/project';
 import createSDKToken from '@utils/createSDKToken';
 import emailPattern from '@utils/emailCheck';
-import { alertCheck, alertLevel } from '@utils/alertLevel';
+import { alertLevel } from '@utils/alertLevel';
 
 const create = async (project: Project): Promise<string> => {
   project.emails?.forEach((v) => {
@@ -21,7 +21,10 @@ const create = async (project: Project): Promise<string> => {
   if (!project.alertLevel) {
     project.alertLevel = alertLevel[2];
   }
-  if (!alertLevel.includes(project.alertLevel)) {
+  if (
+    !alertLevel.includes(project.alertLevel) ||
+    project.alertLevel !== 'unsubscripbe'
+  ) {
     throw '존재하지 않는 레벨입니다.';
   }
   const membersInDB = members.map((v) =>

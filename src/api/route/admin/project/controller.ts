@@ -76,8 +76,8 @@ const updateProject = async (
 ): Promise<void | Response<void>> => {
   try {
     const { projectId } = req.params;
-    let { admins, members, alertLevel } = req.body;
-    const { projectName } = req.body;
+    let { admins, members } = req.body;
+    const { projectName, alertLevel } = req.body;
     admins = admins ? admins : [];
     members = members ? members : [];
     const { _id } = req.user as UserToken;
