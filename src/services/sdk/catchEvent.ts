@@ -70,7 +70,7 @@ const catchEventService = async (
   const addPromise = addStatistic(targetIssue._id, event);
   targetIssue.events.push(errorSample._id);
   if (alertCheck(targetProject.alertLevel as string, event.level as string)) {
-    sendMail(targetProject);
+    sendMail(targetProject, targetIssue, errorSample._id);
   }
   await Promise.all([
     errorSample.save(),
