@@ -5,9 +5,11 @@ import emailPattern from '@utils/emailCheck';
 import { alertLevel } from '@utils/alertLevel';
 
 const create = async (project: Project): Promise<string> => {
-  project.emails?.forEach((v) => {
-    if (!emailPattern.test(v)) throw `${v}는 올바른 이메일 형식이 아닙니다.`;
-  });
+  if (project.emails && project.emails.length !== 0) {
+    project.emails.forEach((v) => {
+      if (!emailPattern.test(v)) throw `${v}는 올바른 이메일 형식이 아닙니다.`;
+    });
+  }
   if (project.issues) {
     throw '새 프로젝트에는 이슈를 추가할 수 없습니다.';
   }
@@ -22,8 +24,8 @@ const create = async (project: Project): Promise<string> => {
     project.alertLevel = alertLevel[2];
   }
   if (
-    !alertLevel.includes(project.alertLevel) ||
-    project.alertLevel !== 'unsubscripbe'
+    !alertLevel.includes(project.alertLevel) &&
+    project.alertLevel !== 'unsubscribe'
   ) {
     throw '존재하지 않는 레벨입니다.';
   }

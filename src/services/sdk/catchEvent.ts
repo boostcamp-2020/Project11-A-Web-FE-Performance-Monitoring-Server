@@ -17,9 +17,7 @@ const catchEventService = async (
   const option: Option = {
     eventName: event.type || event.message,
     errorMessage: event.value,
-    errorStack: {
-      function: event.stacktrace?.[0].function,
-    },
+    errorStack: event.stacktrace?.[0],
     issueType: event.type ? 'error' : 'message',
   };
   Object.keys(option).forEach(
